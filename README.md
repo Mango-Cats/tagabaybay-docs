@@ -1,2 +1,3 @@
-# tagabaybay-docs
-Documentation and paper for TagaBaybay
+# ᜆᜄᜊᜌ᜔ᜊᜌ᜔ / TagaBaybay 
+
+A phonetic nativization algorithm for Filipino loanwords. Written in Rust.
