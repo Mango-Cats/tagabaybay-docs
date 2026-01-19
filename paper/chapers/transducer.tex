@@ -1,0 +1,38 @@
+\section{Loanword Adaptation as a Transducer}
+
+We can think of the computational task of LA as a string transduction
+problem
+
+\[
+    L_2 \mapsto F^*
+\]
+
+where \( F \) is the alphabet of \( \mathcal{F} \) which is the same as
+the latin alphabet but with the letter \~N and Ng added. Note that ng, 
+as the velar nasal \textipa{N}, is counted as a single character.
+
+By framing it as a transduction problem, that is, given an word \( w \in L_2 \)
+the transducer \( A: L_2 \mapsto F^* \) returns \( A(w) \in F^* \)
+where \( A(w) \) is the adapted loanword in \( \mathcal{F} \). We can
+employ formalisms used in formal language theory to perform the task.
+
+Taking inspiration from \underline{O-COCOSDA paper} and~\cite{Mao_Hulden_2016},
+we can use context-sensitive rewrite rules defined as an attribute grammar 
+(AG) to implement the LA algorithm.
+
+Since LA requires constraints from \( F \) and the
+orthography and phonetics of the \( w \), we can embed these
+constraints as attributes required to be satisfied to perform the rewrite.
+
+Hence, we will have a context-sensitive grammar (CSG) \( G \), which defines
+the rewrite-rules as productions of the form
+
+\[
+    \texttt{rule\_i}(\omega_i) \to 
+    \omega_{j} 
+    \qquad 
+    \mid \omega_i \vDash C
+\]
+
+Informally, we will rewrite \( \omega_i \) to \( \omega_j \) if and only if
+\( \omega_i \) satisfies each constraint in \( C \).
