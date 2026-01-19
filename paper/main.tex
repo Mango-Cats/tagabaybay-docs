@@ -9,12 +9,13 @@
 \usepackage{algorithmic}
 \usepackage{hyperref}
 \usepackage{cleveref}
+\usepackage{tipa}
 
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
 \begin{document}
-\title{Phonetic Nativization Algorithm for Filipino}
+\title{Loanword Adaptation Algorithm for Filipino}
 
 % Change this to final author list
 \author{
@@ -69,11 +70,17 @@ This is the abstract.
 one, two, three
 \end{IEEEkeywords}
 
-\input{chapers/introduction.tex}
+\input{chapers/introduction/main.tex}
+\input{chapers/introduction/phonology.tex}
+\input{chapers/introduction/loanwords.tex}
 \input{chapers/problem_definition.tex}
+\input{chapers/generative_phonology.tex}
 \input{chapers/algorithm.tex}
 \input{chapers/evaluation.tex}
 \input{chapers/results.tex}
 \input{chapers/conclusion.tex}
 
+\bibliographystyle{IEEEtran}
+\bibliography{bibliography}
+\
 \end{document}
