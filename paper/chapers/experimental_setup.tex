@@ -1,31 +1,22 @@
 \section{Experimental Setup}
 
+\subsection{Implementation}
+
+As mentioned previously, we will use Filipino as a testbench for
+this study
+
 \subsection{Gold Standard}
 The gold standard was manually constructed with 1,582 instances, consisting of
-English words alongside their Tagalog phonetically-spelled versions. The words
-were separated into 23 grapheme groups (e.g., ed, ough, tch). These grapheme groups
-were based on a phoneme-to-grapheme chart, where digraphs up to quadgraphs were
-selected to represent as many words as possible that contain corresponding
-grapheme sequences. Words were collected by searching each grapheme on
-Merriam-Webster's Word Finder using the ``Containing in order'' filter and selecting
-the most commonly used words.
+English words alongside their adapted versions. This gold standard composed
+of English words commonly being used in Filipino-contexts or in code
+switching.
+ 
+We then validated the accuracy of the gold standard via inter-annotator
+agreement and cross-validating the annotations with Filipino orthography.
 
-The phonetically-spelled versions did not include the letters \emph{z}, \emph{x}, 
-\emph{c}, and \emph{v}, as those letters are not present in traditional Tagalog.
-Each word was constructed based on the Basilect pronunciations of the English word
-and was validated using Inter-Annotator Agreement. For reliability, three Filipino
-annotators compared their own versions of each word and selected the one that all
-annotators agreed fit best.
+\subsection{Evaluation}
 
-\subsection{Metrics}
-Metrics were measured through \textbf{Word Error Rate (WER)} and \textbf{Character Error
-Rate (CER)}. WER measured the error on a whole-word basis (comparing the actual output to
-our expected output in the dataset), while CER measured the error on a per-character basis.
+The implementation was evaluated on the gold standard using Character Error
+Rate (CER) which is the error on a per-character basis, calculated
+as the Levenshein distance between the expected and actual output.
 
-CER uses the \textbf{Levenshtein distance}, also known as edit distance, to calculate how many
-edits it would take to transform the actual output to the correct output. For example, changing
-``cot'' to ``dog'' would take two edits (\textbf{c $\rightarrow$ d} then \textbf{t $\rightarrow$ g}).
-
-By using CER alongside WER, we can measure both word-level and character-level performance. WER
-helps us on a broader level while CER helps with the smaller details that can really change
-how a word is pronounced.
