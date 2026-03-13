@@ -1,17 +1,21 @@
 \section{Experimental Setup}
 
-The gold standard was manually constructed with 1582 instances, composed of
+The gold standard was manually constructed with 1,582 instances, consisting of
 English words alongside their Tagalog phonetically-spelled versions. The words
-were separated into 23 grapheme groups (e.g., ed, ough, tch). Words were collected
-by searching each grapheme on Merriam-Webster's Word Finder using the
-``Containing in order'' filter and selecting the most commonly used words.
+were separated into 23 grapheme groups (e.g., ed, ough, tch). These grapheme groups
+were based on a phoneme-to-grapheme chart, where digraphs up to quadgraphs were
+selected to represent as many words as possible that contain corresponding
+grapheme sequences. Words were collected by searching each grapheme on
+Merriam-Webster's Word Finder using the ``Containing in order'' filter and selecting
+the most commonly used words.
 
 The phonetically-spelled versions did not include the letters \emph{z}, \emph{x}, 
 \emph{c}, and \emph{v}, as those letters are not present in traditional Tagalog.
 Each word was constructed based on the Basilect pronunciations of the English word
 and was validated using Inter-Annotator Agreement. Three Filipino annotators compared
-their own versions and selected the one that all annotators agreed fit the best.
+their own versions of each word and selected the one that all annotators agreed fit
+best.
 
-Metrics were measured through Word Error Rate (WER) and Token Error Rate (TER). Word
-Error Rate. WER measured the correctness of the actual output to our expected output based
-on the dataset, while TER measured the correctness per token (character).
+Metrics were measured through Word Error Rate (WER) and Token Error Rate (TER). WER measured
+the error per whole word (comparing the actual output to our expected output in the dataset),
+ while TER measured the error per token (character).
