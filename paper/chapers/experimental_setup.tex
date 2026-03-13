@@ -1,6 +1,6 @@
 \section{Experimental Setup}
 
-The gold standard was manually constructed with 1484 instances, composed of
+The gold standard was manually constructed with 1582 instances, composed of
 English words alongside their Tagalog phonetically-spelled versions. The words
 were separated into 23 grapheme groups (e.g., ed, ough, tch). Words were collected
 by searching each grapheme on Merriam-Webster's Word Finder using the
@@ -11,3 +11,7 @@ The phonetically-spelled versions did not include the letters \emph{z}, \emph{x}
 Each word was constructed based on the Basilect pronunciations of the English word
 and was validated using Inter-Annotator Agreement. Three Filipino annotators compared
 their own versions and selected the one that all annotators agreed fit the best.
+
+Metrics were measured through Word Error Rate (WER) and Token Error Rate (TER). Word
+Error Rate. WER measured the correctness of the actual output to our expected output based
+on the dataset, while TER measured the correctness per token (character).
