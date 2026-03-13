@@ -1,35 +1,33 @@
 \section{Introduction}
 
 Borrowing words from one language (or the source language \( L_2 \)) to another
-(the borrowing language \( L_1 \)) is a common linguistic phenomenon. Which is
-more common in locales where multiple languages are being used
-simultaneously. An example of this is the Philippine
-context: which has both Filipino (\( \mathcal{F} \)) and English (\(
-\mathcal{E} \)) as their official language. In casual contexts, like going to
-school, one may use \emph{paaralan} which is the native Filipino word for
-``school''. Or borrow by using \emph{eskuwelahan} from Spanish, or \emph{iskul}
-or \emph{skul} from English. Furthermore, the Philippines also has a rich
-history of borrowings from Malay and Chinese way before they started borrowing
-from Spanish and English (during their colonial period)~\cite{Baklanova_2017}.
+(the borrowing language \( L_1 \)) is a common linguistic phenomenon. This is
+more common in locales where multiple languages are being used simultaneously.
 
-In general, \( L_1 \) borrows a word \( w \in L_2 \), we consider how the \( w
-\) is pronounced and written in \( L_2 \) and constraints in \( L_1
-\)~\cite{Uffman_2015,Mao_Hulden_2016}. Using the example above, we look at the
-base pronunciation and spelling of \emph{school}, which are \textipa{/sku:l/}
-and ``school''. With the relevant Filipino constraints: ``i/e-'' prefix for
-English or Spanish loanwords and strict phoneme-grapheme mapping. Which is why
-the adapted loanword is \emph{iskul}.
+Consider the contemporary Filipino as an example, which routinely borrows
+lexical items from English for use in the education, medicine, and
+administrative sectors. Consider the specific example of going to school: one
+might use ``paaralan'' which is the native Filipino word for ``school''. Or
+borrow by using ``eskuwelahan'' from the Spanish word ``escuela'', or ``iskul''
+or ``skul' from the English word ``school''.
 
-The algorithmic task of transforming \( w \in L_2 \) to its adapted form \(
-\omega \in \mathcal{F} \) has importance in Filipino-centric NLP where loanword
-adaptation or code-switching occurs, like spell and grammar checking for
-Filipino text data with loanwords which is common in a most contexts such as
-social media posts, casual conversations, and technical settings where using
-the native words may be difficult. Or, text-to-speech or sentence generation
-for Taglish.
+For the most part, adapting borrowed words is a phonetic task: ``how do I say
+this word, given the phonology of the borrowing language?''. An example of this
+in Filipino, adapting the word ``standby''. First, Filipino consinant clusters,
+like \emph{st}, are not natural. Second, the transition from the /m/ to the /b/
+sound is more natural than /n/ to /b/. Finally, Filipino has a strict set of
+native vowel, hence the \emph{y} which sounds like /\textipa{aI}/ is written as
+\emph{ay} which sounds like /\textipa{ay}/. All of which contribute to the
+adaptation, which yields with ``istambay''.
+
+However, adapting loanwords is not purely phonetic, since how the word is also
+spelt, or its orthography, also influences adaptation. Consider the English word
+``biscuit'' /\textipa{'bIs.kIt}/ whose adapted form is ``biskwit'' /\textipa{/'bis.kwIt/}/.
+This example shows that silent letters have a tendency to be realized
+when adapting, and the reference of this adaptation is through the orthography.
+
+Add more literature review here or whatever
 
 Finally, even though Filipino has a orthography manual publicly available, no
 software solution is yet to be implemented for writing adapted loanwords.
 
-Hence, the goal of the project is to study loanword adaptation (LA) in Filipino
-and implementing an adaptation algorithm.
