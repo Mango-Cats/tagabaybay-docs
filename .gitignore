@@ -327,3 +327,5 @@ TSWLatexianTemp*
 
 paper_ieee.pdf
 .vscode
+
+*.pdf
