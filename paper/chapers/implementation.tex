@@ -1,1 +1,42 @@
 \section{Implementation}
+
+\subsection{Adaptation Model}
+
+\subsection{Grapheme-Phoneme Alignment}
+
+Graphemes were matched to corresponding phonemes based on the
+surrounding context of a each individual token. By default it is
+a one-to-one relation, where one phoneme maps to one grapheme
+according to shared vector indices, but often that is not the case
+as phonetic structures are varied and highly dependent on surrounding
+orthography or phonetics~\cite{Tayao_2004}. With consideration to this,
+context-sensitive rules are made to produce an AlignedString. Type of
+AlignedString consists of an array of two tuples, grapheme tokens taken 
+from the English input word, and an array of IPA phoneme tokens returned from
+the English G2P process. Each index consists of a singular grapheme
+with its matched vector of IPA phonemes. For example, input string "hello"
+has the IPA of \textipa{h@loU}, mapped as
+
+\begin{enumerate}
+    \item \( \text{h} \rightarrow \text{\textipa{h}}\)
+    \item \( \text{e} \rightarrow \text{\textipa{@}}\)
+    \item \( \text{l} \rightarrow \text{\textipa{l}}\)
+    \item \( \text{l} \rightarrow None \)
+    \item \( \text{o} \rightarrow \text{\textipa{oU}}\)
+\end{enumerate}
+
+Individual graphemes are mapped to their corresponding phonetic equivalent,
+and context-sensitive alignments are gauged on the surrounding graphemes or
+phonemes to more accurately map corresponding grapheme to phoneme pairs.
+This process can be broken down into separate context-sensitive grapheme
+and phoneme rules, where grapheme rules rely solely on the surrounding graphemes given an indexed token.
+Phoneme rules are further broken down into non-consuming and consuming cases, where
+non-consuming allows the current phoneme to be of value `None` without affecting
+the indexing order while consuming cases allow multiple phonemes to merge
+into a singular token represented by a vector.
+
+Alignment was needed as a preliminary step towards the adaptation of English loanwords
+into Philippine English due to the variability of sounds in relation to written orthography.
+
+\subsection{Vowel Mapping}
+
