@@ -1,0 +1,69 @@
+Here is the revised introduction implementing the grammatical fixes, logical
+bridges, formatting adjustments, and the added results teaser.
+
+\section{Introduction}
+
+The integration of foreign vocabulary into a native language is a frequent
+consequence of language contact~\cite{haugen1950}. Borrowing is especially
+prevalent in multilingual settings where speakers routinely alternate between
+two or more languages~\cite{haugen1950,uffman2015}.
+
+Loanword adaptation is a task where the borrower must determine how to render a
+foreign word using the sound system of the borrowing language. This often
+presents a classic ``too-many-solutions'' problem~\cite{kang2011}, where
+languages have multiple ways to resolve illegal phonotactic structures, such as
+consonant deletion or vowel epenthesis.
+
+However, loanword adaptation is not a purely phonetic phenomenon. Literature
+has demonstrated that the orthographic form of the source word can also
+systematically influence the adapted output~\cite{vendelin2006,
+    kang2011,daland2015}. Vendelin and Peperkamp (2006) showed experimentally that
+when speakers were presented with nonwords accompanied by their written forms,
+their adaptations differed significantly from those based on auditory input
+alone, confirming the independent role of spelling. This dominance of
+orthography can often be attributed to the sociolinguistic setting,
+particularly when words enter the language primarily through written
+texts~\cite{uffman2015}. Furthermore, recent studies demonstrate that lower L2
+proficiency combined with high spelling similarity causes borrowers to
+systematically rely on reading rules over sound~\cite{wang2025}. Thus, the
+adaptation process generally cannot be attributed to phonetic or phonological
+representation alone; rather, it may draw on phonological, phonetic,
+morphological, and orthographic information simultaneously~\cite{kang2011}.
+
+Because borrowers must often first interpret the foreign orthography, map it to
+native sounds, and finally apply phonetic repairs to illegal syllable
+structures, we can model loanword adaptation as a sequential, multi-layered
+process. While data-driven machine learning models can be utilized for this
+task, they necessitate substantial parallel corpora to learn the underlying
+mapping. This requirement presents a significant barrier, as large-scale
+parallel datasets of source words and their adapted forms are often
+unavailable. This data gap is particularly evident in low-resource languages,
+precluding the straightforward application of these machine learning methods.
+
+With this in mind, rule-based approaches become an attractive alternative.
+Because loanword phenomena are often well-documented and guided by official
+orthographic rules, this multi-layered process can be explicitly encoded as a
+sequential algorithm. To automate adaptation, we propose a methodology that
+embeds known linguistic rules directly into a Finite-State Transducer (FST)
+framework~\cite{mao2016}. The primary computational advantage of FSTs in this
+context is composition, which allows us to cascade multiple independent rule
+sets—representing the various orthographic and phonological layers—into a
+single, efficient model. By operating independently of training corpora, the
+proposed system remains transparent, interpretable, and strictly consistent
+with established linguistic descriptions. Ultimately, the underlying
+computational engine is fundamentally language-agnostic, demonstrating its
+potential applicability across diverse linguistic contexts.
+
+In this study, we utilize Filipino as a compelling test case for
+addressing this gap. Having been shaped by American influence, the language
+draws heavily from both English, particularly in domains such as education,
+medicine, commerce, and public administration~\cite{baklanova2017}. A simple
+illustration is the concept of \emph{school}: a speaker may use the native
+Filipino word \emph{paaralan} or the English-derived \emph{iskul} (from
+\emph{school}).
+
+In summary, the specific contributions of this study are as follows: 
+\begin{itemize}
+    \item \textbf{Low-resource methodology for loanword adaptation.} We demonstrate a viable approach for computational modeling in low-resource settings by directly encoding established linguistic rules, circumventing the need for large-scale parallel training corpora, and validating our model's accuracy against a standard dictionary corpus.
+    \item \textbf{Filipino as a computational test case.} We utilize Filipino to evaluate the proposed methodology, deploying FSTs to automatically generate orthographically well-formed adaptations of English loanwords and confirming the framework's overall viability.
+\end{itemize}
