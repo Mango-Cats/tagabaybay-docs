@@ -37,12 +37,12 @@ where \(\Sigma\) is the set of recognized graphemic units and
 \(\text{substr}(i, n)\) is the \(n\)-character substring beginning at position
 \(i\). For example, ``straight'' and ``phishing'' are tokenized as:
 \begin{center}
-      \texttt{S~T~R~Aigh~T} \\
-      \texttt{Ph~I~Sh~I~Ng}
+    \texttt{S~T~R~A~Igh~T} \\
+    \texttt{Ph~I~Sh~I~Ng}
 \end{center}
 This ensures that subsequent mapping rules operate on meaningful
-units rather than on raw characters.
-
+units, rather than on raw characters.
+ 
 \subsection{Rule-Based Grapheme Mapping}
 Following tokenization, each graphemic token is mapped to its Filipino
 orthographic equivalent through a priority-ordered cascade of rule types. For
