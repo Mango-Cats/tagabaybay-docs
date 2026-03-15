@@ -1,22 +1,93 @@
 \section{Experimental Setup}
 
 \subsection{Implementation}
+The system is implemented in Rust. Vowel resolution relies on a
+G2P backend provided by the
+\texttt{phonemizer} library~\cite{bernard2021}, which wraps the
+eSpeak-NG speech synthesizer and is invoked as a Python subprocess.
 
-As mentioned previously, we will use Filipino as a testbench for
-this study
+\subsubsection{Rule Construction}
+
+The nativization rules were not learned from data but were instead
+hand-authored and grounded in a combination of official orthographic
+standards and descriptive phonological literature. The primary authority
+for Filipino spelling conventions is the KWF \emph{Manwal sa Masinop na
+Pagsulat}~\cite{almario2014}, which prescribes how borrowed consonants,
+vowels, and consonant clusters should be rendered in Filipino orthography.
+Context-free rules are direct encodings of the correspondences
+listed in the KWF manual.
+
+Context-sensitive rules were derived from two complementary sources.
+First, well-documented English grapheme-to-phoneme regularities
+were encoded as conditional mappings. Second, descriptions of Filipino
+phonotactic constraints in~\cite{llamzon1966,schachter1972} informed cluster-repair
+strategies: for instance, the epenthetic vowel insertion that breaks up
+illegal onset clusters follows
+the canonical CV syllable template of Filipino described
+in~\cite{llamzon1966}.
+
+Phonetic vowel-mapping rules were informed by studies of Philippine
+English phonology~\cite{llamzon1997,tayao2004,magpale2026,magpale2025,magpale_hong_2024_sc},
+which describe how the vowel inventory of Philippine English collapses
+the larger English system into roughly five
+categories. These studies provided the empirical basis for the mapping
+from English IPA vowels to the five-vowel Filipino inventory.
 
 \subsection{Gold Standard}
-The gold standard was manually constructed with 1,582 instances, consisting of
-English words alongside their adapted versions. This gold standard composed
-of English words commonly being used in Filipino-contexts or in code
-switching.
- 
-We then validated the accuracy of the gold standard via inter-annotator
-agreement and cross-validating the annotations with Filipino orthography.
 
-\subsection{Evaluation}
+The gold standard corpus was constructed by native Filipino speakers and
+comprises 1,582 English--Filipino loanword pairs organized into four
+datasets spanning Philippine domains where English loanwords are commonly used.
 
-The implementation was evaluated on the gold standard using Character Error
-Rate (CER) which is the error on a per-character basis, calculated
-as the Levenshein distance between the expected and actual output.
+For every entry, the annotator determined the correct Filipino nativized
+form by applying the spelling conventions prescribed in~\cite{almario2014}. 
+Where the manual did not prescribe a
+specific nativization, annotators consulted descriptive accounts of
+Tagalog phonology~\cite{llamzon1966,schachter1972} and Philippine English
+phonology~\cite{llamzon1997,tayao2004,magpale2026,magpale2025,magpale_hong_2024_sc}
+to determine the most plausible nativized form under the five-vowel
+system.
 
+To validate corpus quality, inter-annotator agreement was measured using
+a dedicated validation script. For each dataset, a random subsample of up
+to 60\% of entries was presented to a second native-Filipino annotator,
+who independently produced a nativized form for each English source word
+without seeing the first annotator's output. Agreement is reported as the
+percentage of entries on which both annotators produced identical nativized
+forms.
+
+\subsection{Evaluation Metrics}
+The primary evaluation metric is Character Error Rate (CER), computed as
+the Levenshtein edit distance between the system output and the gold
+standard reference, normalized by the total character count of the
+reference across the entire corpus:
+\begin{equation}
+    \text{CER} = \frac{\sum_{i} \mathrm{lev}(\hat{y}_i,\, y_i)}
+    {\sum_{i} |y_i|}
+    \times 100\%
+\end{equation}
+where $\hat{y}_i$ is the system's nativized form of the $i$-th word, $y_i$ is
+the gold standard reference, $\mathrm{lev}(\cdot,\cdot)$ denotes
+character-level Levenshtein distance, and $|y_i|$ is the character length
+of the reference. CER is preferred over word-level accuracy because
+nativization errors are often minor (e.g., a single vowel substitution),
+and a word-level metric would treat a one-character discrepancy as harshly
+as a completely incorrect output.
+
+We set the acceptance threshold at CER $< 20\%$, meaning that on average
+fewer than one in five reference characters is affected by an edit. We
+additionally report CER under two relaxed evaluation conditions motivated
+by a well-known property of Filipino phonology: the vowels /e/ and /i/
+and the vowels /o/ and /u/ are historically allophonic in
+Tagalog~\cite{schachter1972}. Because native speakers often accept both
+members of each pair interchangeably in nativized forms, we compute CER
+variants in which \{e, i, y\} are treated as equivalent and \{o, u\} are
+treated as equivalent, as well as a combined condition in which both
+equivalences hold simultaneously. These relaxed metrics provide a more
+linguistically informed picture of system performance by discounting
+errors that would not be perceived as incorrect by most Filipino speakers.
+
+Beyond the aggregate CER, the evaluation framework produces per-dataset
+CER scores and a ranked inventory of the most frequent character-level
+error patterns, enabling targeted diagnosis of systematic rule
+failures.
