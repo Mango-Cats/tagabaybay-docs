@@ -4,10 +4,12 @@ through a pipeline of four sequential stages: graphemic tokenization,
 rule-based grapheme mapping, phonetic vowel resolution, and output
 normalization. The input to the system is the English orthographic form; the
 output is the Filipino orthographic form prescribed by the spelling conventions
-in~\cite{almario2014}. Each stage operates on the output of the previous, and
+in~
+\cite{almario2014}. Each stage operates on the output of the previous, and
 together they model the grapheme-to-grapheme transduction that constitutes
 orthographic nativization. The linguistic properties described
-in~\cref{sec:filipino_orthography} directly inform the design of
+in~
+\cref{sec:filipino_orthography} directly inform the design of
 each stage.
 
 \subsection{Graphemic Tokenization}
@@ -37,8 +39,8 @@ where \(\Sigma\) is the set of recognized graphemic units and
 \(\text{substr}(i, n)\) is the \(n\)-character substring beginning at position
 \(i\). For example, ``straight'' and ``phishing'' are tokenized as:
 \begin{center}
-    \texttt{S~T~R~A~Igh~T} \\
-    \texttt{Ph~I~Sh~I~Ng}
+      \emph{s}~\emph{t}~\emph{r}~\emph{a}~\emph{igh}~\emph{t} \\
+      \emph{ph}~\emph{i}~\emph{sh}~\emph{i}~\emph{ng}
 \end{center}
 This ensures that subsequent mapping rules operate on meaningful
 units, rather than on raw characters.
@@ -67,8 +69,7 @@ these \emph{context-free} rules. For example:
       \item \(\emph{b} \mapsto \emph{b}\): both instances in ``basketball'' map
             directly, yielding \emph{basketbol}.
       \item \(\emph{ph} \mapsto \emph{p}\): the digraph \emph{ph}
-            maps to \emph{p},
-            as in ``cellphone'' \(\mapsto\) \emph{selpon}.
+            maps to \emph{p}; ``cellphone'' \(\mapsto\) \emph{selpon}.
 \end{itemize}
 Because these mappings are strictly positional and produce the same output
 regardless of surrounding tokens, they are computed without reference to any
@@ -85,9 +86,9 @@ matching against a set of ordered conditions. For example:
       \item Cases for \emph{c}:
             \begin{enumerate}
                   \item \(\emph{c} \cdot (\emph{i} \mid \emph{e}) \mapsto s\):
-                        when \emph{c} precedes \emph{i} or \emph{e}, as in
-                        ``cinema'' \(\mapsto\) \emph{sine}.
-                  \item Otherwise: \emph{c} \( \mapsto \) \emph{k}, as in ``computer'' \(\mapsto\)
+                        when \emph{c} precedes \emph{i} or \emph{e};
+                        ``cine'' (or ``cinema'') \(\mapsto\) \emph{sine}.
+                  \item Otherwise: \emph{c} \( \mapsto \) \emph{k}; ``computer'' \(\mapsto\)
                         \emph{kompyuter}.
             \end{enumerate}
       \item Cases for doubled consonants: when two identical consonants appear adjacently, the second is treated as silent and mapped to no
@@ -151,4 +152,5 @@ adjacent tokens:
 \end{itemize}
 
 Together, these normalization steps ensure that the output conforms to the
-phonotactic and orthographic conventions codified in~\cite{almario2014}.
+phonotactic and orthographic conventions codified in~
+\cite{almario2014}.
