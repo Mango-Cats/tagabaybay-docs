@@ -25,13 +25,14 @@ attributed to the \{e, i, y\} or \{o, u\} equivalences, contributing minimally
 to overall error. Combining both equivalences produced the lowest CER at 3.61\%,
 producing a 1.06 percentage-point drop.
 
-Because English is a stress-timed language, the phoneme correspondence for vowels is sometimes
-ambiguous and nondeterministic. For example, some of the failures in our tests were: adhered
-$\rightarrow$ adherd, fractured $\rightarrow$ fraksterd, and hemisphere  $\rightarrow$ hemisfer.
-This ambiguity results in \emph{e}, \emph{y}, and \emph{i} errors being the most frequent ones.
-This may explain why relaxing the \{e, i, y\} equivalence significantly reduces the CER.
+Because English is a stress-timed language, some pronunciations get reduced to the schwa
+/\textipa{@}/ sound. ...more on this... results in \emph{e}, \emph{y}, and \emph{i} errors
+being the most frequent ones. This may explain why relaxing the \{e, i, y\} equivalence
+significantly reduces the CER.
 
-idk mention schwa /\textipa{@}/ somewhere
+The phoneme correspondence for vowels is sometimes ambiguous and nondeterministic, splitting
+pronunciations into either its long or short version. Some examples: cake and cat, me and bed,
+time and sit, home and hot, cube and cup. This ambiguity results in...
 
 Possible limitations may include the lack of professional linguistic input towards
 the creation of datasets and orthographic nativization rules to help ensure consistency
