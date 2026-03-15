@@ -12,17 +12,18 @@ conditions described in \cref{ssec:evaluation_metrics}. The system was evaluated
         \hline
         \textbf{5-vowel} & \textbf{\emph{e} = \emph{i} = \emph{y}} & \textbf{\emph{o} = \emph{u}} & \textbf{3-vowel} \\
         \hline
-        11.33 & 8.76 & 11.20 & 8.63 \\
+        4.67 & 3.70 & 4.58 & 3.61 \\
         \hline
     \end{tabular}
 \end{table}
 
 Under the default (strict five-vowel) condition, the system achieved a CER of
-11.33\%. Relaxing the \{e, i, y\} equivalence reduced the CER to 8.76\%, a
-2.57 percentage-point drop that accounts for the majority of the improvement.
-By contrast, the \{o, u\} relaxation yielded only a marginal reduction to
-11.20\%, suggesting that o/u confusions contribute minimally to the overall
-error. Combining both equivalences produced the lowest CER at 8.63\%.
+4.67\%. Relaxing the \{e, i, y\} equivalence reduced the CER to 3.70\%, while 
+the \{o, u\} relaxation yielded a fairly marginal reduction to 4.58\%. The close 
+range of error rates suggest that remaining character errors are not majorly 
+attributed to the \{e, i, y\} or \{o, u\} equivalences, contributing minimally 
+to overall error. Combining both equivalences produced the lowest CER at 3.61\%,
+producing a 1.06 percentage-point drop.
 
 Because English is a stress-timed language, unstressed syllables often replace vowel sounds
 with the schwa /\textipa{@}/ sound. This makes the pronunciation of some vowels ambiguous.
@@ -30,3 +31,4 @@ For example, some of the failures in our tests were: adhered $\rightarrow$ adher
 $\rightarrow$ fraksterd, and hemisphere  $\rightarrow$ hemisfer. This ambiguity results in \emph{e},
 \emph{y}, and \emph{i} errors being the most frequent ones. This may explain why relaxing the
 \{e, i, y\} equivalence significantly reduces the CER.
+
