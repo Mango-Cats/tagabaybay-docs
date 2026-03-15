@@ -8,13 +8,13 @@ This process is especially pervasive in multilingual and literacy-rich
 settings, where foreign vocabulary is encountered through both spoken and
 written channels~\cite{haugen1950,uffman2015}.
 
-Among its dimensions, \emph{orthographic nativization} — the adaptation of
-a loanword’s spelling to the writing conventions of the borrowing
-language — has received limited computational attention despite its
+Among its dimensions, \emph{orthographic nativization}, the adaptation of
+a loanword's spelling to the writing conventions of the borrowing
+language, has received limited computational attention despite its
 importance for consistent text processing in multilingual contexts. We
 formulate orthographic nativization as a grapheme-to-grapheme transduction
 task: given a source-language spelling, produce the single standardized
-spelling prescribed by the borrowing language’s orthographic norms.
+spelling prescribed by the borrowing language's orthographic norms.
 Empirical work shows that spelling systematically influences adaptation
 outcomes, that borrowers rely on orthographic cues when phonetic input is
 ambiguous, and that orthographic dominance is strongest when loanwords
@@ -27,7 +27,7 @@ Theory provide explanatory accounts of adaptation but are difficult to
 operationalize computationally due to complex constraint interaction and
 limited interpretability~\cite{idsardi2006}. Purely data-driven approaches
 face a complementary limitation: they require large parallel corpora of
-source–nativized forms, which are typically unavailable for low-resource
+source--nativized forms, which are typically unavailable for low-resource
 languages. A prioritized cascade of rewrite rules offers a practical
 middle ground, enabling transparent, linguistically grounded modeling
 independent of training data~\cite{mao2016}.
@@ -36,7 +36,7 @@ We evaluate this rule-cascade architecture using Filipino as a test case.
 Filipino is well-suited to this role because it borrows extensively from
 English across domains such as education, medicine, commerce, and public
 administration~\cite{baklanova2017}, and because official nativization
-guidelines are codified in the Komisyon sa Wikang Filipino’s
+guidelines are codified in the Komisyon sa Wikang Filipino's
 \emph{Manwal sa Masinop na Pagsulat}~\cite{almario2014}. These properties
 allow the construction and systematic evaluation of a deterministic
 rule-based model grounded in prescriptive orthographic standards.
@@ -52,7 +52,7 @@ In summary, this study makes the following contributions:
           rules can be operationalized as an interpretable computational
           pipeline without large parallel corpora.
 
-    \item \textbf{An empirical case study on English–Filipino borrowing.}
+    \item \textbf{An empirical case study on English--Filipino borrowing.}
           Using Filipino as a computational testbench, we implement and
           evaluate the proposed framework on real loanword data, showing its
           practical effectiveness while identifying systematic error sources.
