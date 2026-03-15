@@ -15,44 +15,44 @@
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
 \begin{document}
-\title{Adapting Filipino Loanwords with a Transducer}
+\title{Orthographic Nativization as Rule-Based Rewrite Cascades}
 
 % Change this to final author list
 \author{
     \IEEEauthorblockN{Erin Gabrielle Chua}
     \IEEEauthorblockA{\textit{De La Salle University} \\
-    Manila, Philippines \\
-    erin\_chua@dlsu.edu.ph}
+        Manila, Philippines \\
+        erin\_chua@dlsu.edu.ph}
     \and
     \IEEEauthorblockN{Zhean Robby Ganituen}
     \IEEEauthorblockA{\textit{De La Salle University} \\
-    Manila, Philippines \\
-    zhean\_robby\_ganituen@dlsu.edu.ph}
+        Manila, Philippines \\
+        zhean\_robby\_ganituen@dlsu.edu.ph}
     \and
     \IEEEauthorblockN{Justin Ching}
     \IEEEauthorblockA{\textit{De La Salle University} \\
-    Manila, Philippines \\
-    justin\_ethan\_l\_ching@dlsu.edu.ph}
+        Manila, Philippines \\
+        justin\_ethan\_l\_ching@dlsu.edu.ph}
     \and
     \IEEEauthorblockN{Jaztin Jacob Jimenez}
     \IEEEauthorblockA{\textit{De La Salle University} \\
-    Manila, Philippines \\
-    jaztin\_jacob\_jimenez@dlsu.edu.ph}
+        Manila, Philippines \\
+        jaztin\_jacob\_jimenez@dlsu.edu.ph}
     \and
     \IEEEauthorblockN{Nathaniel Oco}
     \IEEEauthorblockA{\textit{De La Salle University} \\
-    Manila, Philippines \\
-    nathaniel.oco@dlsu.edu.ph}
+        Manila, Philippines \\
+        nathaniel.oco@dlsu.edu.ph}
 }
 
 \maketitle
 
 \begin{abstract}
-This is the abstract.
+    Orthographic nativization, the task of generating standardized spellings for loanwords, is essential for consistent text processing in multilingual settings, yet computational approaches remain scarce, particularly for low-resource languages. We present a rule-based cascade algorithm for the orthographic nativization of English loanwords, using Filipino as a computational testbench. The system performs orthographic nativization through sequential stages of tokenization, priority-ordered rule application, phonetic disambiguation via a grapheme-to-phoneme component, and output normalization. All rules are derived from prescriptive spelling guidelines and descriptive accounts of Filipino orthopraphy and phonology. Evaluation against a gold-standard corpus spanning Philippine domains where English is frequenlty used, using Character Error Rate, shows that explicitly encoding linguistic rules in a rewrite cascade provides an effective and interpretable low-resource solution while highlighting remaining coverage limitations.
 \end{abstract}
 
 \begin{IEEEkeywords}
-one, two, three
+    orthographic nativization, Filipino, rule-based systems, grapheme-to-grapheme transduction, low-resource languages, rewrite rules
 \end{IEEEkeywords}
 
 \input{chapters/introduction.tex}
