@@ -17,11 +17,11 @@ orthography contains multi-letter sequences that function as
 single phonological units. The system recognizes the following classes of
 multigraphs:
 \begin{itemize}
-      \item \textbf{Digraphs}: \emph{ph}, \emph{ch}, \emph{sh}, \emph{th},
+      \item Digraph: \emph{ph}, \emph{ch}, \emph{sh}, \emph{th},
             \emph{ng}, \emph{kn}, \emph{wr}, \emph{gh}, \emph{ee}, \emph{oo}
-      \item \textbf{Trigraphs}: \emph{igh}, \emph{tch}, \emph{dge},
+      \item Trigraph: \emph{igh}, \emph{tch}, \emph{dge},
             \emph{que}, \emph{ore}
-      \item \textbf{Higher-order multigraphs}: \emph{augh}, \emph{ough},
+      \item Multigraph: \emph{augh}, \emph{ough},
             \emph{eigh}
 \end{itemize}
 
@@ -82,7 +82,7 @@ environment. These cases require \emph{context-sensitive} rules, where the
 mapping for a given token is selected by inspecting adjacent graphemes and
 matching against a set of ordered conditions. For example:
 \begin{itemize}
-      \item Cases for \emph{c} (cf.\ Section~II-C):
+      \item Cases for \emph{c}:
             \begin{enumerate}
                   \item \(\emph{c} \cdot (\emph{i} \mid \emph{e}) \mapsto s\):
                         when \emph{c} precedes \emph{i} or \emph{e}, as in
@@ -113,10 +113,7 @@ graphemes. For vowel tokens whose nativized form cannot be determined from
 spelling context alone, the system invokes a G2P
 component to obtain an IPA transcription of the entire English word. The
 relevant vowel phoneme is then extracted by aligning it to the current token
-position. The resulting IPA vowel is mapped to a Filipino grapheme following
-correspondences informed by the Philippine English vowel system described in
-Section~II-E, which mediates between General American English phonemes and the
-Filipino five-vowel inventory. The mapping proceeds as follows:
+position. The mapping proceeds as follows:
 \begin{itemize}
       \item Tense vowels and diphthongs (/\textipa{eI}/, /\textipa{oU}/, /\textipa{aI}/,
             /\textipa{aU}/) are rendered as two-character Filipino sequences: \emph{ey},
@@ -139,13 +136,13 @@ normalization pass over the raw output sequence. This pass corrects three
 classes of artifact that can arise from the independent firing of rules across
 adjacent tokens:
 \begin{itemize}
-      \item \textbf{Contiguous duplicates}: identical adjacent graphemes produced
+      \item Contiguous duplicates: identical adjacent graphemes produced
             by separate rule branches are collapsed to a single instance.
-      \item \textbf{Redundant affricate prefixes}: when a stop consonant is
+      \item Redundant affricate prefixes: when a stop consonant is
             immediately followed by its own affricate form (\emph{d} followed
             by \emph{dy}, or \emph{t} followed by \emph{ts}), the leading stop
             is removed, as it is already encoded within the affricate.
-      \item \textbf{Phonotactic cluster repair}: consonant clusters that violate
+      \item Phonotactic cluster repair: consonant clusters that violate
             the Filipino CV/CVC syllable template (Section~II-D) are repaired
             through epenthetic vowel insertion. Specifically, when the IPA
             transcription contains a schwa and the word-final graphemes form an

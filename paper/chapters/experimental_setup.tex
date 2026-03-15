@@ -1,7 +1,7 @@
 \section{Experimental Setup}
 
 \subsection{Implementation}
-The system is implemented in Rust. Vowel resolution relies on a G2P backend
+The system is implemented in Rust. The G2P backend for vowels is
 provided by the \texttt{phonemizer} library~\cite{bernard2021}, which wraps the
 eSpeak-NG speech synthesizer and is invoked as a Python subprocess.
 
@@ -38,7 +38,7 @@ spanning Philippine domains where English loanwords are commonly used.
 For every entry, the annotator determined the correct Filipino nativized form
 by applying the spelling conventions prescribed in~\cite{almario2014}. Where
 the manual did not prescribe a specific nativization, annotators consulted
-descriptive accounts of Tagalog phonology~\cite{llamzon1966,schachter1972} and
+descriptive accounts of Filipino phonology~\cite{llamzon1966,schachter1972} and
 Philippine English
 phonology~\cite{llamzon1997,tayao2004,magpale2026,magpale2025,magpale_hong_2024_sc}
 to determine the most plausible nativized form under the five-vowel system.
@@ -72,7 +72,7 @@ We set the acceptance threshold at CER \(< 20\%\), meaning that on average fewer
 than one in five reference characters is affected by an edit. We additionally
 report CER under two relaxed evaluation conditions motivated by a well-known
 property of Filipino phonology: the vowels /e/ and /i/ and the vowels /o/ and
-/u/ are historically allophonic in Tagalog~\cite{schachter1972}. Because native
+/u/ are historically allophonic in Filipino~\cite{schachter1972}. Because native
 speakers often accept both members of each pair interchangeably in nativized
 forms, we compute CER variants in which \{e, i, y\} are treated as equivalent
 and \{o, u\} are treated as equivalent, as well as a combined condition in
