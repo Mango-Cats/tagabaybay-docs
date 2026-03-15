@@ -1,27 +1,25 @@
 \section{Results and Discussion}
-As a testbed we implemented orthographic nativization of English words in
-Filipino.~\Cref{CER} shows the CERs for default case, e/i/y relaxed, o/u
+
+\Cref{CER} reports the overall Character Error Rate under the four evaluation
+conditions described in \cref{ssec:evaluation_metrics}. The system was evaluated on
+2,045 words across the four gold corpora.
 
 \begin{table}[h]
     \centering
-
-    \caption{Performance (Character Error Rate)}
+    \caption{Overall Character Error Rate (\%) under four vowel-equivalence conditions.}
     \label{CER}
-    \begin{tabular}{|l|c|c|c|c|}
+    \begin{tabular}{lccc c}
         \hline
-            & Default & e = i = y & o = u   & Combined \\
+        \textbf{5-vowel} & \textbf{\emph{e} = \emph{i} = \emph{y}} & \textbf{\emph{o} = \emph{u}} & \textbf{3-vowel} \\
         \hline
-        CER & 11.33\% & 8.76\%    & 11.20\% & 8.63\%   \\
+        11.33 & 8.76 & 11.20 & 8.63 \\
         \hline
     \end{tabular}
 \end{table}
 
-Testing was conducted over the four previously mentioned datasets. There were a
-total of 2,045 words evaluated.
-
-The base model achieved an overall CER of 11.33\%. For the methodology, refer
-to the last paragraph of Experimental Setup. The results show that treating
-\{e, i, y\} as equivalent reduced the CER from 11.33\% to 8.76\%, showing that
-this variant is what most of the improvement consists of. Whereas the \{o, u\}
-variant only reduced the CER by 0.13\%, from 11.33\% to 11.20\%. Combining both
-variants resulted in the lowest CER, with 8.63\%.
+Under the default (strict five-vowel) condition, the system achieved a CER of
+11.33\%. Relaxing the \{e, i, y\} equivalence reduced the CER to 8.76\%, a
+2.57 percentage-point drop that accounts for the majority of the improvement.
+By contrast, the \{o, u\} relaxation yielded only a marginal reduction to
+11.20\%, suggesting that o/u confusions contribute minimally to the overall
+error. Combining both equivalences produced the lowest CER at 8.63\%.
