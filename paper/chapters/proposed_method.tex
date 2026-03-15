@@ -4,27 +4,21 @@ through a pipeline of four sequential stages: graphemic tokenization,
 rule-based grapheme mapping, phonetic vowel resolution, and output
 normalization. The input to the system is the English orthographic form; the
 output is the Filipino orthographic form prescribed by the spelling conventions
-in~
-\cite{almario2014}. Each stage operates on the output of the previous, and
+in~ \cite{almario2014}. Each stage operates on the output of the previous, and
 together they model the grapheme-to-grapheme transduction that constitutes
-orthographic nativization. The linguistic properties described
-in~
-\cref{sec:filipino_orthography} directly inform the design of
-each stage.
+orthographic nativization. The linguistic properties described in~
+\cref{sec:filipino_orthography} directly inform the design of each stage.
 
 \subsection{Graphemic Tokenization}
 Before any mapping can take place, the English input must be segmented into its
 functional graphemic units. This step is necessary because English's deep
-orthography contains multi-letter sequences that function as
-single graphemic units. The system recognizes the following classes of
-multigraphs:
+orthography contains multi-letter sequences that function as single graphemic
+units. The system recognizes the following classes of multigraphs:
 \begin{itemize}
-      \item Digraph: \emph{ph}, \emph{ch}, \emph{sh}, \emph{th},
-            \emph{ng}, \emph{kn}, \emph{wr}, \emph{gh}, \emph{ee}, \emph{oo}
-      \item Trigraph: \emph{igh}, \emph{tch}, \emph{dge},
-            \emph{que}, \emph{ore}
-      \item Multigraph: \emph{augh}, \emph{ough},
-            \emph{eigh}
+      \item Digraph: \emph{ph}, \emph{ch}, \emph{sh}, \emph{th}, \emph{ng}, \emph{kn},
+            \emph{wr}, \emph{gh}, \emph{ee}, \emph{oo}
+      \item Trigraph: \emph{igh}, \emph{tch}, \emph{dge}, \emph{que}, \emph{ore}
+      \item Multigraph: \emph{augh}, \emph{ough}, \emph{eigh}
 \end{itemize}
 
 The tokenizer applies a greedy, longest-match strategy: at each position in the
@@ -44,7 +38,7 @@ where \(\Sigma\) is the set of recognized graphemic units and
 \end{center}
 This ensures that subsequent mapping rules operate on meaningful
 units, rather than on raw characters.
- 
+
 \subsection{Rule-Based Grapheme Mapping}
 Following tokenization, each graphemic token is mapped to its Filipino
 orthographic equivalent through a priority-ordered cascade of rule types. For
@@ -77,11 +71,11 @@ context window.
 
 \subsubsection{Context-Sensitive Rules}
 Several of the foreign-derived letters added in the 1987 alphabet expansion
-have context-dependent phonemic values, and English graphemes
-more broadly often have realizations that vary with their orthographic
-environment. These cases require \emph{context-sensitive} rules, where the
-mapping for a given token is selected by inspecting adjacent graphemes and
-matching against a set of ordered conditions. For example:
+have context-dependent phonemic values, and English graphemes more broadly
+often have realizations that vary with their orthographic environment. These
+cases require \emph{context-sensitive} rules, where the mapping for a given
+token is selected by inspecting adjacent graphemes and matching against a set
+of ordered conditions. For example:
 \begin{itemize}
       \item Cases for \emph{c}:
             \begin{enumerate}
@@ -91,8 +85,9 @@ matching against a set of ordered conditions. For example:
                   \item Otherwise: \emph{c} \( \mapsto \) \emph{k}; ``computer'' \(\mapsto\)
                         \emph{kompyuter}.
             \end{enumerate}
-      \item Cases for doubled consonants: when two identical consonants appear adjacently, the second is treated as silent and mapped to no
-            output, with the single consonant preserved.
+      \item Cases for doubled consonants: when two identical consonants appear adjacently,
+            the second is treated as silent and mapped to no output, with the single
+            consonant preserved.
 \end{itemize}
 More complex patterns require multi-token lookahead. The sequence \emph{-ate}
 at the word boundary, for instance, maps to \emph{-eyt} rather than a sequence
@@ -101,20 +96,20 @@ common English suffixes in Filipino orthographic convention.
 
 \subsection{Phonetic Resolution for Vowels}
 The orthographic rules described above handle consonant nativization well, but
-vowels present a qualitatively different challenge. 
-English's deep orthography means that a single vowel grapheme can correspond to
-several distinct phonemes, and the five-vowel Filipino system
-requires that these distinctions be collapsed into a small target set.
-Furthermore, because English is a stress-timed language, unstressed vowels
-frequently reduce to the schwa /\textipa{@}/, introducing a systematic
-ambiguity that orthography alone cannot resolve.
+vowels present a qualitatively different challenge. English's deep orthography
+means that a single vowel grapheme can correspond to several distinct phonemes,
+and the five-vowel Filipino system requires that these distinctions be
+collapsed into a small target set. Furthermore, because English is a
+stress-timed language, unstressed vowels frequently reduce to the schwa
+/\textipa{@}/, introducing a systematic ambiguity that orthography alone cannot
+resolve.
 
 This is the one point in the pipeline where the system must look beyond
 graphemes. For vowel tokens whose nativized form cannot be determined from
-spelling context alone, the system invokes a G2P
-component to obtain an IPA transcription of the entire English word. The
-relevant vowel phoneme is then extracted by aligning it to the current token
-position. The mapping proceeds as follows:
+spelling context alone, the system invokes a G2P component to obtain an IPA
+transcription of the entire English word. The relevant vowel phoneme is then
+extracted by aligning it to the current token position. The mapping proceeds as
+follows:
 \begin{itemize}
       \item Tense vowels and diphthongs (/\textipa{eI}/, /\textipa{oU}/, /\textipa{aI}/,
             /\textipa{aU}/) are rendered as two-character Filipino sequences: \emph{ey},
@@ -137,20 +132,18 @@ normalization pass over the raw output sequence. This pass corrects three
 classes of artifact that can arise from the independent firing of rules across
 adjacent tokens:
 \begin{itemize}
-      \item Contiguous duplicates: identical adjacent graphemes produced
-            by separate rule branches are collapsed to a single instance.
-      \item Redundant affricate prefixes: when a stop consonant is
-            immediately followed by its own affricate form (\emph{d} followed
-            by \emph{dy}, or \emph{t} followed by \emph{ts}), the leading stop
-            is removed, as it is already encoded within the affricate.
-      \item Phonotactic cluster repair: consonant clusters that violate
-            the Filipino CV/CVC syllable template are repaired
-            through epenthetic vowel insertion. Specifically, when the IPA
-            transcription contains a schwa and the word-final graphemes form an
-            illegal cluster ending in \emph{l} or \emph{r}, the vowel \emph{o}
-            is inserted before the liquid.
+      \item Contiguous duplicates: identical adjacent graphemes produced by separate rule
+            branches are collapsed to a single instance.
+      \item Redundant affricate prefixes: when a stop consonant is immediately followed by
+            its own affricate form (\emph{d} followed by \emph{dy}, or \emph{t} followed by
+            \emph{ts}), the leading stop is removed, as it is already encoded within the
+            affricate.
+      \item Phonotactic cluster repair: consonant clusters that violate the Filipino CV/CVC
+            syllable template are repaired through epenthetic vowel insertion.
+            Specifically, when the IPA transcription contains a schwa and the word-final
+            graphemes form an illegal cluster ending in \emph{l} or \emph{r}, the vowel
+            \emph{o} is inserted before the liquid.
 \end{itemize}
 
 Together, these normalization steps ensure that the output conforms to the
-phonotactic and orthographic conventions codified in~
-\cite{almario2014}.
+phonotactic and orthographic conventions codified in~ \cite{almario2014}.
