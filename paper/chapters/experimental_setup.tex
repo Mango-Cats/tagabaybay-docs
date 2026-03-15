@@ -18,12 +18,11 @@ Context-free rules are direct encodings of the correspondences
 listed in the KWF manual.
 
 Context-sensitive rules were derived from two complementary sources.
-First, well-documented English grapheme-to-phoneme regularities
-were encoded as conditional mappings. Second, descriptions of Filipino
-phonotactic constraints in~\cite{llamzon1966,schachter1972} informed cluster-repair
-strategies: for instance, the epenthetic vowel insertion that breaks up
-illegal onset clusters follows
-the canonical CV syllable template of Filipino described
+First, well-documented English G2P regularities were encoded as conditional
+mappings. Second, descriptions of Filipino phonotactic constraints
+in~\cite{llamzon1966,schachter1972} informed cluster-repair strategies:
+for instance, the epenthetic vowel insertion that breaks up illegal onset
+clusters follows the canonical CV syllable template of Filipino described
 in~\cite{llamzon1966}.
 
 Phonetic vowel-mapping rules were informed by studies of Philippine
@@ -74,7 +73,7 @@ nativization errors are often minor (e.g., a single vowel substitution),
 and a word-level metric would treat a one-character discrepancy as harshly
 as a completely incorrect output.
 
-We set the acceptance threshold at CER $< 20\%$, meaning that on average
+We set the acceptance threshold at CER $< 20\%$, meaning that, on average,
 fewer than one in five reference characters is affected by an edit. We
 additionally report CER under two relaxed evaluation conditions motivated
 by a well-known property of Filipino phonology: the vowels /e/ and /i/
