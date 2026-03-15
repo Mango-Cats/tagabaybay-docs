@@ -1,59 +1,59 @@
 \section{Introduction}
 
-Language contact commonly results in the borrowing of foreign lexical
-items. Borrowed words rarely enter unchanged; instead, they undergo
-\emph{nativization}, adapting to the phonological, morphological, and
-orthographic conventions of the receiving language~\cite{haugen1950}.
-This process is especially pervasive in multilingual and literacy-rich
-settings, where foreign vocabulary is encountered through both spoken and
-written channels~\cite{haugen1950,uffman2015}.
+Language contact commonly results in the borrowing of foreign lexical items
+from a donor language. Borrowed words rarely enter unchanged; instead, they
+undergo \emph{nativization}, adapting to the phonological, morphological, and
+orthographic conventions of the recipient~\cite{haugen1950,wang2025}. The
+phonological and morphological dimensions of loanword integration have been
+studied extensively~\cite{kang2011, uffmann2015}, and the influence of
+orthography on adaptation is also documented~\cite{wang2025,daland2015}.
+However, \emph{orthographic nativization} has received considerably less
+attention as a computational task, despite its relevance to text normalization,
+spell-checking, and corpus construction in multilingual natural language
+processing.
 
-Among its dimensions, \emph{orthographic nativization}, the adaptation of
-a loanword's spelling to the writing conventions of the borrowing
-language, has received limited computational attention despite its
-importance for consistent text processing in multilingual contexts. We
-formulate orthographic nativization as a grapheme-to-grapheme transduction
-task: given a source-language spelling, produce the single standardized
-spelling prescribed by the borrowing language's orthographic norms.
-Empirical work shows that spelling systematically influences adaptation
-outcomes, that borrowers rely on orthographic cues when phonetic input is
-ambiguous, and that orthographic dominance is strongest when loanwords
-enter primarily through written discourse~\cite{vendelin2006,daland2015,wang2025,uffman2015}.
+Within computational linguistics, loanword modeling efforts have targeted
+related but distinct problems. FST cascades with Optimality-Theoretic
+constraint ranking have modeled the morpho-phonological transformations of
+Arabic loanwords entering Swahili for bilingual lexicon
+generation~\cite{tsvetkov2015}. FSTs have also shown that much of the
+phonological adaptation from English into Japanese can be captured by
+finite-state mappings~\cite{mao2016}. More broadly, nativization in loanword
+phonology has been shown to be systematic and rule-governed across
+typologically diverse languages~\cite{kang2011}.
 
-Computational modeling of this task must therefore encode both graphemic
-correspondences and phonotactic repair strategies reflected in spelling
-conventions. Constraint-based phonological frameworks such as Optimality
-Theory provide explanatory accounts of adaptation but are difficult to
-operationalize computationally due to complex constraint interaction and
-limited interpretability~\cite{idsardi2006}. Purely data-driven approaches
-face a complementary limitation: they require large parallel corpora of
-source--nativized forms, which are typically unavailable for low-resource
-languages. A prioritized cascade of rewrite rules offers a practical
-middle ground, enabling transparent, linguistically grounded modeling
-independent of training data~\cite{mao2016}.
+These studies focus on modeling phonological nativization patterns. What they
+do not address is orthographic nativization as a \emph{generation} problem:
+given a loanword, produce its standardized written form according to the
+recipient language's orthographic conventions. This distinction matters, as
+phonological and orthographic nativization are not
+equivalent~\cite{wang2025,daland2015}. A phonological model produces an
+abstract pronunciation representation; an orthographic nativization system must
+produce a concrete character string that obeys the recipient's spelling rules.
 
-We evaluate this rule-cascade architecture using Filipino as a test case.
-Filipino is well-suited to this role because it borrows extensively from
-English across domains such as education, medicine, commerce, and public
-administration~\cite{baklanova2017}, and because official nativization
-guidelines are codified in the Komisyon sa Wikang Filipino's
-\emph{Manwal sa Masinop na Pagsulat}~\cite{almario2014}. These properties
-allow the construction and systematic evaluation of a deterministic
-rule-based model grounded in prescriptive orthographic standards.
-Although the specific rules are language-dependent, the underlying
-priority-cascade architecture is intended to be transferable to other
-borrowing contexts with documented spelling conventions.
+We address this gap with a rule-based rewrite cascade drawn from prior FST work
+on loanword modeling~\cite{mao2016}. By deriving rewrites from prescriptive
+guidelines and linguistic literature, the approach is transparent and
+linguistically grounded. It also sidesteps the limitation of data-driven
+methods, which require parallel corpora typically unavailable for low-resource
+languages, offering a practical middle ground.
 
-In summary, this study makes the following contributions:
+We evaluate the proposed method using Filipino as a testbed. Filipino borrows
+extensively from English across education, medicine, commerce, and public
+administration~\cite{martin2020,baklanova2017}, and official nativization
+guidelines are codified in~\cite{almario2014}. These properties enable
+systematic evaluation against prescriptive orthographic standards. Filipino is
+also typologically distinct from English in phonological inventory, syllable
+structure, and orthographic depth~\cite{llamzon1966,schachter1972,llamzon1997},
+ensuring the testbed exercises the full capacity of the proposed cascade.
+
+This study makes the following contributions:
 \begin{itemize}
-    \item \textbf{A rule-cascade framework for low-resource orthographic nativization.}
-          We formalize orthographic nativization as prioritized grapheme-level
-          rewrite transduction, demonstrating that prescriptive linguistic
-          rules can be operationalized as an interpretable computational
-          pipeline without large parallel corpora.
+      \item We formalize orthographic nativization as prioritized grapheme-level rewrite
+            transduction, demonstrating that prescriptive linguistic rules can be
+            operationalized as an interpretable pipeline without large parallel corpora.
 
-    \item \textbf{An empirical case study on English--Filipino borrowing.}
-          Using Filipino as a computational testbench, we implement and
-          evaluate the proposed framework on real loanword data, showing its
-          practical effectiveness while identifying systematic error sources.
+      \item Using Filipino as a testbed, we implement and evaluate the framework on real
+            loanword data, demonstrating practical effectiveness while identifying
+            systematic sources of error.
 \end{itemize}
