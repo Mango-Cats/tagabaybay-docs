@@ -1,27 +1,27 @@
 \section{Results and Discussion}
-As a testbed we implemented orthigraphic nativization of English words
-in Filipino. \ref{CER} shows the CERs for default case, e/i/y relaxed, o/u
-relaxed, and combined.
+As a testbed we implemented orthographic nativization of English words in
+Filipino.~\Cref{CER} shows the CERs for default case, e/i/y relaxed, o/u
 
 \begin{table}[h]
-\centering
+    \centering
 
-\caption{Performance (Character Error Rate)}
-\label{CER}
-\begin{tabular}{|l|c|c|c|c|}
-\hline
-    & Default & e = i = y & o = u   & Combined \\
-\hline
-CER & 11.33\% & 8.76\%    & 11.20\% & 8.63\% \\
-\hline
-
-\end{tabular}
+    \caption{Performance (Character Error Rate)}
+    \label{CER}
+    \begin{tabular}{|l|c|c|c|c|}
+        \hline
+            & Default & e = i = y & o = u   & Combined \\
+        \hline
+        CER & 11.33\% & 8.76\%    & 11.20\% & 8.63\%   \\
+        \hline
+    \end{tabular}
 \end{table}
 
-Testing was conducted over the four previously mentioned datasets. There were
-a total of 2,045 words evaluated. The model achieved an overall CER of 11.33\%,
-but applying different CER variants improved the performance. The variant that
-treats \{e, i, y\} characters as equivalent achieved a CER of 8.76\%, while
-the variant that treats \{o, u\} as equivalent achieved a CER of 11.20\%.
-Combining both variants improved the results even further, resulting in a CER
-of 8.63\%.
+Testing was conducted over the four previously mentioned datasets. There were a
+total of 2,045 words evaluated.
+
+The base model achieved an overall CER of 11.33\%. For the methodology, refer
+to the last paragraph of Experimental Setup. The results show that treating
+\{e, i, y\} as equivalent reduced the CER from 11.33\% to 8.76\%, showing that
+this variant is what most of the improvement consists of. Whereas the \{o, u\}
+variant only reduced the CER by 0.13\%, from 11.33\% to 11.20\%. Combining both
+variants resulted in the lowest CER, with 8.63\%.
