@@ -1,4 +1,4 @@
-\section{Methodology}
+\section{Proposed Method}
 The proposed system performs orthographic nativization of English loanwords
 through a pipeline of four sequential stages: graphemic tokenization,
 rule-based grapheme mapping, phonetic vowel resolution, and output
@@ -14,7 +14,7 @@ each stage.
 Before any mapping can take place, the English input must be segmented into its
 functional graphemic units. This step is necessary because English's deep
 orthography contains multi-letter sequences that function as
-single phonological units. The system recognizes the following classes of
+single graphemic units. The system recognizes the following classes of
 multigraphs:
 \begin{itemize}
       \item Digraph: \emph{ph}, \emph{ch}, \emph{sh}, \emph{th},
@@ -143,7 +143,7 @@ adjacent tokens:
             by \emph{dy}, or \emph{t} followed by \emph{ts}), the leading stop
             is removed, as it is already encoded within the affricate.
       \item Phonotactic cluster repair: consonant clusters that violate
-            the Filipino CV/CVC syllable template (Section~II-D) are repaired
+            the Filipino CV/CVC syllable template are repaired
             through epenthetic vowel insertion. Specifically, when the IPA
             transcription contains a schwa and the word-final graphemes form an
             illegal cluster ending in \emph{l} or \emph{r}, the vowel \emph{o}
