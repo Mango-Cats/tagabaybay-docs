@@ -31,7 +31,7 @@ which can surface as any of the five Filipino vowels.
 
 \subsection{Error Analysis}
 
-Manual inspection of the 882 character-level edits under the relaxed 3-vowel
+Manual inspection of the 856 character-level edits under the relaxed 3-vowel
 scoring reveals four dominant failure modes.
 
 \subsubsection{Unstressed Vowel Ambiguity}
@@ -40,10 +40,10 @@ The largest error source is the resolution of English unstressed vowels,
 particularly the schwa /\textipa{@}/, to Filipino, whose orthography has no
 dedicated reduced-vowel character. Under 3-vowel evaluation, vowel-to-vowel
 substitutions dominate the error ranking:
-\emph{a}~\(\mapsto\)~\emph{o} accounts for 60 errors,
+\emph{a}~\(\mapsto\)~\emph{o} accounts for 46 errors,
 \emph{e}~\(\mapsto\)~\emph{a} for 37,
 \emph{o}~\(\mapsto\)~\emph{a} for 27, and
-\emph{a}~\(\mapsto\)~\emph{e} for 23, totaling over 170 vowel substitutions.
+\emph{a}~\(\mapsto\)~\emph{e} for 23, totaling over 133 vowel substitutions.
 Because the (\emph{a}, \emph{o}) contrast persists even after collapsing
 (\emph{e}, \emph{i}, \emph{y}) and (\emph{o}, \emph{u}), the ambiguity is
 structural: the rule-based pipeline cannot resolve it without lexical stress
@@ -53,7 +53,7 @@ information or a pronunciation dictionary lookup.
 
 Filipino phonotactics requires semivowel glides /w/ and /j/ to break vowel
 hiatus and to close certain diphthongs. The current rules handle several common
-environments but miss 42 \emph{w}-insertion and 38 \emph{y}-insertion sites
+environments but miss 42 \emph{w}-insertion and 40 \emph{y}-insertion sites
 under 5-vowel evaluation. Errors cluster in two contexts: hiatus resolution,
 where adjacent vowels require an intervening glide
 For instance, ``tiara''~\(\mapsto\)~``tiara'' instead of ``tiyara''.
