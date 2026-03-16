@@ -3,40 +3,27 @@
 \subsection{Implementation}
 The system is implemented in Rust. The G2P backend for vowel resolution is
 provided by the \texttt{phonemizer} library~\cite{bernard2021}, which wraps the
-eSpeak-NG speech synthesizer and is invoked as a Python subprocess. The G2P
-component is called only when the current token is a vowel grapheme whose
-nativized form cannot be determined from spelling context alone; for all other
-tokens, the system operates entirely within the Rust process.
-
-The nativization rules described in~\cref{sec:filipino_orthography} were
-hand-authored, not learned from data. Context-free and context-sensitive rules
-were drawn from~\cite{almario2014} and from descriptive accounts of Filipino
-phonotactics~\cite{llamzon1966,schachter1972}. Vowel-mapping rules were
-informed by studies of Filipino
-phonology~\cite{llamzon1966,llamzon1997,tayao2004,magpale2026,magpale2025,magpale_hong_2024_sc},
-which document how the larger English vowel system reduces to roughly five
-categories in Filipino usage.
+eSpeak-NG speech synthesizer and is invoked as a Python subprocess only when a
+vowel grapheme requires phonetic disambiguation; otherwise, the system operates
+entirely within the Rust process.
 
 \subsection{Gold Standard}
 
 \subsubsection{Construction}
-The gold standard corpus was constructed by native Filipino speakers and
-comprises 2,320 English--Filipino loanword pairs panning Philippine domains where English loanwords are commonly used.
+The gold standard corpus comprises 2,320 English--Filipino loanword pairs
+constructed by native Filipino speakers, spanning spanning Philippine domains
+where English loanwords are commonly used
 
-For every entry, the annotator determined the correct Filipino nativized form
-by applying the spelling conventions prescribed in~\cite{almario2014}. Where
-the manual did not prescribe a specific nativization, annotators consulted
-descriptive accounts of Filipino
-phonology~\cite{llamzon1966,schachter1972,llamzon1997,tayao2004,magpale2026,magpale2025,magpale_hong_2024_sc}
-to determine the most plausible nativized form under the five-vowel system.
+Annotators applied the spelling conventions prescribed in~\cite{almario2014};
+where the manual did not prescribe a specific nativization, they consulted
+descriptive phonological sources to determine the most plausible form under the
+five-vowel system.
 
 \subsubsection{Inter-Annotator Agreement}
-To validate corpus quality, inter-annotator agreement was measured using a
-dedicated validation script. For each dataset, a random subsample of 60\% of
-entries was presented to a second native-Filipino annotator, who independently
-produced a nativized form for each English source word without seeing the first
-annotator's output. Agreement is reported as the percentage of entries on which
-both annotators produced identical nativized forms.
+To validate corpus quality, inter-annotator agreement was measured by
+presenting a random subsample of 60\% of entries was presented to a second
+native-Filipino annotator. Agreement is reported as the percentage of entries
+on which both annotators produced identical nativized forms.
 
 \subsection{Evaluation Metrics}\label{ssec:evaluation_metrics}
 The primary evaluation metric is Character Error Rate (CER), computed as the
@@ -57,13 +44,9 @@ word-level metric would treat a one-character discrepancy as harshly as a
 completely incorrect output.
 
 We set the acceptance threshold at CER \(< 20\%\), meaning that on average
-fewer than one in five reference characters is affected by an edit. We
-additionally report CER under two relaxed evaluation conditions motivated by
-the \emph{e}/\emph{i} and \emph{o}/\emph{u} allographic variation described
-in~\cref{sec:filipino_orthography}: because native speakers often accept both
-members of each pair interchangeably in nativized forms, we compute CER
-variants in which \emph{e}, \emph{i}, \emph{y} are treated as equivalent and \emph{o}, \emph{u} are
-treated as equivalent, as well as a combined condition in which both
-equivalences hold simultaneously. These relaxed metrics provide a more
-linguistically informed picture of system performance by discounting errors
-that would not be perceived as incorrect by most Filipino speakers.
+fewer than one in five reference characters is affected by an edit.
+Additionally, because (\emph{e}, \emph{i}, \emph{y}) and (\emph{o}, \emph{u})
+are interchangeable in Filipino~\cite{schachter1972}, we report CER under
+relaxed conditions treating these pairs as equivalent. This provides a
+linguistically realistic assessment by discounting errors native speakers would
+not perceive.

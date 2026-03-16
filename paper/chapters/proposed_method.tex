@@ -6,7 +6,33 @@ normalization. The input to the system is the English orthographic form; the
 output is the Filipino orthographic form prescribed by the spelling conventions
 in~\cite{almario2014}. Each stage operates on the output of the previous, and
 together they model the grapheme-to-grapheme transduction that constitutes
-orthographic nativization. The linguistic properties described in~\cref{sec:filipino_orthography} directly inform the design of each stage.
+orthographic nativization. The linguistic properties described
+in~\cref{sec:filipino_orthography} directly inform the design of each stage.
+
+\Cref{tab:pipeline} illustrates the four-stage pipeline using the word
+``computer'' as an example. Graphemic tokenization segments the input into
+functional units, handling English multigraphs. The rewrite cascade then maps
+each token to its Filipino equivalent using context-sensitive rules where
+needed and invoking G2P for
+ambiguous vowels. Finally, output normalization ensures conformance to Filipino
+phonotactic constraints.
+
+\begin{table}[htbp]
+      \centering
+      \caption{Pipeline stages illustrated with ``computer'' \(\mapsto\) \emph{kompyuter}.}
+      \label{tab:pipeline}
+      \begin{tabular}{lll}
+            \toprule
+            \textbf{Stage}         & \textbf{Output}             \\
+            \midrule
+            \emph{Input}           & computer                    \\
+            \emph{Tokenization}    & \{c, o, m, p, u, t, e, r\}  \\
+            \emph{G2P}             & /k\textipa{@m"pjut@r}/      \\
+            \emph{Rewrite Cascade} & \{k, o, m, p, yu, t, e, r\} \\
+            \emph{Normalization}   & kompyuter                   \\
+            \bottomrule
+      \end{tabular}
+\end{table}
 
 \subsection{Graphemic Tokenization}
 Before any mapping can take place, the English input must be segmented into its
@@ -14,10 +40,10 @@ functional graphemic units. This step is necessary because English's deep
 orthography contains multi-letter sequences that function as single graphemic
 units. The system recognizes the following classes of multigraphs:
 \begin{itemize}
-    \item Digraphs: \emph{ph}, \emph{ch}, \emph{sh}, \emph{th}, \emph{ng}, \emph{kn},
-          \emph{wr}, \emph{gh}, \emph{ee}, \emph{oo}
-    \item Trigraphs: \emph{igh}, \emph{tch}, \emph{dge}, \emph{que}, \emph{ore}
-    \item Tetragraphs: \emph{augh}, \emph{ough}, \emph{eigh}
+      \item Digraphs: \emph{ph}, \emph{ch}, \emph{sh}, \emph{th}, \emph{ng}, \emph{kn},
+            \emph{wr}, \emph{gh}, \emph{ee}, \emph{oo}
+      \item Trigraphs: \emph{igh}, \emph{tch}, \emph{dge}, \emph{que}, \emph{ore}
+      \item Tetragraphs: \emph{augh}, \emph{ough}, \emph{eigh}
 \end{itemize}
 
 The tokenizer applies a greedy, longest-match strategy: at each position in the
@@ -26,19 +52,20 @@ digraph, and finally falls back to a single character if no multi-character
 pattern is recognized. Formally, for each position \(i\) in the input string,
 the tokenizer selects:
 \[
-    \max \{n\in\{1,2,3,4\} \mid \mathrm{substr}(i,n) \in \Sigma\}
+      \max \{n\in\{1,2,3,4\} \mid \mathrm{substr}(i,n) \in \Sigma\}
 \]
 where \(\Sigma\) is the set of recognized graphemic units and
-\(\mathrm{substr}(i, n)\) is the \(n\)-character substring beginning at position
-\(i\). For example, the words ``straight'' and ``phishing'' are tokenized as:
+\(\mathrm{substr}(i, n)\) is the \(n\)-character substring beginning at
+position \(i\). For example, the words ``straight'' and ``phishing'' are
+tokenized as:
 \begin{center}
-    \emph{s}~\emph{t}~\emph{r}~\emph{a}~\emph{igh}~\emph{t} \\
-    \emph{ph}~\emph{i}~\emph{sh}~\emph{i}~\emph{ng}
+      \emph{s}~\emph{t}~\emph{r}~\emph{a}~\emph{igh}~\emph{t} \\
+      \emph{ph}~\emph{i}~\emph{sh}~\emph{i}~\emph{ng}
 \end{center}
 This ensures that subsequent mapping rules operate on meaningful graphemic
 units rather than on raw characters.
 
-\subsection{Rule-Based Grapheme Mapping}
+\subsection{Rewrite Cascades}
 Following tokenization, each graphemic token is mapped to its Filipino
 orthographic equivalent through a priority-ordered cascade of rule types. The
 system distinguishes between context-free rules, which apply invariant mappings
@@ -46,9 +73,9 @@ regardless of surrounding graphemes, and context-sensitive rules, which select
 outputs based on orthographic environment. For each token, the system evaluates
 rules in the following priority order, accepting the first match:
 \begin{enumerate}
-    \item Context-sensitive orthographic rules
-    \item Phonetic resolution rules
-    \item Context-free orthographic rules
+      \item Context-sensitive orthographic rules
+      \item Phonetic resolution rules
+      \item Context-free orthographic rules
 \end{enumerate}
 This ordering reflects a key design principle: more specific rules take
 priority over more general ones. Context-sensitive rules handle the majority of
@@ -56,8 +83,8 @@ ambiguous cases where neighboring graphemes determine the mapping;
 context-free rules serve as the default fallback for graphemes with invariant
 correspondences.
 
-For clarity, we describe these rule types in order of increasing
-complexity, beginning with context-free rules.
+For clarity, we describe these rule types in order of increasing complexity,
+beginning with context-free rules.
 
 \subsubsection{Context-Free Rules}
 Many English consonant graphemes bear an invariant relationship to their
@@ -65,11 +92,11 @@ Filipino nativized form. For such graphemes, nativization reduces to a direct
 one-to-one substitution requiring no knowledge of surrounding context.
 Representative examples include:
 \begin{itemize}
-    \item \(\emph{b} \mapsto \emph{b}\): Both instances in ``basketball'' map
-          directly, yielding \emph{basketbol}.
-    \item \(\emph{ph} \mapsto \emph{p}\): The digraph \emph{ph}
-          consistently maps to \emph{p}; ``cellphone'' \(\mapsto\) \emph{selpon}.
-    \item \(\emph{f} \mapsto \emph{p}\): ``coffee'' \(\mapsto\) \emph{kopi}.
+      \item \(\emph{b} \mapsto \emph{b}\): Both instances in ``basketball'' map
+            directly, yielding \emph{basketbol}.
+      \item \(\emph{ph} \mapsto \emph{p}\): The digraph \emph{ph}
+            consistently maps to \emph{p}; ``cellphone'' \(\mapsto\) \emph{selpon}.
+      \item \(\emph{f} \mapsto \emph{p}\): ``coffee'' \(\mapsto\) \emph{kopi}.
 \end{itemize}
 Because these mappings are strictly positional and produce the same output
 regardless of surrounding tokens, they are computed without reference to any
@@ -86,20 +113,20 @@ graphemes and matching against a set of ordered conditions.
 The letter \emph{c} provides a prototypical example. Its nativized form depends
 on the following grapheme:
 \begin{itemize}
-    \item \(\emph{c} \cdot (\emph{i} \mid \emph{e}) \mapsto \emph{s}\):
-          When \emph{c} precedes \emph{i} or \emph{e}, it maps to \emph{s};
-          ``cinema'' \(\mapsto\) \emph{sine}.
-    \item Otherwise: \(\emph{c} \mapsto \emph{k}\); ``computer'' \(\mapsto\)
-          \emph{kompyuter}.
+      \item \(\emph{c} \cdot (\emph{i} \mid \emph{e}) \mapsto \emph{s}\):
+            When \emph{c} precedes \emph{i} or \emph{e}, it maps to \emph{s};
+            ``cinema'' \(\mapsto\) \emph{sine}.
+      \item Otherwise: \(\emph{c} \mapsto \emph{k}\); ``computer'' \(\mapsto\)
+            \emph{kompyuter}.
 \end{itemize}
 
 Similar context-dependent patterns apply to other graphemes:
 \begin{itemize}
-    \item Doubled consonants: When two identical consonants appear adjacently,
-          the second is treated as silent and mapped to no output, preserving
-          only the single consonant; ``addict'' \(\mapsto\) \emph{adik}.
-    \item Silent \emph{e}: Word-final \emph{e} following a consonant is dropped;
-          ``make'' \(\mapsto\) \emph{meyk}.
+      \item Doubled consonants: When two identical consonants appear adjacently, the second
+            is treated as silent and mapped to no output, preserving only the single
+            consonant; ``addict'' \(\mapsto\) \emph{adik}.
+      \item Silent \emph{e}: Word-final \emph{e} following a consonant is dropped; ``make''
+            \(\mapsto\) \emph{meyk}.
 \end{itemize}
 
 More complex patterns require multi-token lookahead. The sequence \emph{-ate}
@@ -124,15 +151,15 @@ Alphabet (IPA) transcription of the entire English word. The relevant vowel
 phoneme is then extracted by aligning it to the current token position. The
 mapping proceeds as follows:
 \begin{itemize}
-    \item Tense vowels and diphthongs (/\textipa{eI}/, /\textipa{oU}/, /\textipa{aI}/,
-          /\textipa{aU}/) are rendered as two-character Filipino sequences: \emph{ey},
-          \emph{ow}, \emph{ay}, \emph{aw}.
-    \item Lax monophthongs (/\textipa{\ae}/, /\textipa{E}/, /\textipa{I}/, /\textipa{Q}/,
-          /\textipa{U}/) are mapped to the nearest Filipino simple vowel.
-    \item The schwa /\textipa{@}/ in word-final position is realized as \emph{e} or
-          \emph{o} depending on the written vowel.
-    \item R-colored vowels (/\textipa{@r}/, /\textipa{3r}/) preserve the written vowel
-          letter, deferring to orthographic convention.
+      \item Tense vowels and diphthongs (/\textipa{eI}/, /\textipa{oU}/, /\textipa{aI}/,
+            /\textipa{aU}/) are rendered as two-character Filipino sequences: \emph{ey},
+            \emph{ow}, \emph{ay}, \emph{aw}.
+      \item Lax monophthongs (/\textipa{\ae}/, /\textipa{E}/, /\textipa{I}/, /\textipa{Q}/,
+            /\textipa{U}/) are mapped to the nearest Filipino simple vowel.
+      \item The schwa /\textipa{@}/ in word-final position is realized as \emph{e} or
+            \emph{o} depending on the written vowel.
+      \item R-colored vowels (/\textipa{@r}/, /\textipa{3r}/) preserve the written vowel
+            letter, deferring to orthographic convention.
 \end{itemize}
 Critically, even in this phonetic stage, the system ultimately produces Filipino
 \emph{graphemes}: the G2P lookup is a disambiguation step that resolves
@@ -145,18 +172,23 @@ normalization pass over the raw output sequence. This pass corrects three
 classes of artifacts that can arise from the independent application of rules
 across adjacent tokens:
 \begin{itemize}
-    \item \textbf{Contiguous duplicates}: Identical adjacent graphemes produced by
-          separate rule branches are collapsed to a single instance.
-    \item \textbf{Redundant affricate prefixes}: When a stop consonant is immediately
-          followed by its own affricate form (\emph{d} followed by \emph{dy}, or \emph{t}
-          followed by \emph{ts}), the leading stop is removed, as it is already encoded
-          within the affricate.
-    \item \textbf{Phonotactic cluster repair}: Consonant clusters that violate the
-          Filipino CV/CVC syllable template are repaired through epenthetic vowel
-          insertion. Specifically, when the IPA transcription contains a schwa and the
-          word-final graphemes form an illegal cluster ending in \emph{l} or \emph{r},
-          the vowel \emph{o} is inserted before the liquid.
+      \item \textbf{Contiguous duplicates}: Identical adjacent graphemes produced by
+            separate rule branches are collapsed to a single instance.
+      \item \textbf{Redundant affricate prefixes}: When a stop consonant is immediately
+            followed by its own affricate form (\emph{d} followed by \emph{dy}, or \emph{t}
+            followed by \emph{ts}), the leading stop is removed, as it is already encoded
+            within the affricate.
+      \item \textbf{Phonotactic cluster repair}: Consonant clusters that violate the
+            Filipino CV/CVC syllable template are repaired through epenthetic vowel
+            insertion. Specifically, when the IPA transcription contains a schwa and the
+            word-final graphemes form an illegal cluster ending in \emph{l} or \emph{r},
+            the vowel \emph{o} is inserted before the liquid.
 \end{itemize}
 
 Together, these normalization steps ensure that the output conforms to the
 phonotactic and orthographic conventions codified in~\cite{almario2014}.
+
+\subsection{Rule Construction}
+
+All rules were hand-authored from prescriptive guidelines~\cite{almario2014} and descriptive
+accounts of Filipino phonology~\cite{llamzon1966,llamzon1997,tayao2004,magpale_hong_2024_sc}.
