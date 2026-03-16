@@ -1,105 +1,74 @@
 \section{Results and Discussion}
 
-\Cref{tab:CER} reports the overall CER, we get the CER for a five-vowel inventory,
-a relaxed {\emph{e}, \emph{i}, \emph{y}} case, a relaxed {\emph{o}, \emph{u}} case,
-and a combination of both relaxed cases resulting to a three-vowel inventory.
-The system was evaluated on 2,319 words across the five gold corpora.
-
-To validate the effectiveness of the G2P process and grapheme-phoneme alignment
-on the adaptation of vowel sounds, a comparison against a non-mapped set can be
-made. In this set the G2P process was removed entirely and each vowel results
-to itself without inferrence of any context-sensitive rules or IPA reference.
+The system was evaluated on 2,319 English--Filipino loanword pairs.
+\Cref{tab:CER} reports overall CER under four vowel-equivalence conditions,
+comparing the proposed IPA-guided system against a baseline that maps each
+vowel to itself without G2P or phonetic rules.
 
 \begin{table}[h]
     \centering
     \caption{Overall CER (\%) under four vowel-equivalence conditions.}
     \label{tab:CER}
-    \begin{tabular}{c|cccc}
+    \begin{tabular}{l|cccc}
         \hline
-        \textbf{System}   & \textbf{5-vowel} & \textbf{\emph{e} = \emph{i} = \emph{y}} & \textbf{\emph{o} = \emph{u}} & \textbf{3-vowel} \\
+        \textbf{System} & \textbf{5-vowel} & \textbf{e=i=y} & \textbf{o=u} & \textbf{3-vowel} \\
         \hline
-        Baseline          & 15.50            & 12.48                                   & 15.25                       & 12.23        \\
-        IPA-guided        & 5.32             & 4.29                                    & 5.23                        & 4.20          \\
-        \emph{Difference} & 10.18            & 8.19                                    & 10.02                       & 8.03          \\
+        Baseline        & 15.50            & 12.48          & 15.25        & 12.23            \\
+        IPA-guided      & 5.32             & 4.29           & 5.23         & 4.20             \\
         \hline
-    \end{tabular}
-\end{table}
-
-Under the strict five-vowel condition, the system achieved a CER of 5.32\%.
-Relaxing the (\emph{e}, \emph{i}, \emph{y}) equivalence reduced the CER to
-4.29\%, while the (\emph{o}, \emph{u}) relaxation yielded a fairly marginal
-reduction to 5.23\%. Combining both equivalences produced the lowest CER at
-4.20\%, producing a 1.12 percentage-point drop; a total of 98 word pairs were
-wrong.
-
-Comparing to the unmapped set, there is a 10.18\% difference in the five-vowel
-CER and a 8.03\% difference in the three-vowel CER, validating the need for
-G2P and context-sensitive rules to more accurately assess corresponding vowel
-sounds. Compared to the baseline's non-use of G2P, IPA-guided helps with
-letters that may have an ambiguous pronunciation if only basing it off of the
-graphemes. The close range of error rates for both tests suggest that remaining
-character errors are not majorly attributed to the (\emph{e}, \emph{i},
-\emph{y}) or (\emph{o}, \emph{u}) equivalences, contributing minimally to
-overall error.
-
-Because English is a stress-timed language, some pronunciations get reduced to
-the schwa /\textipa{@}/ sound. This creates a bit of an ambiguity between vowel
-sounds as it is a very neutral sound. This results in \emph{e}, \emph{y}, and
-\emph{i} errors being the most frequent ones. This may explain why relaxing the
-{\emph{e}, \emph{i}, \emph{y}} equivalence significantly reduces the CER.
-
-The phoneme correspondence for vowels is most of the time ambiguous, splitting
-a vowel pronunciation into either its long or short version. Some examples:
-
-\begin{table}[h]
-    \centering
-    \caption{Examples of long and short vowel correspondence.}
-    \label{vowel_examples}
-    \begin{tabular}{lll}
-        \hline
-                 & \textbf{Long vowel} & \textbf{Short vowel} \\
-        \hline
-        \emph{a} & ``cake'' (``keyk'') & ``cat'' (``kat'')    \\
-        \emph{e} & ``me'' (``mi'')     & ``bed'' (``bed'')    \\
-        \emph{i} & ``time'' (``taym'') & ``sit'' (``sit'')    \\
-        \emph{o} & ``home'' (``hom'')  & ``hot'' (``hat'')    \\
-        \emph{u} & ``cube'' (``kyub'') & ``cup'' (``kap'')    \\
+        Reduction       & 10.18            & 8.19           & 10.02        & 8.03             \\
         \hline
     \end{tabular}
 \end{table}
 
+Under strict five-vowel evaluation, the IPA-guided system achieved 5.32\% CER,
+a 66\% relative reduction from the 15.50\% baseline. Relaxing (\emph{e},
+\emph{i}, \emph{y}) equivalence reduced CER to 4.29\%, while (\emph{o},
+\emph{u}) relaxation yielded 5.23\%. Combining both equivalences produced
+4.20\% CER. The larger improvement from \emph{e}/\emph{i}/\emph{y} relaxation
+versus \emph{o}/\emph{u} reflects the prevalence of schwa-derived ambiguity:
+English unstressed vowels reduce to /\textipa{@}/, which can map to \emph{e},
+\emph{i}, or \emph{y} depending on orthographic context.
+
+\subsection{Error Analysis}
+
+Manual analysis of the errors under 3-vowel evaluation reveals X primary
+failure modes. Schwa mapping ambiguity: ---. G2P errors propagate to final
+output: ---.  (More as needed) ---. Exceptions occur where gold-standard nativizations diverge from
+phonetic predictions, often in domain-specific terminology where convention
+overrides systematic rules.
+
+\Cref{tab:actual_expected} illustrates representative errors. The first four
+rows show correct outputs; the remaining rows demonstrate the vowel ambiguity
+pattern, where the system selects phonetically plausible but
+prescriptively incorrect vowel mappings.
+
 \begin{table}[h]
     \centering
-    \caption{Comparison of Actual and Expected Nativized Forms of English Loanwords}
+    \caption{Representative system outputs (errors bolded).}
     \label{tab:actual_expected}
     \begin{tabular}{llll}
         \hline
-        \textbf{English Word} & \textbf{IPA}                            & \textbf{Actual}            & \textbf{Expected}          \\
+        \textbf{English} & \textbf{IPA}           & \textbf{Output}        & \textbf{Gold}          \\
         \hline
-        ``abortion''          & \textipa{@"bOrS@n}                      & ``aborsyon''               & ``aborsyon''               \\
-        ``escalator''         & \textipa{"Esk@leIt@r}                   & ``eskaleytor''             & ``eskaleytor''             \\
-        ``gimmick''           & \textipa{"gImIk}                        & ``gimik''                  & ``gimik''                  \\
-        ``mouse''             & \textipa{maUs}                          & ``maws''                   & ``maws''                   \\
-        ``candy''             & \textipa{"k\ae ndi}                    & ``k\textbf{a}ndi''         & ``k\textbf{e}ndi''         \\
-        ``mall''              & \textipa{mOl}                          & ``m\textbf{a}l''           & ``m\textbf{o}l''           \\
-        ``air conditioner''   & \textipa{"E@ k@n""dIS\textsyllabic{n}@} & ``\textbf{a}rkondisyoner'' & ``\textbf{e}rkondisyoner'' \\
-        ``football''          & \textipa{"fUtbOl}                       & ``futb\textbf{a}l''        & ``futb\textbf{o}l''        \\
+        abortion         & \textipa{@"bOrS@n}     & aborsyon               & aborsyon               \\
+        escalator        & \textipa{"Esk@leIt@r}  & eskaleytor             & eskaleytor             \\
+        gimmick          & \textipa{"gImIk}       & gimik                  & gimik                  \\
+        mouse            & \textipa{maUs}         & maws                   & maws                   \\
+        \hline
+        candy            & \textipa{"k\ae ndi}    & k\textbf{a}ndi         & k\textbf{e}ndi         \\
+        mall             & \textipa{mOl}          & m\textbf{a}l           & m\textbf{o}l           \\
+        air conditioner  & \textipa{"E@ k@n"dIS@} & \textbf{a}rkondisyoner & \textbf{e}rkondisyoner \\
+        football         & \textipa{"fUtbOl}      & futb\textbf{a}l        & futb\textbf{o}l        \\
         \hline
     \end{tabular}
 \end{table}
 
-This ambiguity results in a problem where a vowel must be mapped to multiple
-different pronunciations. From the above examples, ``mall'' had an incorrect
-ouput of ``mal'', when the expected was ``mol'', incorrectly using the short
-version of \emph{a}. Another one is ``football'' with an incorrect output of
-``futbal'', when the expected was ``futbol'', again incorrectly using the short
-version of emph{a}. These are some examples that show the nondeterminism of
-long and short vowels.
+\subsection{Limitations}
 
-% TODO: to paragraph
-This work has several limitations:
-\begin{itemize}
-    \item \textbf{Coverage}: Rules derived from prescriptive sources may not capture informal nativization patterns used in social media or colloquial text.
-    \item \textbf{Language specificity}: The rule set is Filipino-specific; porting to other languages requires new linguistic expertise.
-    \item \textbf{G2P dependency}: Performance is bounded by G2P quality; errors in phonemization propagate to final output.
-\end{itemize}
+Three limitations warrant consideration. First, rules derived from prescriptive
+sources may not capture informal nativization patterns in social media or
+colloquial text. Second, the rule set is Filipino-specific; porting to other
+languages requires new linguistic expertise. Third, performance is bounded by
+G2P accuracy—phonemization errors propagate to final output, as demonstrated by
+the ``air conditioner'' example.
