@@ -1,12 +1,13 @@
 \section{Results and Discussion}
 
-\Cref{CER} reports the overall Character Error Rate under the four evaluation
-conditions described in \cref{ssec:evaluation_metrics}. The system was evaluated on
-2,045 words across the four gold corpora.
+\Cref{CER} reports the overall CER, we get the CER for a five-vowel inventory, 
+a relaxed {\emph{e}, \emph{i}, \emph{y}} case, a relaxed {\emph{o}, \emph{u}} case, 
+and a combination of both relaxed cases resulting to a three-vowel inventory. 
+The system was evaluated on 2,045 words across the four gold corpora.
 
 \begin{table}[h]
     \centering
-    \caption{Overall Character Error Rate (\%) under four vowel-equivalence conditions.}
+    \caption{Overall CER (\%) under four vowel-equivalence conditions.}
     \label{CER}
     \begin{tabular}{lccc c}
         \hline
@@ -18,23 +19,24 @@ conditions described in \cref{ssec:evaluation_metrics}. The system was evaluated
 \end{table}
 
 Under the default (strict five-vowel) condition, the system achieved a CER of
-4.67\%. Relaxing the \{e, i, y\} equivalence reduced the CER to 3.70\%, while 
-the \{o, u\} relaxation yielded a fairly marginal reduction to 4.58\%. The close 
+4.67\%. Relaxing the {\emph{e}, \emph{i}, \emph{y}} equivalence reduced the CER to 3.70\%, while 
+the {\emph{o}, \emph{u}} relaxation yielded a fairly marginal reduction to 4.58\%. The close 
 range of error rates suggest that remaining character errors are not majorly 
-attributed to the \{e, i, y\} or \{o, u\} equivalences, contributing minimally 
+attributed to the {\emph{e}, \emph{i}, \emph{y}} or {\emph{o}, \emph{u}} equivalences, contributing minimally 
 to overall error. Combining both equivalences produced the lowest CER at 3.61\%,
 producing a 1.06 percentage-point drop.
 
 Because English is a stress-timed language, some pronunciations get reduced to the schwa
 /\textipa{@}/ sound. This creates a bit of an ambiguity between vowel sounds as it is a
 very neutral sound. This results in \emph{e}, \emph{y}, and \emph{i} errors being the most
-frequent ones. This may explain why relaxing the \{e, i, y\} equivalence significantly reduces
-the CER.
+frequent ones. This may explain why relaxing the {\emph{e}, \emph{i}, \emph{y}} equivalence
+significantly reduces the CER.
 
 The phoneme correspondence for vowels is sometimes ambiguous and nondeterministic, splitting a
-vowel pronunciation into either its long or short version. Some examples: cake and cat, me and bed,
-time and sit, home and hot, cube and cup. This ambiguity results in a problem where a vowel must
-be mapped to multiple different pronunciations.
+vowel pronunciation into either its long or short version. Some examples: ``cake'' (``keyk'') and 
+``cat'' (``kat''), ``me''(``mi'') and ``bed''(``bed''), ``time''(``taym'') and ``sit''(``sit''),
+``home''(``hom'') and ``hot''(``hat''), ``cube''(``kyub'') and ``cup''(``kap''). This ambiguity 
+results in a problem where a vowel must be mapped to multiple different pronunciations.
 
 Possible limitations may include the lack of professional linguistic input towards
 the creation of datasets and orthographic nativization rules to help ensure consistency
