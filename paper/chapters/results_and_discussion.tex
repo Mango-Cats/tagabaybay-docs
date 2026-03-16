@@ -14,9 +14,9 @@ vowel to itself without G2P or phonetic rules.
         \textbf{System} & \textbf{5-vowel} & \textbf{e=i=y} & \textbf{o=u} & \textbf{3-vowel} \\
         \hline
         Baseline        & 17.73            & 14.50          & 17.42        & 14.19            \\
-        IPA-guided      & 5.15             & 4.14           & 5.06         & 4.05             \\
+        IPA-guided      & 5.14             & 4.14           & 5.05         & 4.05             \\
         \hline
-        Reduction       & 12.58            & 10.36          & 12.36        & 10.14             \\
+        Reduction       & 12.59            & 10.36          & 12.37        & 10.14             \\
         \hline
     \end{tabular}
 \end{table}
@@ -33,12 +33,20 @@ five vowels.
 \subsection{Error Analysis}
 
 Manual analysis of the errors under 3-vowel evaluation reveals 3 primary failure modes.
+% \begin{itemize}
+%     \item \textbf{Schwa mapping ambiguity:} \\
+%      e.g., Carbamazepine \(\mapsto\) karbameysIpayn but expected is karbamasEpin.
+%     \item \textbf{G2P errors (low-quality) propagate to final output:} \\
+%     e.g., Chlorpromazine \(\mapsto\) klorOPoRamasin but expected is klorPRomasin.
+%     \item \textbf{Vowel pronunciation ambiguity:} \\
+%     e.g., Finasteride \(\mapsto\) fAYnasterayd but expected is fInasterayrd
+% \end{itemize}. 
 Schwa mapping ambiguity: e.g., Carbamazepine \(\mapsto\) karbameysIpayn but expected is
 karbamasEpin. G2P errors (low-quality) propagate to final output: e.g., Chlorpromazine
 \(\mapsto\) klorOPoRamasin but expected is klorPRomasin. Vowel pronunciation ambiguity:
-e.g., Finasteride \(\mapsto\) fAYnasterayd but expected is fInasterayrd. Exceptions
-occur where gold-standard nativizations diverge from phonetic predictions, often in
-domain-specific terminology where convention overrides systematic rules.
+e.g., Finasteride \(\mapsto\) fAYnasterayd but expected is fInasterayrd. 
+Exceptions occur where gold-standard nativizations diverge from phonetic predictions, 
+often in domain-specific terminology where convention overrides systematic rules.
 
 \Cref{tab:actual_expected} illustrates representative errors. The first four
 rows show correct outputs; the remaining rows demonstrate the vowel ambiguity

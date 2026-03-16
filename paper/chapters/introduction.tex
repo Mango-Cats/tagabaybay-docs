@@ -46,7 +46,7 @@ pipeline: graphemic tokenization, rule-based grapheme mapping, phonetic vowel
 resolution via Grapheme-to-Phoneme (G2P) lookup, and output normalization.
 Rules are hand-authored from prescriptive guidelines~\cite{almario2014} and
 linguistic descriptions of Filipino
-phonology~\cite{llamzon1966,schachter1972,llamzon1997,tayao2004,magpale_hong_2024_sc},
+phonology~\cite{llamzon1966,schachter1972,llamzon1997,tayao2004,magpale2024},
 making the approach transparent and linguistically grounded. By deriving
 rewrites from existing linguistic resources rather than requiring parallel
 training corpora, the method is particularly suited to low-resource scenarios
@@ -58,7 +58,7 @@ orthography while maintaining computational efficiency.
 This work makes two principal contributions. First, we formalize orthographic
 nativization as a rewrite cascade and demonstrate that prescriptive linguistic
 rules can be operationalized into an effective computational pipeline without
-large parallel corpora, achieving 5.15\% character error rate under strict
+large parallel corpora, achieving 5.14\% character error rate under strict
 evaluation and 4.05\% when accounting for Filipino's allographic vowel
 variation. Second, we provide an empirical case study on English--Filipino
 borrowing using a newly constructed gold standard of 2,319 loanword pairs,
