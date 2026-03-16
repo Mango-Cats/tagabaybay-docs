@@ -49,14 +49,7 @@ units. The system recognizes the following classes of multigraphs:
 The tokenizer applies a greedy, longest-match strategy: at each position in the
 input string, it attempts to match a tetragraph first, then a trigraph, then a
 digraph, and finally falls back to a single character if no multi-character
-pattern is recognized. Formally, for each position \(i\) in the input string,
-the tokenizer selects:
-\[
-      \max \{n\in\{1,2,3,4\} \mid \mathrm{substr}(i,n) \in \Sigma\}
-\]
-where \(\Sigma\) is the set of recognized graphemic units and
-\(\mathrm{substr}(i, n)\) is the \(n\)-character substring beginning at
-position \(i\). For example, the words ``straight'' and ``phishing'' are
+pattern is recognized. For example, the words ``straight'' and ``phishing'' are
 tokenized as:
 \begin{center}
       \emph{s}~\emph{t}~\emph{r}~\emph{a}~\emph{igh}~\emph{t} \\
