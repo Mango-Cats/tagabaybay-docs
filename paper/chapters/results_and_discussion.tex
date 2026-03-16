@@ -27,16 +27,18 @@ a 66\% relative reduction from the 15.50\% baseline. Relaxing (\emph{e},
 \emph{u}) relaxation yielded 5.23\%. Combining both equivalences produced
 4.20\% CER. The larger improvement from \emph{e}/\emph{i}/\emph{y} relaxation
 versus \emph{o}/\emph{u} reflects the prevalence of schwa-derived ambiguity:
-English unstressed vowels reduce to /\textipa{@}/, which can map to \emph{e},
-\emph{i}, or \emph{y} depending on orthographic context.
+English unstressed vowels reduce to /\textipa{@}/, which can map to any of the
+five vowels.
 
 \subsection{Error Analysis}
 
-Manual analysis of the errors under 3-vowel evaluation reveals X primary
-failure modes. Schwa mapping ambiguity: ---. G2P errors propagate to final
-output: ---.  (More as needed) ---. Exceptions occur where gold-standard nativizations diverge from
-phonetic predictions, often in domain-specific terminology where convention
-overrides systematic rules.
+Manual analysis of the errors under 3-vowel evaluation reveals 3 primary failure modes.
+Schwa mapping ambiguity: e.g., Carbamazepine \(\mapsto\) karbameysIpayn but expected is
+karbamasEpin. G2P errors (low-quality) propagate to final output: e.g., Chlorpromazine
+\(\mapsto\) klorOPoRamasin but expected is klorPRomasin. Vowel pronunciation ambiguity:
+e.g., Finasteride \(\mapsto\) fAYnasterayd but expected is fInasterayrd. Exceptions
+occur where gold-standard nativizations diverge from phonetic predictions, often in
+domain-specific terminology where convention overrides systematic rules.
 
 \Cref{tab:actual_expected} illustrates representative errors. The first four
 rows show correct outputs; the remaining rows demonstrate the vowel ambiguity
