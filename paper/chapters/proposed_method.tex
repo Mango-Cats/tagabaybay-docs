@@ -13,13 +13,13 @@ in~\cref{sec:filipino_orthography} directly inform the design of each stage.
 ``computer'' as an example. Graphemic tokenization segments the input into
 functional units, handling English multigraphs. The rewrite cascade then maps
 each token to its Filipino equivalent using context-sensitive rules where
-needed (e.g., \emph{c} before \emph{o} $\to$ \emph{k}) and invoking G2P for
+needed and invoking G2P for
 ambiguous vowels. Finally, output normalization ensures conformance to Filipino
 phonotactic constraints.
 
 \begin{table}[htbp]
       \centering
-      \caption{Pipeline stages illustrated with ``computer'' $\to$ \emph{kompyuter}.}
+      \caption{Pipeline stages illustrated with ``computer'' \(\mapsto\) \emph{kompyuter}.}
       \label{tab:pipeline}
       \begin{tabular}{lll}
             \toprule
@@ -187,3 +187,8 @@ across adjacent tokens:
 
 Together, these normalization steps ensure that the output conforms to the
 phonotactic and orthographic conventions codified in~\cite{almario2014}.
+
+\subsection{Rule Construction}
+
+All rules were hand-authored from prescriptive guidelines~\cite{almario2014} and descriptive
+accounts of Filipino phonology~\cite{llamzon1966,llamzon1997,tayao2004,magpale_hong_2024_sc}.
