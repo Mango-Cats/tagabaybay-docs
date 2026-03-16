@@ -8,9 +8,9 @@ and explains how each shapes the corresponding stage of the system.
 \subsection{Vowel Spelling and Phonetic Resolution}
 
 Filipino orthography uses five vowel letters: \emph{a}, \emph{e}, \emph{i},
-\emph{o}, and \emph{u}~\cite{almario2014}. Because English's vowel inventory is
+\emph{o}, and \emph{u}, because English's vowel inventory is
 larger, multiple English vowels must collapse onto a single Filipino letter
-when a word is nativized. For instance, English /\textipa{\ae}/ (``cat'') and
+when a word is nativized~\cite{almario2014}. For instance, English /\textipa{\ae}/ (``cat'') and
 /\textipa{A:}/ (``father'') are both written as \emph{a} in Filipino. This
 many-to-one mapping creates ambiguity that cannot be resolved from English
 spelling alone: ``a'' in ``make'' /\textipa{eI}/ becomes \emph{ey}, while ``a''
@@ -56,10 +56,10 @@ the appropriate mapping.
 
 Filipino spelling strongly favors syllable patterns of the form CV or
 CVC~\cite{llamzon1966,magpale2024}. When direct grapheme-to-grapheme mapping would produce
-a consonant cluster that violates these patterns, such as the \emph{-tr-} in a
-naive adaptation of ``extra,'' prescriptive convention inserts a vowel letter to
-break up the illegal sequence (\emph{ekstra}), preserving all source consonants
-in the spelling~\cite{almario2014}. This phonotactic constraint motivates our
+a consonant cluster that violates these patterns, such as the ``-bl'' in a
+naive adaptation of ``rumble'', prescriptive convention inserts a vowel letter to
+break up the illegal sequence, preserving all source consonants
+in the spelling, \emph{``rambol''}~\cite{almario2014}. This phonotactic constraint motivates our
 output normalization stage, which detects word-final consonant clusters ending
 in \emph{l} or \emph{r} and inserts epenthetic \emph{o} where needed. The
 normalization pass also collapses contiguous duplicate graphemes and removes
