@@ -1,11 +1,13 @@
 \section{Results and Discussion}
 
- {
-  EDITS:
-  \begin{enumerate}
-      \item Add discussion of the baseline model
-  \end{enumerate}
- }
+{
+EDITS: \begin{enumerate}
+    \item Add discussion of the baseline model (what makes it difference)
+    \item Integrate the 
+\end{enumerate}
+
+\textbf{---------------------------------}
+}
 
 \Cref{tab:CER} reports the overall CER, we get the CER for a five-vowel inventory,
 a relaxed {\emph{e}, \emph{i}, \emph{y}} case, a relaxed {\emph{o}, \emph{u}} case,
@@ -21,13 +23,13 @@ to itself without inferrence of any context-sensitive rules or IPA reference.
     \centering
     \caption{Overall CER (\%) under four vowel-equivalence conditions.}
     \label{tab:CER}
-    \begin{tabular}{c|ccc c}
+    \begin{tabular}{c|cccc}
         \hline
         \textbf{System}   & \textbf{5-vowel} & \textbf{\emph{e} = \emph{i} = \emph{y}} & \textbf{\emph{o} = \emph{u}} & \textbf{3-vowel} \\
         \hline
         Baseline          & 20.60            & 18.24                                   & 20.36                        & 18.00            \\
         IPA-guided        & 4.67             & 3.70                                    & 4.58                         & 3.61             \\
-        \emph{Difference} & ---              & ---                                     & ---                          & ---
+        \emph{Difference} & ---              & ---                                     & ---                          & ---              \\
         \hline
     \end{tabular}
 \end{table}
@@ -88,7 +90,7 @@ a vowel pronunciation into either its long or short version. Some examples:
         ``candy''             & \textipa{"k\ae ndi/}                    & ``k\textbf{a}ndi''         & ``k\textbf{e}ndi''         \\
         ``mall''              & \textipa{mOl/}                          & ``m\textbf{a}l''           & ``m\textbf{o}l''           \\
         ``air conditioner''   & \textipa{"E@ k@n""dIS\textsyllabic{n}@} & ``\textbf{a}rkondisyoner'' & ``\textbf{e}rkondisyoner'' \\
-        ``football''          & \textipa{"fUtbOl}                       & ``futb\textbf{a}l''        & ``futb\textbf{o}l''       
+        ``football''          & \textipa{"fUtbOl}                       & ``futb\textbf{a}l''        & ``futb\textbf{o}l''        \\
         \hline
     \end{tabular}
 \end{table}
@@ -98,5 +100,5 @@ different pronunciations. From the above examples, ``mall'' had an incorrect
 ouput of ``mal'', when the expected was ``mol'', incorrectly using the short
 version of \emph{a}. Another one is ``football'' with an incorrect output of
 ``futbal'', when the expected was ``futbol'', again incorrectly using the short
-version of emph{a}. These are some examples that show the nondeterminism of long
-and short vowels.
+version of emph{a}. These are some examples that show the nondeterminism of
+long and short vowels.
