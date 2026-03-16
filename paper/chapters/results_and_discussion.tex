@@ -33,10 +33,25 @@ sounds as it is a very neutral sound. This results in \emph{e}, \emph{y}, and
 \emph{i} errors being the most frequent ones. This may explain why relaxing the
     {\emph{e}, \emph{i}, \emph{y}} equivalence significantly reduces the CER.
 
-The phoneme correspondence for vowels is sometimes ambiguous and
-nondeterministic, splitting a vowel pronunciation into either its long or short
-version. Some examples: ``cake'' (``keyk'') and ``cat'' (``kat''),
-``me''(``mi'') and ``bed''(``bed''), ``time''(``taym'') and ``sit''(``sit''),
-``home''(``hom'') and ``hot''(``hat''), ``cube''(``kyub'') and
-``cup''(``kap''). This ambiguity results in a problem where a vowel must be
+The phoneme correspondence for vowels is most of the time ambiguous, splitting a vowel pronunciation into either its long or short
+version. Some examples:
+
+\begin{table}[h]
+    \centering
+    \caption{Examples of long and short vowel correspondence.}
+    \label{vowel_examples}
+    \begin{tabular}{ll}
+        \hline
+        \textbf{Long vowel} & \textbf{Short vowel} \\
+        \hline
+        ``cake'' (``keyk'') & ``cat'' (``kat'') \\
+        ``me'' (``mi'') & ``bed'' (``bed'') \\
+        ``time'' (``taym'') & ``sit'' (``sit'') \\
+        ``home'' (``hom'') & ``hot'' (``hat'') \\
+        ``cube'' (``kyub'') & ``cup'' (``kap'') \\
+        \hline
+    \end{tabular}
+\end{table}
+
+This ambiguity results in a problem where a vowel must be
 mapped to multiple different pronunciations.
