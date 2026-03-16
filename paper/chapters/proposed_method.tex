@@ -9,7 +9,7 @@ together they model the grapheme-to-grapheme transduction that constitutes
 orthographic nativization. The linguistic properties described
 in~\cref{sec:filipino_orthography} directly inform the design of each stage.
 
-\Cref{tab:pipeline} illustrates the four-stage pipeline using the word
+\Cref{fig:pipeline} illustrates the four-stage pipeline using the word
 ``computer'' as an example. Graphemic tokenization segments the input into
 functional units, handling English multigraphs. The rewrite cascade then maps
 each token to its Filipino equivalent using context-sensitive rules where
@@ -17,22 +17,12 @@ needed and invoking G2P for
 ambiguous vowels. Finally, output normalization ensures conformance to Filipino
 phonotactic constraints.
 
-\begin{table}[htbp]
+\begin{figure}[t]
       \centering
-      \caption{Pipeline stages illustrated with ``computer'' \(\mapsto\) \emph{kompyuter}.}
-      \label{tab:pipeline}
-      \begin{tabular}{lll}
-            \toprule
-            \textbf{Stage}         & \textbf{Output}             \\
-            \midrule
-            \emph{Input}           & computer                    \\
-            \emph{Tokenization}    & \{c, o, m, p, u, t, e, r\}  \\
-            \emph{G2P}             & /k\textipa{@m"pjut@r}/      \\
-            \emph{Rewrite Cascade} & \{k, o, m, p, yu, t, e, r\} \\
-            \emph{Normalization}   & kompyuter                   \\
-            \bottomrule
-      \end{tabular}
-\end{table}
+      \includegraphics[width=\columnwidth]{assets/system}
+      \caption{System architecture. G2P is invoked once for words containing vowel graphemes; the IPA transcription is consulted selectively during phonetic vowel resolution (stage~2). Each token accepts the first matching rule.}
+      \label{fig:pipeline}
+\end{figure}
 
 \subsection{Graphemic Tokenization}
 Before any mapping can take place, the English input must be segmented into its
@@ -85,11 +75,11 @@ Filipino nativized form. For such graphemes, nativization reduces to a direct
 one-to-one substitution requiring no knowledge of surrounding context.
 Representative examples include:
 \begin{itemize}
-      \item \(\emph{b} \mapsto \emph{b}\): Both instances in ``basketball'' map
+      \item \(\mathit{b} \mapsto \mathit{b}\): Both instances in ``basketball'' map
             directly, yielding \emph{basketbol}.
-      \item \(\emph{ph} \mapsto \emph{p}\): The digraph \emph{ph}
+      \item \(\mathit{ph} \mapsto \mathit{p}\): The digraph \emph{ph}
             consistently maps to \emph{p}; ``cellphone'' \(\mapsto\) \emph{selpon}.
-      \item \(\emph{f} \mapsto \emph{p}\): ``coffee'' \(\mapsto\) \emph{kopi}.
+      \item \(\mathit{f} \mapsto \mathit{p}\): ``coffee'' \(\mapsto\) \emph{kopi}.
 \end{itemize}
 Because these mappings are strictly positional and produce the same output
 regardless of surrounding tokens, they are computed without reference to any
@@ -106,10 +96,10 @@ graphemes and matching against a set of ordered conditions.
 The letter \emph{c} provides a prototypical example. Its nativized form depends
 on the following grapheme:
 \begin{itemize}
-      \item \(\emph{c} \cdot (\emph{i} \mid \emph{e}) \mapsto \emph{s}\):
+      \item \(\mathit{c} \cdot (\mathit{i} \mid \mathit{e}) \mapsto \mathit{s}\):
             When \emph{c} precedes \emph{i} or \emph{e}, it maps to \emph{s};
             ``cinema'' \(\mapsto\) \emph{sine}.
-      \item Otherwise: \(\emph{c} \mapsto \emph{k}\); ``computer'' \(\mapsto\)
+      \item Otherwise: \(\mathit{c} \mapsto \mathit{k}\); ``computer'' \(\mapsto\)
             \emph{kompyuter}.
 \end{itemize}
 
@@ -183,5 +173,6 @@ phonotactic and orthographic conventions codified in~\cite{almario2014}.
 
 \subsection{Rule Construction}
 
-All rules were hand-authored from prescriptive guidelines~\cite{almario2014} and descriptive
-accounts of Filipino phonology~\cite{llamzon1966,llamzon1997,tayao2004,magpale2024}.
+All rules were hand-authored from prescriptive guidelines~\cite{almario2014}
+and descriptive accounts of Filipino
+phonology~\cite{llamzon1966,llamzon1997,tayao2004,magpale2024}.
