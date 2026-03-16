@@ -18,22 +18,22 @@ to itself without inferrence of any context-sensitive rules or IPA reference.
         \hline
         \textbf{System}   & \textbf{5-vowel} & \textbf{\emph{e} = \emph{i} = \emph{y}} & \textbf{\emph{o} = \emph{u}} & \textbf{3-vowel} \\
         \hline
-        Baseline          & X            & X                                   & X                        & X            \\
-        IPA-guided        & X             & X                                    & X                        & X          \\
-        \emph{Difference} & X            & X                                   & X                        & X              \\
+        Baseline          & 15.50            & 12.48                                   & 15.25                       & 12.23        \\
+        IPA-guided        & 5.32             & 4.29                                    & 5.23                        & 4.20          \\
+        \emph{Difference} & 10.18            & 8.19                                    & 10.02                       & 8.03          \\
         \hline
     \end{tabular}
 \end{table}
 
-Under the strict five-vowel condition, the system achieved a CER of X\%.
+Under the strict five-vowel condition, the system achieved a CER of 5.32\%.
 Relaxing the (\emph{e}, \emph{i}, \emph{y}) equivalence reduced the CER to
-X\%, while the (\emph{o}, \emph{u}) relaxation yielded a fairly marginal
-reduction to X\%. Combining both equivalences produced the lowest CER at
-X\%, producing a X percentage-point drop; a total of X word pairs were
+4.29\%, while the (\emph{o}, \emph{u}) relaxation yielded a fairly marginal
+reduction to 5.23\%. Combining both equivalences produced the lowest CER at
+4.20\%, producing a 1.12 percentage-point drop; a total of 98 word pairs were
 wrong.
 
-Comparing to the unmapped set, there is a X\% difference in the five-vowel
-CER and a X\% difference in the three-vowel CER, validating the need for
+Comparing to the unmapped set, there is a 10.18\% difference in the five-vowel
+CER and a 8.03\% difference in the three-vowel CER, validating the need for
 G2P and context-sensitive rules to more accurately assess corresponding vowel
 sounds. Compared to the baseline's non-use of G2P, IPA-guided helps with
 letters that may have an ambiguous pronunciation if only basing it off of the
