@@ -2,7 +2,7 @@
 
 Borrowed words rarely enter a language unchanged. When English loanwords are
 adopted into Filipino, they must be adapted to conform to Filipino's
-orthographic conventions—a process known as \emph{orthographic nativization}.
+orthographic conventions, a process known as \emph{orthographic nativization}.
 This computational task requires generating the standardized written form of a
 loanword according to the recipient language's spelling rules. For example,
 ``computer'' becomes \emph{kompyuter}, and ``basketball'' becomes
@@ -18,12 +18,11 @@ public administration~\cite{martin2020,baklanova2017}, and official
 nativization guidelines are codified in the prescriptive manual by the Komisyon
 sa Wikang Filipino~\cite{almario2014}. These properties enable systematic
 evaluation against standardized orthographic norms. Furthermore, Filipino is
-typologically distinct from English in phonological inventory (collapsing
-English's 14+ vowel phonemes onto five vowel letters), syllable structure
-(strongly favoring CV and CVC patterns), and orthographic
-depth~\cite{llamzon1966,schachter1972,llamzon1997}. This typological distance
-ensures that the proposed system must handle substantial graphemic and
-phonotactic transformations, providing a rigorous test of the approach.
+typologically distinct from English in phonological inventory, syllable
+structure, and orthographic depth~\cite{llamzon1966,schachter1972,llamzon1997}.
+This typological distance ensures that the proposed system must handle
+substantial graphemic and phonotactic transformations, providing a rigorous
+test of the approach.
 
 Our method draws on prior work in computational loanword modeling while
 addressing a distinct generation problem. Finite-State Transducer (FST)
@@ -34,7 +33,7 @@ approaches have captured much of the phonological adaptation from English into
 Japanese~\cite{mao2016}. More broadly, nativization in loanword phonology has
 been shown to be systematic and rule-governed across typologically diverse
 languages~\cite{kang2011}. However, these studies focus on modeling
-\emph{phonological} patterns—the abstract sound structure of adaptation—rather
+\emph{phonological} patterns (the abstract sound structure of adaptation) rather
 than orthographic generation. As documented in~\cite{wang2025,daland2015},
 phonological and orthographic nativization are not equivalent: a phonological
 model produces an abstract pronunciation representation, while an orthographic
@@ -51,8 +50,8 @@ making the approach transparent and linguistically grounded. By deriving
 rewrites from existing linguistic resources rather than requiring parallel
 training corpora, the method is particularly suited to low-resource scenarios
 where annotated loanword data are unavailable. The G2P component is invoked
-selectively—only for vowel graphemes whose nativized form cannot be determined
-from spelling context alone—allowing the system to handle English's deep
+selectively---only for vowel graphemes whose nativized form cannot be determined
+from spelling context alone---allowing the system to handle English's deep
 orthography while maintaining computational efficiency.
 
 This work makes two principal contributions. First, we formalize orthographic

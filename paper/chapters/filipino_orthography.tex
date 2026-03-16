@@ -13,7 +13,7 @@ larger, multiple English vowels must collapse onto a single Filipino letter
 when a word is nativized. For instance, English /\textipa{\ae}/ (``cat'') and
 /\textipa{A:}/ (``father'') are both written as \emph{a} in Filipino. This
 many-to-one mapping creates ambiguity that cannot be resolved from English
-spelling alone—``a'' in ``make'' /\textipa{eI}/ becomes \emph{ey}, while ``a''
+spelling alone: ``a'' in ``make'' /\textipa{eI}/ becomes \emph{ey}, while ``a''
 in ``cat'' /\textipa{\ae}/ becomes \emph{a}. This motivates our phonetic
 resolution stage, which invokes a G2P component to determine which English
 vowel sound is present, enabling correct mapping to Filipino letters.
@@ -56,8 +56,8 @@ the appropriate mapping.
 
 Filipino spelling strongly favors syllable patterns of the form CV or
 CVC~\cite{llamzon1966,magpale2024}. When direct grapheme-to-grapheme mapping would produce
-a consonant cluster that violates these patterns—such as the \emph{-tr-} in a
-naive adaptation of ``extra''—prescriptive convention inserts a vowel letter to
+a consonant cluster that violates these patterns, such as the \emph{-tr-} in a
+naive adaptation of ``extra,'' prescriptive convention inserts a vowel letter to
 break up the illegal sequence (\emph{ekstra}), preserving all source consonants
 in the spelling~\cite{almario2014}. This phonotactic constraint motivates our
 output normalization stage, which detects word-final consonant clusters ending

@@ -3,7 +3,7 @@
 The system was evaluated on 2,319 English--Filipino loanword pairs.
 \Cref{tab:CER} reports overall CER under four vowel-equivalence conditions,
 comparing the proposed IPA-guided system against a baseline that maps each
-vowel to itself without G2P or phonetic rules.
+English letter to itself without G2P lookup or phonetic rules.
 
 \begin{table}[h]
     \centering
@@ -11,77 +11,80 @@ vowel to itself without G2P or phonetic rules.
     \label{tab:CER}
     \begin{tabular}{l|cccc}
         \hline
-        \textbf{System} & \textbf{5-vowel} & \textbf{e=i=y} & \textbf{o=u} & \textbf{3-vowel} \\
+        \textbf{System} & \textbf{5-vowel} & \textbf{\emph{e}~=~\emph{i}~=~\emph{y}} & \textbf{\emph{o}~=~\emph{u}} & \textbf{3-vowel} \\
         \hline
-        Baseline        & 17.73            & 14.50          & 17.42        & 14.19            \\
-        IPA-guided      & 5.14             & 4.14           & 5.05         & 4.05             \\
+        Baseline        & 17.73            & 14.50                                    & 17.42                        & 14.19            \\
+        IPA-guided      & 5.31             & 4.29                                     & 5.22                         & 4.20             \\
         \hline
-        Reduction       & 12.58            & 10.36          & 12.36        & 10.14            \\
+        Reduction       & 12.42            & 10.21                                    & 12.20                        & 9.99             \\
         \hline
     \end{tabular}
 \end{table}
 
-Under strict five-vowel evaluation, the IPA-guided system achieved 5.15\% CER,
-a 71\% relative reduction from the 17.73\% baseline. Relaxing (\emph{e},
-\emph{i}, \emph{y}) equivalence reduced CER to 4.14\%, while (\emph{o},
-\emph{u}) relaxation yielded 5.06\%. Combining both equivalences produced
-4.05\% CER. The larger improvement from \emph{e}/\emph{i}/\emph{y} relaxation
-versus \emph{o}/\emph{u} reflects the prevalence of schwa-derived ambiguity:
-English unstressed vowels reduce to /\textipa{@}/, which can map to any of the
-five vowels.
+Under strict five-vowel evaluation the IPA-guided system achieved 5.31\% CER, a
+70\% relative reduction from the 17.73\% baseline. Relaxing (\emph{e},
+\emph{i}, \emph{y}) equivalence reduced CER to 4.29\%, while (\emph{o},
+\emph{u}) relaxation yielded 5.22\%; combining both produced 4.20\%. The larger
+gain from (\emph{e}, \emph{i}, \emph{y}) relaxation reflects the prevalence of
+schwa-derived ambiguity: English unstressed vowels reduce to /\textipa{@}/,
+which can surface as any of the five Filipino vowels.
 
 \subsection{Error Analysis}
 
-Manual analysis of the errors under 3-vowel evaluation reveals 3 primary
-failure modes.
+Manual inspection of the 882 character-level edits under the relaxed 3-vowel
+scoring reveals four dominant failure modes.
 
-\subsubsection{Unstressed vowel ambiguity}
+\subsubsection{Unstressed Vowel Ambiguity}
 
-The single largest error source involves the mapping of English unstressed
-vowels, the schwa /\textipa{@}/, to Filipino. Because Filipino orthography
-lacks a dedicated schwa character, every unstressed vowel must be resolved to
-one of the five target vowels \emph{a}, \emph{e}, \emph{i}, \emph{o}, \emph{u}.
+The largest error source is the resolution of English unstressed vowels,
+particularly the schwa /\textipa{@}/, to Filipino, whose orthography has no
+dedicated reduced-vowel character. Under 3-vowel evaluation, vowel-to-vowel
+substitutions dominate the error ranking:
+\emph{a}~\(\mapsto\)~\emph{o} accounts for 60 errors,
+\emph{e}~\(\mapsto\)~\emph{a} for 37,
+\emph{o}~\(\mapsto\)~\emph{a} for 27, and
+\emph{a}~\(\mapsto\)~\emph{e} for 23, totaling over 170 vowel substitutions.
+Because the (\emph{a}, \emph{o}) contrast persists even after collapsing
+(\emph{e}, \emph{i}, \emph{y}) and (\emph{o}, \emph{u}), the ambiguity is
+structural: the rule-based pipeline cannot resolve it without lexical stress
+information or a pronunciation dictionary lookup.
+
+\subsubsection{Incomplete Glide Insertion}
+
+Filipino phonotactics requires semivowel glides /w/ and /j/ to break vowel
+hiatus and to close certain diphthongs. The current rules handle several common
+environments but miss 42 \emph{w}-insertion and 38 \emph{y}-insertion sites
+under 5-vowel evaluation. Errors cluster in two contexts: hiatus resolution,
+where adjacent vowels require an intervening glide
+For instance, ``tiara''~\(\mapsto\)~``tiara'' instead of ``tiyara''.
+These gaps are addressable through additional context conditions for
+vowel-initial suffixes and word-final sequences.
 
 \subsubsection{G2P Propagation Errors}
 
-When the G2P module produces an incorrect intermediate phonemic representation,
-the error cascades into the final output.For example, ``chlorpromazine''
-produces ``kloroporamasin'' rather than the expected ``klorpromasin'', where
-the consonant cluster /pr/ is erroneously broken by a spurious vowel.
+Some failures originate not in the transducer but in the upstream
+grapheme-to-phoneme module. An incorrect intermediate representation cascades
+directly into the output: ``chlorpromazine'' yields ``klor\textbf{o}p\textbf{o}r\textbf{a}masin''
+rather than the expected ``klorpromasin'', with the consonant cluster /pr/
+erroneously broken by a spurious vowel. Such cases are identifiable by their
+multi-character deviation from the gold standard and disproportionately affect
+pharmacological inputs, the longest and most phonotactically complex tokens in
+the evaluation set.
 
-\subsubsection{Conventional loanword divergence}
+\subsubsection{Conventional Loanword Divergence}
 
-A subset of errors reflects cases where established Filipino borrowing
-conventions override phonetically systematic predictions. The most prominent is
-the \emph{f} \( \mapsto \) \emph{p} substitution. Filipino historically lacked /f/, and many established
-loanwords preserve the older /p/ mapping.
-
-\begin{table}[h]
-    \centering
-    \caption{Representative system outputs (errors bolded).}
-    \label{tab:actual_expected}
-    \begin{tabular}{llll}
-        \hline
-        \textbf{English} & \textbf{IPA}           & \textbf{Output}        & \textbf{Gold}          \\
-        \hline
-        abortion         & \textipa{@"bOrS@n}     & aborsyon               & aborsyon               \\
-        escalator        & \textipa{"Esk@leIt@r}  & eskaleytor             & eskaleytor             \\
-        gimmick          & \textipa{"gImIk}       & gimik                  & gimik                  \\
-        mouse            & \textipa{maUs}         & maws                   & maws                   \\
-        \hline
-        candy            & \textipa{"k\ae ndi}    & k\textbf{a}ndi         & k\textbf{e}ndi         \\
-        mall             & \textipa{mOl}          & m\textbf{a}l           & m\textbf{o}l           \\
-        air conditioner  & \textipa{"E@ k@n"dIS@} & \textbf{a}rkondisyoner & \textbf{e}rkondisyoner \\
-        football         & \textipa{"fUtbOl}      & futb\textbf{a}l        & futb\textbf{o}l        \\
-        \hline
-    \end{tabular}
-\end{table}
+A subset of errors arises where established Filipino borrowing conventions
+override systematic phonetic predictions. The most prominent is the
+\emph{f}~\(\mapsto\)~\emph{p} substitution of 19 errors: Filipino historically
+lacked /f/, and many entrenched loanwords preserve the older bilabial mapping.
+The system, applying modern rules that recognize /f/ as part of the extended
+Filipino alphabet, retains the fricative in all positions.
 
 \subsection{Limitations}
 
-Three limitations warrant consideration. First, rules derived from prescriptive
-sources may not capture informal nativization patterns in social media or
-colloquial text. Second, the rule set is Filipino-specific; porting to other
-languages requires new linguistic expertise. Third, performance is bounded by
-G2P accuracy—phonemization errors propagate to final output, as demonstrated by
-the ``air conditioner'' example.
+Three limitations warrant consideration. First, the rules derive from
+prescriptive sources and may not capture informal nativization patterns in
+social media or colloquial text. Second, the rule set is Filipino-specific;
+porting to another target language requires new linguistic analysis. Third,
+performance is bounded by G2P accuracy, as phonemization errors propagate
+directly to the final output.
