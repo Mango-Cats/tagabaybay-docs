@@ -16,7 +16,7 @@ vowel to itself without G2P or phonetic rules.
         Baseline        & 17.73            & 14.50          & 17.42        & 14.19            \\
         IPA-guided      & 5.15             & 4.14           & 5.06         & 4.05             \\
         \hline
-        Reduction       & 12.58            & 10.36          & 12.36        & 10.14             \\
+        Reduction       & 12.58            & 10.36          & 12.36        & 10.14            \\
         \hline
     \end{tabular}
 \end{table}
@@ -32,18 +32,29 @@ five vowels.
 
 \subsection{Error Analysis}
 
-Manual analysis of the errors under 3-vowel evaluation reveals 3 primary failure modes.
-Schwa mapping ambiguity: e.g., Carbamazepine \(\mapsto\) karbameysIpayn but expected is
-karbamasEpin. G2P errors (low-quality) propagate to final output: e.g., Chlorpromazine
-\(\mapsto\) klorOPoRamasin but expected is klorPRomasin. Vowel pronunciation ambiguity:
-e.g., Finasteride \(\mapsto\) fAYnasterayd but expected is fInasterayrd. Exceptions
-occur where gold-standard nativizations diverge from phonetic predictions, often in
-domain-specific terminology where convention overrides systematic rules.
+Manual analysis of the errors under 3-vowel evaluation reveals 3 primary
+failure modes.
 
-\Cref{tab:actual_expected} illustrates representative errors. The first four
-rows show correct outputs; the remaining rows demonstrate the vowel ambiguity
-pattern, where the system selects phonetically plausible but
-prescriptively incorrect vowel mappings.
+\subsubsection{Unstressed vowel ambiguity}
+
+The single largest error source involves the mapping of English unstressed
+vowels, the schwa /\textipa{@}/, to Filipino. Because Filipino orthography
+lacks a dedicated schwa character, every unstressed vowel must be resolved to
+one of the five target vowels \emph{a}, \emph{e}, \emph{i}, \emph{o}, \emph{u}.
+
+\subsubsection{G2P Propagation Errors}
+
+When the G2P module produces an incorrect intermediate phonemic representation,
+the error cascades into the final output.For example, ``chlorpromazine''
+produces ``kloroporamasin'' rather than the expected ``klorpromasin'', where
+the consonant cluster /pr/ is erroneously broken by a spurious vowel.
+
+\subsubsection{Conventional loanword divergence}
+
+A subset of errors reflects cases where established Filipino borrowing
+conventions override phonetically systematic predictions. The most prominent is
+the \emph{f} \( \mapsto \) \emph{p} substitution. Filipino historically lacked /f/, and many established
+loanwords preserve the older /p/ mapping.
 
 \begin{table}[h]
     \centering
