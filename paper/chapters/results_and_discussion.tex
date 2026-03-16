@@ -13,19 +13,19 @@ vowel to itself without G2P or phonetic rules.
         \hline
         \textbf{System} & \textbf{5-vowel} & \textbf{e=i=y} & \textbf{o=u} & \textbf{3-vowel} \\
         \hline
-        Baseline        & 15.50            & 12.48          & 15.25        & 12.23            \\
-        IPA-guided      & 5.32             & 4.29           & 5.23         & 4.20             \\
+        Baseline        & 17.73            & 14.50          & 17.42        & 14.19            \\
+        IPA-guided      & 5.15             & 4.14           & 5.06         & 4.05             \\
         \hline
-        Reduction       & 10.18            & 8.19           & 10.02        & 8.03             \\
+        Reduction       & 12.58            & 10.36          & 12.36        & 10.14             \\
         \hline
     \end{tabular}
 \end{table}
 
-Under strict five-vowel evaluation, the IPA-guided system achieved 5.32\% CER,
-a 66\% relative reduction from the 15.50\% baseline. Relaxing (\emph{e},
-\emph{i}, \emph{y}) equivalence reduced CER to 4.29\%, while (\emph{o},
-\emph{u}) relaxation yielded 5.23\%. Combining both equivalences produced
-4.20\% CER. The larger improvement from \emph{e}/\emph{i}/\emph{y} relaxation
+Under strict five-vowel evaluation, the IPA-guided system achieved 5.15\% CER,
+a 71\% relative reduction from the 17.73\% baseline. Relaxing (\emph{e},
+\emph{i}, \emph{y}) equivalence reduced CER to 4.14\%, while (\emph{o},
+\emph{u}) relaxation yielded 5.06\%. Combining both equivalences produced
+4.05\% CER. The larger improvement from \emph{e}/\emph{i}/\emph{y} relaxation
 versus \emph{o}/\emph{u} reflects the prevalence of schwa-derived ambiguity:
 English unstressed vowels reduce to /\textipa{@}/, which can map to \emph{e},
 \emph{i}, or \emph{y} depending on orthographic context.
@@ -34,9 +34,9 @@ English unstressed vowels reduce to /\textipa{@}/, which can map to \emph{e},
 
 Manual analysis of the errors under 3-vowel evaluation reveals X primary
 failure modes. Schwa mapping ambiguity: ---. G2P errors propagate to final
-output: ---.  (More as needed) ---. Exceptions occur where gold-standard nativizations diverge from
-phonetic predictions, often in domain-specific terminology where convention
-overrides systematic rules.
+output: ---.  (More as needed) ---. Exceptions occur where gold-standard 
+nativizations diverge from phonetic predictions, often in domain-specific 
+terminology where convention Soverrides systematic rules.
 
 \Cref{tab:actual_expected} illustrates representative errors. The first four
 rows show correct outputs; the remaining rows demonstrate the vowel ambiguity
