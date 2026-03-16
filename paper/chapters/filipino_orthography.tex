@@ -1,38 +1,68 @@
-\section{Filipino Orthography for Nativization}\label{sec:filipino_orthography}
+\section{Filipino Orthography and System Design}\label{sec:filipino_orthography}
 
-This section describes the spelling conventions and orthographic properties of
-Filipino that govern how English loanwords are nativized in writing.
+The orthographic properties of Filipino directly motivate the three core
+components of our nativization pipeline: phonetic vowel resolution, rule-based
+consonant mapping, and syllable repair. This section describes these properties
+and explains how each shapes the corresponding stage of the system.
 
-\subsection{Vowel Spelling and Allographic Variation}
+\subsection{Vowel Spelling and Phonetic Resolution}
 
 Filipino orthography uses five vowel letters: \emph{a}, \emph{e}, \emph{i},
-\emph{o}, and \emph{u}~\cite{almario2014}. Because English distinguishes a much
-larger set of vowel sounds, multiple English vowels must collapse onto a single
-Filipino letter when a word is nativized. For instance, English /\textipa{\ae}/
-and /\textipa{A:}/ are both written as \emph{a} in Filipino.
+\emph{o}, and \emph{u}~\cite{almario2014}. Because English's vowel inventory is
+larger, multiple English vowels must collapse onto a single Filipino letter
+when a word is nativized. For instance, English /\textipa{\ae}/ (``cat'') and
+/\textipa{A:}/ (``father'') are both written as \emph{a} in Filipino. This
+many-to-one mapping creates ambiguity that cannot be resolved from English
+spelling alone—``a'' in ``make'' /\textipa{eI}/ becomes \emph{ey}, while ``a''
+in ``cat'' /\textipa{\ae}/ becomes \emph{a}. This motivates our phonetic
+resolution stage, which invokes a G2P component to determine which English
+vowel sound is present, enabling correct mapping to Filipino letters.
 
-The pairs (\emph{e,i}) and (\emph{o,u}) are widely treated as
-interchangeable in many lexical contexts, a convention rooted in the historical
-allophonic status of these pairs in Filipino~\cite{schachter1972}. In practice,
-native speakers often accept either spelling variant without perceiving an
-error. This variation is especially common in borrowed vocabulary, where the
-choice between them is not always uniquely prescribed.
+Further complicating vowel adaptation, the pairs (\emph{e}, \emph{i}) and
+(\emph{o}, \emph{u}) are widely treated as interchangeable in many lexical
+contexts, a convention rooted in the historical allophonic status of these
+pairs in Filipino~\cite{schachter1972}. In practice, native speakers often
+accept either spelling variant without perceiving an error. This variation is
+especially common in borrowed vocabulary, where prescriptive sources do not
+always uniquely specify a choice. This allographic flexibility motivates our
+relaxed evaluation conditions, in which (\emph{e}, \emph{i}, \emph{y}) and
+(\emph{o}, \emph{u}) are treated as equivalent, providing a more linguistically
+realistic assessment of system performance.
 
-\subsection{Consonant Letter Correspondences}
+\subsection{Consonant Letter Correspondences and Context-Sensitive Rules}
 
 For the fifteen consonant letters of the native Filipino
 alphabet~\cite{llamzon1966}, spelling correspondences between English and
-Filipino are largely straightforward. However, English loanwords frequently
-contain sounds that have no native Filipino letter, including /f/, /v/, /z/,
-/\textipa{S}/, /\textipa{tS}/, and /\textipa{dZ}/. But there are standard
-written forms for these cases: /\textipa{tS}/ is written as \emph{ts},
-/\textipa{dZ}/ as \emph{dy}, and /\textipa{S}/ as \emph{s} or
-\emph{sy}~\cite{almario2014,llamzon1966}.
+Filipino are largely predictable through one-to-one mappings (\emph{b}
+\(\mapsto\) \emph{b}, \emph{m} \(\mapsto\) \emph{m}, etc.). However, English
+loanwords frequently contain sounds that have no native Filipino letter,
+including /f/, /v/, /z/, /\textipa{S}/, /\textipa{tS}/, and /\textipa{dZ}/.
+Prescriptive guidelines~\cite{almario2014,llamzon1966} provide standard written
+forms for these cases: /\textipa{tS}/ is written as \emph{ts}, /\textipa{dZ}/
+as \emph{dy}, and /\textipa{S}/ as \emph{s} or \emph{sy}. These systematic
+correspondences motivate our context-free mapping rules, which handle the
+majority of consonant adaptations through direct substitution.
 
-\subsection{Syllable-Level Spelling Repairs}
+Some graphemes, however, require context-sensitive treatment. The letter
+\emph{c}, for example, maps to \emph{s} before \emph{i} or \emph{e} (``cinema''
+\(\mapsto\) \emph{sine}) but to \emph{k} elsewhere (``computer'' \(\mapsto\)
+\emph{kompyuter}). Similarly, doubled consonants are simplified (``addict''
+\(\mapsto\) \emph{adik}), and word-final silent \emph{e} is dropped (``make''
+\(\mapsto\) \emph{meyk}). These environment-dependent patterns motivate our
+context-sensitive rule layer, which inspects neighboring graphemes to select
+the appropriate mapping.
+
+\subsection{Syllable-Level Spelling Repairs and Output Normalization}
 
 Filipino spelling strongly favors syllable patterns of the form CV or
-CVC~\cite{llamzon1966}. When a nativized spelling would produce a consonant
-cluster that violates these patterns, a
-vowel letter is inserted to break up the illegal sequence, preserving all
-source consonants in the spelling~\cite{almario2014}. 
+CVC~\cite{llamzon1966}. When direct grapheme-to-grapheme mapping would produce
+a consonant cluster that violates these patterns—such as the \emph{-tr-} in a
+naive adaptation of ``extra''—prescriptive convention inserts a vowel letter to
+break up the illegal sequence (\emph{ekstra}), preserving all source consonants
+in the spelling~\cite{almario2014}. This phonotactic constraint motivates our
+output normalization stage, which detects word-final consonant clusters ending
+in \emph{l} or \emph{r} and inserts epenthetic \emph{o} where needed. The
+normalization pass also collapses contiguous duplicate graphemes and removes
+redundant affricate prefixes, ensuring that the final output conforms to
+Filipino orthographic conventions even when individual rule applications
+produce intermediate artifacts.

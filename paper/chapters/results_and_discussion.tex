@@ -1,13 +1,13 @@
 \section{Results and Discussion}
 
-{
-EDITS: \begin{enumerate}
-    \item Add discussion of the baseline model (what makes it difference)
-    \item Integrate the 
-\end{enumerate}
+ {
+  EDITS: \begin{enumerate}
+      \item Add discussion of the baseline model (what makes it difference)
+      \item Integrate the
+  \end{enumerate}
 
-\textbf{---------------------------------}
-}
+  \textbf{---------------------------------}
+ }
 
 \Cref{tab:CER} reports the overall CER, we get the CER for a five-vowel inventory,
 a relaxed {\emph{e}, \emph{i}, \emph{y}} case, a relaxed {\emph{o}, \emph{u}} case,
@@ -104,3 +104,11 @@ version of \emph{a}. Another one is ``football'' with an incorrect output of
 ``futbal'', when the expected was ``futbol'', again incorrectly using the short
 version of emph{a}. These are some examples that show the nondeterminism of
 long and short vowels.
+
+% TODO: to paragraph
+This work has several limitations:
+\begin{itemize}
+    \item \textbf{Coverage}: Rules derived from prescriptive sources may not capture informal nativization patterns used in social media or colloquial text.
+    \item \textbf{Language specificity}: The rule set is Filipino-specific; porting to other languages requires new linguistic expertise.
+    \item \textbf{G2P dependency}: Performance is bounded by G2P quality; errors in phonemization propagate to final output.
+\end{itemize}

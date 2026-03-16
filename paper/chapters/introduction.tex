@@ -1,62 +1,67 @@
 \section{Introduction}
 
-Language contact commonly results in the borrowing of foreign lexical items
-from a donor language. Borrowed words rarely enter unchanged; instead, they
-undergo \emph{nativization}, adapting to the phonological, morphological, and
-orthographic conventions of the recipient~\cite{haugen1950,wang2025}. The
-phonological and morphological dimensions of loanword integration have been
-studied extensively~\cite{kang2011, uffmann2015}, and the influence of
-orthography on adaptation is also documented~\cite{wang2025,daland2015}.
-However, \emph{orthographic nativization} has received considerably less
-attention as a computational task, despite its relevance to text normalization,
+Borrowed words rarely enter a language unchanged. When English loanwords are
+adopted into Filipino, they must be adapted to conform to Filipino's
+orthographic conventions, a process known as \emph{orthographic nativization}.
+This computational task requires generating the standardized written form of a
+loanword according to the recipient language's spelling rules. For example,
+``computer'' becomes \emph{kompyuter}, and ``basketball'' becomes
+\emph{basketbol}. Despite its practical importance for text normalization,
 spell-checking, and corpus construction in multilingual natural language
-processing.
+processing, orthographic nativization has received considerably less
+computational attention than the well-studied problems of phonological and
+morphological adaptation~\cite{kang2011,uffmann2015,wang2025,daland2015}. We
+address this gap by presenting a rule-based rewrite cascade that generates
+orthographically nativized Filipino forms from English loanwords.
 
-Within computational linguistics, loanword modeling efforts have targeted
-related but distinct problems. Finite-State Transducer (FST) cascades with Optimality-Theoretic
-constraint ranking have modeled the morpho-phonological transformations of
-Arabic loanwords entering Swahili for bilingual lexicon
-generation~\cite{tsvetkov2015}. FSTs have also shown that much of the
-phonological adaptation from English into Japanese can be captured by
-finite-state mappings~\cite{mao2016}. More broadly, nativization in loanword
-phonology has been shown to be systematic and rule-governed across
-typologically diverse languages~\cite{kang2011}.
+Filipino provides an ideal testbed for orthographic nativization. The language
+borrows extensively from English across education, medicine, commerce, and
+public administration~\cite{martin2020,baklanova2017}, and official
+nativization guidelines are codified in the prescriptive manual by the Komisyon
+sa Wikang Filipino~\cite{almario2014}. These properties enable systematic
+evaluation against standardized orthographic norms. Furthermore, Filipino is
+typologically distinct from English in phonological inventory, syllable
+structure, and orthographic depth~\cite{llamzon1966,schachter1972,llamzon1997}.
+This typological distance ensures that the proposed system must handle
+substantial graphemic and phonotactic transformations, providing a rigorous
+test of the approach.
 
-These studies focus on modeling phonological nativization patterns. What they
-do not address is orthographic nativization as a \emph{generation} problem:
-given a loanword, produce its standardized written form according to the
-recipient language's orthographic conventions. This distinction matters, as
-phonological and orthographic nativization are not
-equivalent~\cite{wang2025,daland2015}. A phonological model produces an
-abstract pronunciation representation; an orthographic nativization system must
-produce a concrete character string that obeys the recipient's spelling rules.
+Our method draws on prior work in computational loanword modeling while
+addressing a distinct generation problem. Finite-State Transducer (FST)
+cascades with Optimality-Theoretic constraint ranking have successfully modeled
+the morpho-phonological transformations of Arabic loanwords entering Swahili
+for bilingual lexicon generation~\cite{tsvetkov2015}, and similar FST
+approaches have captured much of the phonological adaptation from English into
+Japanese~\cite{mao2016}. More broadly, nativization in loanword phonology has
+been shown to be systematic and rule-governed across typologically diverse
+languages~\cite{kang2011}. However, these studies focus on modeling
+\emph{phonological} patterns, the abstract sound structure of adaptation—rather
+than orthographic generation. As documented in~\cite{wang2025,daland2015},
+phonological and orthographic nativization are not equivalent: a phonological
+model produces an abstract pronunciation representation, while an orthographic
+nativization system must produce a concrete character string that obeys the
+recipient's spelling rules.
 
-We address this gap with a rule-based rewrite cascade drawn from prior FST work
-on loanword modeling~\cite{mao2016}. By deriving rewrites from prescriptive
-guidelines and linguistic literature, the approach is transparent and
-linguistically grounded. It also sidesteps the limitation of data-driven
-methods, which require parallel corpora typically unavailable for low-resource
-languages, offering a practical middle ground.
+The proposed system performs orthographic nativization through a four-stage
+pipeline: graphemic tokenization, rule-based grapheme mapping, phonetic vowel
+resolution via Grapheme-to-Phoneme (G2P) lookup, and output normalization.
+Rules are hand-authored from prescriptive guidelines~\cite{almario2014,schachter1972} and
+linguistic descriptions of Filipino
+phonology~\cite{llamzon1966,schachter1972,llamzon1997,tayao2004}, making the
+approach transparent and linguistically grounded. By deriving rewrites from
+existing linguistic resources rather than requiring parallel training corpora,
+the method is particularly suited to low-resource scenarios where annotated
+loanword data are unavailable. The G2P component is invoked selectively—only
+for vowel graphemes whose nativized form cannot be determined from spelling
+context alone—allowing the system to handle English's deep orthography while
+maintaining computational efficiency.
 
-We evaluate the proposed method using Filipino as a testbed. Filipino borrows
-extensively from English across education, medicine, commerce, and public
-administration~\cite{martin2020,baklanova2017}, and official nativization
-guidelines are codified in~\cite{almario2014}. These properties enable
-systematic evaluation against prescriptive orthographic standards. Filipino is
-also typologically distinct from English in phonological inventory, syllable
-structure, and orthographic depth~\cite{llamzon1966,schachter1972,llamzon1997},
-ensuring the testbed exercises the full capacity of the proposed cascade.
-
-This study makes the following contributions:
-\begin{itemize}
-      \item \textbf{A rewrite cascade framework for low-resource orthographic nativization}.
-            We formalize orthographic nativization as a rewrite cascade,
-            demonstrating that prescriptive linguistic rules can be
-            operationalized as an interpretable computational pipeline
-            without large parallel corpora.
-
-      \item \textbf{An empirical case study on English--Filipino borrowing}.
-            Using Filipino as a testbed, we implement and evaluate the framework on real
-            loanword data, demonstrating practical effectiveness while identifying
-            systematic sources of error.
-\end{itemize}
+This work makes two principal contributions:
+\begin{enumerate}
+      \item We formalize orthographic nativization as a rewrite cascade and demonstrate
+            that prescriptive linguistic rules can be operationalized into an effective
+            computational pipeline without large parallel corpora.
+      \item An empirical case study on English--Filipino borrowing, identifying systematic
+            error patterns and validating the utility of phonetic disambiguation for vowel
+            adaptation.
+\end{enumerate}
