@@ -44,7 +44,9 @@ wrong.
 Comparing to the unmapped set, there is a X\% difference in the five-vowel
 CER and a X\% difference in the three-vowel CER, validating the need for
 G2P and context-sensitive rules to more accurately assess corresponding vowel
-sounds. The close range of error rates for both tests suggest that remaining
+sounds. Compared to the baseline's non-use of G2P, IPA-guided helps with
+letters that may have an ambiguous pronunciation if only basing it off of the
+graphemes. The close range of error rates for both tests suggest that remaining
 character errors are not majorly attributed to the (\emph{e}, \emph{i},
 \emph{y}) or (\emph{o}, \emph{u}) equivalences, contributing minimally to
 overall error.
@@ -53,7 +55,7 @@ Because English is a stress-timed language, some pronunciations get reduced to
 the schwa /\textipa{@}/ sound. This creates a bit of an ambiguity between vowel
 sounds as it is a very neutral sound. This results in \emph{e}, \emph{y}, and
 \emph{i} errors being the most frequent ones. This may explain why relaxing the
-    {\emph{e}, \emph{i}, \emph{y}} equivalence significantly reduces the CER.
+{\emph{e}, \emph{i}, \emph{y}} equivalence significantly reduces the CER.
 
 The phoneme correspondence for vowels is most of the time ambiguous, splitting
 a vowel pronunciation into either its long or short version. Some examples:
