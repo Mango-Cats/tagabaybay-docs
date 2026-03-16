@@ -17,6 +17,7 @@ of any context-sensitive rules or IPA reference.
     \begin{tabular}{c|ccc c}
         \hline
         \textbf{G2P} & \textbf{5-vowel} & \textbf{\emph{e} = \emph{i} = \emph{y}} & \textbf{\emph{o} = \emph{u}} & \textbf{3-vowel} \\
+        \textbf{G2P} & \textbf{5-vowel} & \textbf{\emph{e} = \emph{i} = \emph{y}} & \textbf{\emph{o} = \emph{u}} & \textbf{3-vowel} \\
         \hline
         % idk if thats better
         Unmapped & 20.60 & 18.24 & 20.36 & 18.00 \\
@@ -37,8 +38,31 @@ rules to more accurately assess corresponding vowel sounds. The close range of e
 both tests suggest that remaining character errors are not majorly attributed to the {\emph{e}, \emph{i}, \emph{y}}
 or {\emph{o}, \emph{u}} equivalences, contributing minimally to overall error. 
 
-Because English is a stress-timed language, some pronunciations get reduced to the schwa
-/\textipa{@}/ sound. This creates a bit of an ambiguity between vowel sounds as it is a
-very neutral sound. This results in \emph{e}, \emph{y}, and \emph{i} errors being the most
-frequent ones. This may explain why relaxing the {\emph{e}, \emph{i}, \emph{y}} equivalence
-significantly reduces the CER.
+Because English is a stress-timed language, some pronunciations get reduced to
+the schwa /\textipa{@}/ sound. This creates a bit of an ambiguity between vowel
+sounds as it is a very neutral sound. This results in \emph{e}, \emph{y}, and
+\emph{i} errors being the most frequent ones. This may explain why relaxing the
+    {\emph{e}, \emph{i}, \emph{y}} equivalence significantly reduces the CER.
+
+The phoneme correspondence for vowels is most of the time ambiguous, splitting a vowel pronunciation into either its long or short
+version. Some examples:
+
+\begin{table}[h]
+    \centering
+    \caption{Examples of long and short vowel correspondence.}
+    \label{vowel_examples}
+    \begin{tabular}{ll}
+        \hline
+        \textbf{Long vowel} & \textbf{Short vowel} \\
+        \hline
+        ``cake'' (``keyk'') & ``cat'' (``kat'') \\
+        ``me'' (``mi'') & ``bed'' (``bed'') \\
+        ``time'' (``taym'') & ``sit'' (``sit'') \\
+        ``home'' (``hom'') & ``hot'' (``hat'') \\
+        ``cube'' (``kyub'') & ``cup'' (``kap'') \\
+        \hline
+    \end{tabular}
+\end{table}
+
+This ambiguity results in a problem where a vowel must be
+mapped to multiple different pronunciations.

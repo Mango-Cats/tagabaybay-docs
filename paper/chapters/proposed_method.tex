@@ -87,7 +87,7 @@ of ordered conditions. For example:
             \end{enumerate}
       \item Cases for doubled consonants: when two identical consonants appear adjacently,
             the second is treated as silent and mapped to no output, with the single
-            consonant preserved.
+            consonant preserved; ``addict'' \( \mapsto \) ``adik''.
 \end{itemize}
 More complex patterns require multi-token lookahead. The sequence \emph{-ate}
 at the word boundary, for instance, maps to \emph{-eyt} rather than a sequence
@@ -106,7 +106,7 @@ resolve.
 
 This is the one point in the pipeline where the system must look beyond
 graphemes. For vowel tokens whose nativized form cannot be determined from
-spelling context alone, the system invokes a G2P component to obtain an IPA
+spelling context alone, the system invokes a Grapheme-to-Phoneme (G2P) component to obtain an International Phonetic Alphabet (IPA)
 transcription of the entire English word. The relevant vowel phoneme is then
 extracted by aligning it to the current token position. The mapping proceeds as
 follows:
@@ -146,4 +146,4 @@ adjacent tokens:
 \end{itemize}
 
 Together, these normalization steps ensure that the output conforms to the
-phonotactic and orthographic conventions codified in~ \cite{almario2014}.
+phonotactic and orthographic conventions codified in~\cite{almario2014}.
