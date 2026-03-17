@@ -26,7 +26,7 @@ test of the approach.
 
 Our method draws on prior work in computational loanword modeling while
 addressing a distinct generation problem. Finite-State Transducer (FST)
-cascades with Optimality-Theoretic constraint ranking have successfully modeled
+with Optimality-Theoretic constraint ranking have successfully modeled
 the morpho-phonological transformations of Arabic loanwords entering Swahili
 for bilingual lexicon generation~\cite{tsvetkov2015}, and similar FST
 approaches have captured much of the phonological adaptation from English into
@@ -51,14 +51,16 @@ rewrites from existing linguistic resources rather than requiring parallel
 training corpora, the method is particularly suited to low-resource scenarios
 where annotated loanword data are unavailable.
 
-This work makes two principal contributions. First, we formalize orthographic
-nativization as a rewrite cascade. We use rewrite cascade to refer to this
-priority-ordered sequential evaluation of rule types over a token sequence,
-where the first matching rule determines the output for each token. Then, we
-demonstrate that prescriptive linguistic rules can be operationalized into an
-effective computational pipeline without large parallel corpora, achieving
-5.14\% character error rate under strict evaluation and 4.05\% when accounting
-for Filipino's allographic vowel variation. Second, we provide an empirical
-case study on English--Filipino borrowing using a newly constructed gold
-standard of 2,319 loanword pairs, identifying systematic error patterns and
-validating the utility of phonetic disambiguation for vowel adaptation.
+This work makes three contributions. First, we formalize orthographic
+nativization as a rewrite cascade, a priority-ordered sequential evaluation of
+rule types over a token sequence where the first matching rule determines the
+output for each token. We demonstrate that prescriptive linguistic rules can be
+operationalized into an effective computational pipeline without large parallel
+corpora, achieving 5.14\% character error rate under strict evaluation and
+4.05\% when accounting for Filipino's allographic vowel variation. Second, we
+compare the pipeline against a regex baseline, an ortho-only ablation, and
+zero-shot LLM prompting, showing that the rewrite cascade
+outperforms all three. Third, we provide an empirical case study on
+English-Filipino borrowing using a newly constructed gold standard of 2,319
+loanword pairs, identifying systematic error patterns and validating the
+utility of phonetic disambiguation for vowel adaptation.

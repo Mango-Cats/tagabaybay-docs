@@ -14,11 +14,10 @@ entirely within the Rust process.
 \subsubsection{Construction}
 The gold standard corpus comprises 2,319 English-Filipino loanword pairs
 constructed by native Filipino speakers, drawn from general English vocabulary
-(1,858 pairs) and pharmaceutical terminology (461 pairs).
-Annotators applied the spelling conventions prescribed in~\cite{almario2014};
-where the manual did not prescribe a specific nativization, they consulted
-descriptive phonological sources to determine the most plausible form under the
-five-vowel system.
+(1,858 pairs) and pharmaceutical terminology (461 pairs). Annotators applied
+the spelling conventions prescribed in~\cite{almario2014}; where the manual did
+not prescribe a specific nativization, they consulted descriptive phonological
+sources to determine the most plausible form under the five-vowel system.
 
 \subsubsection{Inter-Annotator Agreement}
 To validate corpus quality, a random subsample of 60\% of entries was
@@ -50,3 +49,16 @@ are interchangeable in Filipino~\cite{schachter1972}, we report CER under
 addtional conditions treating these pairs as equivalent. This provides a
 linguistically realistic assessment by discounting errors native speakers would
 not perceive.
+
+\subsection{Comparison}
+
+Three additional systems are evaluated. The baseline applies a
+flat sequence of regular expression substitutions without graphemic
+tokenization, priority ordering, or phonetic disambiguation. The
+ortho-only ablation runs the full proposed pipeline with phonetic
+vowel resolution disabled; all orthographic rules remain active, but vowel
+graphemes map to their identity. The LLM prompting system sends each
+word to Claude Haiku 4.5 in a zero-shot setting. The
+prompt supplies the same core mapping rules encoded in the proposed system, so
+that the comparison isolates execution reliability rather than knowledge
+availability.

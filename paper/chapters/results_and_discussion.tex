@@ -17,20 +17,26 @@ maps each vowel grapheme to its identity.
         Baseline                  & 20.38            & 17.17                                   & 20.04                         & 16.83            \\
         Ortho-only                & 17.73            & 14.50                                   & 17.42                         & 14.19            \\
         IPA-guided                & 5.14             & 4.14                                    & 5.05                          & 4.05             \\
-        claude-haiku-4-5-20251001 & 15.54            & 13.39                                   & 15.29                         & 13.14            \\
+        LLM Prompting & 15.54            & 13.39                                   & 15.29                         & 13.14            \\
         \hline
     \end{tabular}
 \end{table}
 
-The IPA-guided system achieved 5.14\% CER under strict five-vowel evaluation, a
-12.59-point reduction from the 17.73\% ortho-only ablation. Under (\emph{e},
-\emph{i}, \emph{y}) equivalence, CER fell to 4.14\%; under (\emph{o}, \emph{u})
-equivalence it yielded 5.05\%; the combination of both produced 4.05\%. The
-larger gain from (\emph{e}, \emph{i}, \emph{y}) equivalence reflects two
-overlapping sources of vowel ambiguity: schwa resolution and \emph{i}/\emph{y}
-alternation in glide contexts. The marginal effect of (\emph{o}, \emph{u})
-equivalence (5.14\% to 5.05\%) confirms that this alternation is rare in the
-evaluation data.
+The IPA-guided system achieved 5.14\% CER under strict five-vowel evaluation,
+a 12.59-point reduction from the 17.73\% ortho-only ablation and a
+15.24-point reduction from the 20.38\% identity baseline. LLM
+prompting achieved 15.54\% CER, outperforming the identity baseline but
+underperforming the ortho-only ablation. This result indicates that even with
+explicit nativization rules in the prompt, an LLM cannot reliably apply them at
+the character level, and that the rewrite cascade substantially
+outperforms prompting-based approaches for this task.
+Under (\emph{e}, \emph{i}, \emph{y}) equivalence, CER fell to 4.14\%; under
+(\emph{o}, \emph{u}) equivalence it yielded 5.05\%; the combination of both
+produced 4.05\%. The larger gain from (\emph{e}, \emph{i}, \emph{y})
+equivalence reflects two overlapping sources of vowel ambiguity: schwa
+resolution and \emph{i}/\emph{y} alternation in glide contexts. The marginal
+effect of (\emph{o}, \emph{u}) equivalence (5.14\% to 5.05\%) confirms that
+this alternation is rare in the evaluation data.
 
 \subsection{Error Analysis}
 
@@ -58,7 +64,7 @@ word-final sequences would close these gaps.
 \subsubsection{G2P Propagation Errors}
 
 Some failures originate in the upstream G2P module rather than in the rewrite
-rules. An incorrect IPA transcription cascades directly into the output:
+rules. An incorrect IPA transcription directly effects the output:
 ``chlorpromazine'' yields ``klor\textbf{o}p\textbf{o}r\textbf{a}masin'' instead
 of ``klorpromasin''. Approximately 40 of the 856 edits trace to incorrect G2P
 transcriptions, and these concentrate in pharmaceutical terms and long compound
@@ -78,7 +84,7 @@ the fricative in all positions.
 Three limitations warrant consideration. First, the rules derive from
 prescriptive sources and may not capture informal nativization patterns.
 Second, the rule set is Filipino-specific, though the pipeline architecture,
-multigraph tokenizer, and cascade mechanism are language-general; only the rule
+multigraph tokenizer, and rewrite cascade are language-general; only the rule
 inventory, phoneme-to-grapheme mappings, and normalization repairs require
 re-engineering per target language. Third, G2P accuracy bounds overall
 performance, as phonemization errors propagate directly to the output.
