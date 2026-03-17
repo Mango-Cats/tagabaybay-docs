@@ -1,4 +1,6 @@
 \section{Experimental Setup}
+The source code and gold standard are publicly available at
+\url{https://github.com/Mango-Cats/tagabaybay}.
 
 \subsection{Implementation}
 The system is implemented in Rust. The G2P backend for vowel resolution is
@@ -10,20 +12,21 @@ entirely within the Rust process.
 \subsection{Gold Standard}
 
 \subsubsection{Construction}
-The gold standard corpus comprises 2,319 English--Filipino loanword pairs
-constructed by native Filipino speakers, spanning Philippine domains
-where English loanwords are commonly used.
-
+The gold standard corpus comprises 2,319 English-Filipino loanword pairs
+constructed by native Filipino speakers, drawn from general English vocabulary
+(1,858 pairs) and pharmaceutical terminology (461 pairs).
 Annotators applied the spelling conventions prescribed in~\cite{almario2014};
 where the manual did not prescribe a specific nativization, they consulted
 descriptive phonological sources to determine the most plausible form under the
 five-vowel system.
 
 \subsubsection{Inter-Annotator Agreement}
-To validate corpus quality, inter-annotator agreement was measured by
-presenting a random subsample of 60\% of entries was presented to a second
-native-Filipino annotator. Agreement is reported as the percentage of entries
-on which both annotators produced identical nativized forms.
+To validate corpus quality, a random subsample of 60\% of entries was
+independently re-annotated by a second native-Filipino speaker. Raw agreement,
+the percentage of entries on which both annotators produced identical nativized
+forms, averaged 92\% across the corpus. Disagreements were adjudicated by
+discussion and the gold standard was corrected accordingly; the evaluation
+results reported later on reflect the post-adjudication corpus.
 
 \subsection{Evaluation Metrics}\label{ssec:evaluation_metrics}
 The primary evaluation metric is Character Error Rate (CER), computed as the
@@ -35,16 +38,15 @@ entire corpus:
     {\sum_{i} |y_i|}
     \times 100\%
 \end{equation}
-where \(\hat{y}_i\) is the system's nativized form of the \(i\)-th word, \(y_i\) is
-the gold standard reference, \(\mathrm{lev}(\cdot,\cdot)\) denotes
+where \(\hat{y}_i\) is the system's nativized form of the \(i\)-th word,
+\(y_i\) is the gold standard reference, \(\mathrm{lev}(\cdot,\cdot)\) denotes
 character-level Levenshtein distance, and \(|y_i|\) is the character length of
 the reference. CER is preferred over word-level accuracy because nativization
-errors are often minor, and a
-word-level metric would treat a one-character discrepancy as harshly as a
-completely incorrect output.
+errors are often minor, and a word-level metric would treat a one-character
+discrepancy as harshly as a completely incorrect output.
 
 Additionally, because (\emph{e}, \emph{i}, \emph{y}) and (\emph{o}, \emph{u})
 are interchangeable in Filipino~\cite{schachter1972}, we report CER under
-relaxed conditions treating these pairs as equivalent. This provides a
+addtional conditions treating these pairs as equivalent. This provides a
 linguistically realistic assessment by discounting errors native speakers would
 not perceive.
