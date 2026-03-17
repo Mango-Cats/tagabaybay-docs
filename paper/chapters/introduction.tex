@@ -58,9 +58,10 @@ output for each token. We demonstrate that prescriptive linguistic rules can be
 operationalized into an effective computational pipeline without large parallel
 corpora, achieving 5.14\% character error rate under strict evaluation and
 4.05\% when accounting for Filipino's allographic vowel variation. Second, we
-compare the pipeline against a regex baseline, an ortho-only ablation, and
-zero-shot LLM prompting, showing that the rewrite cascade
-outperforms all three. Third, we provide an empirical case study on
-English-Filipino borrowing using a newly constructed gold standard of 2,319
-loanword pairs, identifying systematic error patterns and validating the
-utility of phonetic disambiguation for vowel adaptation.
+show that zero-shot LLM prompting with explicit linguistic rules underperforms
+the structured rewrite cascade by over 10 percentage points, which indicates
+that rule execution architecture matters independently of rule knowledge.
+Third, we provide an empirical case study on English-Filipino borrowing using a
+newly constructed gold standard of 2,319 loanword pairs, identifying systematic
+error patterns and validating the utility of phonetic disambiguation for vowel
+adaptation.
