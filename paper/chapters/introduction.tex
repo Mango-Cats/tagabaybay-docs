@@ -33,12 +33,12 @@ approaches have captured much of the phonological adaptation from English into
 Japanese~\cite{mao2016}. More broadly, nativization in loanword phonology has
 been shown to be systematic and rule-governed across typologically diverse
 languages~\cite{kang2011}. However, these studies focus on modeling
-\emph{phonological} patterns (the abstract sound structure of adaptation) rather
-than orthographic generation. As documented in~\cite{wang2025,daland2015},
-phonological and orthographic nativization are not equivalent: a phonological
-model produces an abstract pronunciation representation, while an orthographic
-nativization system must produce a concrete character string that obeys the
-recipient's spelling rules.
+\emph{phonological} patterns (the abstract sound structure of adaptation)
+rather than orthographic generation. As documented
+in~\cite{wang2025,daland2015}, phonological and orthographic nativization are
+not equivalent: a phonological model produces an abstract pronunciation
+representation, while an orthographic nativization system must produce a
+concrete character string that obeys the recipient's spelling rules.
 
 The proposed system performs orthographic nativization through a four-stage
 pipeline: graphemic tokenization, rule-based grapheme mapping, phonetic
@@ -52,11 +52,13 @@ training corpora, the method is particularly suited to low-resource scenarios
 where annotated loanword data are unavailable.
 
 This work makes two principal contributions. First, we formalize orthographic
-nativization as a rewrite cascade and demonstrate that prescriptive linguistic
-rules can be operationalized into an effective computational pipeline without
-large parallel corpora, achieving 5.14\% character error rate under strict
-evaluation and 4.05\% when accounting for Filipino's allographic vowel
-variation. Second, we provide an empirical case study on English--Filipino
-borrowing using a newly constructed gold standard of 2,319 loanword pairs,
-identifying systematic error patterns and validating the utility of phonetic
-disambiguation for vowel adaptation.
+nativization as a rewrite cascade. We use rewrite cascade to refer to this
+priority-ordered sequential evaluation of rule types over a token sequence,
+where the first matching rule determines the output for each token. Then, we
+demonstrate that prescriptive linguistic rules can be operationalized into an
+effective computational pipeline without large parallel corpora, achieving
+5.14\% character error rate under strict evaluation and 4.05\% when accounting
+for Filipino's allographic vowel variation. Second, we provide an empirical
+case study on English--Filipino borrowing using a newly constructed gold
+standard of 2,319 loanword pairs, identifying systematic error patterns and
+validating the utility of phonetic disambiguation for vowel adaptation.
