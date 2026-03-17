@@ -31,23 +31,22 @@ realistic assessment of system performance.
 
 \subsection{Consonant Letter Correspondences and Context-Sensitive Rules}
 
-For the fifteen consonant letters of the native Filipino
-alphabet~\cite{llamzon1966}, spelling correspondences between English and
-Filipino are largely predictable through one-to-one mappings. However, English
-loanwords frequently contain sounds that have no native Filipino letter,
-including /f/, /v/, /z/, /\textipa{S}/, /\textipa{tS}/, and /\textipa{dZ}/.
-Prescriptive guidelines~\cite{almario2014,llamzon1966} provide standard written
-forms for these cases: /\textipa{tS}/ is written as \emph{ts}, /\textipa{dZ}/
+For the consonant letters native to the Filipino alphabet~\cite{llamzon1966},
+spelling correspondences between English and Filipino are largely predictable
+through one-to-one mappings. However, English loanwords frequently contain sounds
+that have no native Filipino letter, including /\textipa{S}/, /\textipa{tS}/, and
+/\textipa{dZ}/. Prescriptive guidelines~\cite{almario2014,llamzon1966} provide standard
+written forms for these cases: /\textipa{tS}/ is written as \emph{ts}, /\textipa{dZ}/
 as \emph{dy}, and /\textipa{S}/ as \emph{s} or \emph{sy}. These systematic
 correspondences motivate our context-free mapping rules, which handle the
 majority of consonant adaptations through direct substitution.
 
 Some graphemes, however, require context-sensitive treatment. The letter
-\emph{c}, for example, maps to \emph{s} before \emph{i} or \emph{e} (``cinema''
-\(\mapsto\) \emph{sine}) but to \emph{k} elsewhere (``computer'' \(\mapsto\)
-\emph{kompyuter}). Similarly, doubled consonants are simplified (``addict''
-\(\mapsto\) \emph{adik}), and word-final silent \emph{e} is dropped (``make''
-\(\mapsto\) \emph{meyk}). These environment-dependent patterns motivate our
+\emph{c}, for example, maps to \emph{s} before \emph{i} or \emph{e} (``sinema'',
+not \emph{cinema}) but to \emph{k} elsewhere (``kompyuter'', not
+\emph{computer}). Similarly, doubled consonants are simplified (``adik'', not
+\emph{addict}), and word-final silent \emph{e} is dropped (``meyk'', not
+\emph{make}). These environment-dependent patterns motivate our
 context-sensitive rule layer, which inspects neighboring graphemes to select
 the appropriate mapping.
 
@@ -58,7 +57,7 @@ CVC~\cite{llamzon1966,magpale2024}. When direct grapheme-to-grapheme mapping wou
 a consonant cluster that violates these patterns, such as the ``-bl'' in a
 naive adaptation of ``rumble'', prescriptive convention inserts a vowel letter to
 break up the illegal sequence, preserving all source consonants
-in the spelling, \emph{``rambol''}~\cite{almario2014}. This phonotactic constraint motivates our
+in the spelling, ``rambol''~\cite{almario2014}. This phonotactic constraint motivates our
 output normalization stage, which detects word-final consonant clusters ending
 in \emph{l} or \emph{r} and inserts epenthetic \emph{o} where needed. The
 normalization pass also collapses contiguous duplicate graphemes and removes
