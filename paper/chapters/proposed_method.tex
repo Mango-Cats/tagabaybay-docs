@@ -153,13 +153,13 @@ normalization pass over the raw output sequence. This pass corrects three
 classes of artifacts that can arise from the independent application of rules
 across adjacent tokens:
 \begin{itemize}
-      \item \textbf{Contiguous duplicates}: Identical adjacent graphemes produced by
+      \item Contiguous duplicates: Identical adjacent graphemes produced by
             separate rule branches are collapsed to a single instance.
-      \item \textbf{Redundant affricate prefixes}: When a stop consonant is immediately
+      \item Redundant affricate prefixes: When a stop consonant is immediately
             followed by its own affricate form (\emph{d} followed by \emph{dy}, or \emph{t}
             followed by \emph{ts}), the leading stop is removed, as it is already encoded
             within the affricate.
-      \item \textbf{Phonotactic cluster repair}: Consonant clusters that violate the
+      \item Phonotactic cluster repair: Consonant clusters that violate the
             Filipino CV/CVC syllable template are repaired through epenthetic vowel
             insertion. Specifically, when the IPA transcription contains a schwa and the
             word-final graphemes form an illegal cluster ending in \emph{l} or \emph{r},
