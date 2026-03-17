@@ -134,14 +134,12 @@ Alphabet (IPA) transcription of the entire English word. The relevant vowel
 phoneme is then extracted by aligning it to the current token position. The
 mapping proceeds as follows:
 \begin{itemize}
-      \item Tense vowels and diphthongs (/\textipa{eI}/, /\textipa{oU}/, /\textipa{aI}/,
-            /\textipa{aU}/) are rendered as two-character Filipino sequences: \emph{ey},
-            \emph{ow}, \emph{ay}, \emph{aw}.
-      \item Lax monophthongs (/\textipa{\ae}/, /\textipa{E}/, /\textipa{I}/, /\textipa{Q}/,
-            /\textipa{U}/) are mapped to the nearest Filipino simple vowel.
-      \item The schwa /\textipa{@}/ in word-final position is realized as \emph{e} or
+      \item Tense vowels and diphthongs are rendered as two-character Filipino
+      sequences: \emph{ey}, \emph{ow}, \emph{ay}, \emph{aw}.
+      \item Lax monophthongs are mapped to the nearest Filipino simple vowel.
+      \item The schwa in word-final position is realized as \emph{e} or
             \emph{o} depending on the written vowel.
-      \item R-colored vowels (/\textipa{@r}/, /\textipa{3r}/) preserve the written vowel
+      \item R-colored vowels preserve the written vowel
             letter, deferring to orthographic convention.
 \end{itemize}
 Critically, even in this phonetic stage, the system ultimately produces Filipino
