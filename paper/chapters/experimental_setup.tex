@@ -4,7 +4,7 @@ The source code and gold standard are publicly available at
 
 \subsection{Implementation}
 The system is implemented in Rust. The G2P backend for vowel resolution is
-provided by the \texttt{phonemizer} library~\cite{bernard2021}, which wraps the
+provided by the phonemizer library~\cite{bernard2021}, which wraps the
 eSpeak-NG speech synthesizer and is invoked as a Python subprocess only when a
 vowel grapheme requires phonetic disambiguation; otherwise, the system operates
 entirely within the Rust process.
