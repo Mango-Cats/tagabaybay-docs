@@ -25,16 +25,18 @@ substantial graphemic and phonotactic transformations, providing a rigorous
 test of the approach.
 
 Our method draws on prior work in computational loanword modeling while
-addressing a distinct generation problem. Finite-State Transducer (FST)
-with Optimality-Theoretic constraint ranking have successfully modeled
-the morpho-phonological transformations of Arabic loanwords entering Swahili
-for bilingual lexicon generation~\cite{tsvetkov2015}, and similar FST
-approaches have captured much of the phonological adaptation from English into
-Japanese~\cite{mao2016}. More broadly, nativization in loanword phonology has
-been shown to be systematic and rule-governed across typologically diverse
-languages~\cite{kang2011}. However, these studies focus on modeling
-\emph{phonological} patterns (the abstract sound structure of adaptation)
-rather than orthographic generation. As documented
+addressing a distinct generation problem. Finite-State Transducer (FST) with
+Optimality-Theoretic constraint ranking have successfully modeled the
+morpho-phonological transformations of Arabic loanwords entering Swahili for
+bilingual lexicon generation~\cite{tsvetkov2015}, and similar FST approaches
+have captured much of the phonological adaptation from English into
+Japanese~\cite{mao2016}. Furthermore, rule-based methodologies have been
+explored for English respelling, producing alternative English spellings
+intended to clarify pronunciation~\cite{hauer2013}. More broadly,
+nativization in loanword phonology has been shown to be systematic and
+rule-governed across typologically diverse languages~\cite{kang2011}. However,
+these studies focus on modeling phonological patterns (the abstract sound
+structure of adaptation) rather than orthographic generation. As documented
 in~\cite{wang2025,daland2015}, phonological and orthographic nativization are
 not equivalent: a phonological model produces an abstract pronunciation
 representation, while an orthographic nativization system must produce a
@@ -57,11 +59,11 @@ rule types over a token sequence where the first matching rule determines the
 output for each token. We demonstrate that prescriptive linguistic rules can be
 operationalized into an effective computational pipeline without large parallel
 corpora, achieving 5.14\% character error rate under strict evaluation and
-4.05\% when accounting for Filipino's vowel variation. Second, we
-show that zero-shot LLM prompting with explicit linguistic rules underperforms
-the structured rewrite cascade by over 10 percentage points, which indicates
-that rule execution architecture matters independently of rule knowledge.
-Third, we provide an empirical case study on English-Filipino borrowing using a
-newly constructed gold standard of 2,319 loanword pairs, identifying systematic
-error patterns and validating the utility of phonetic disambiguation for vowel
+4.05\% when accounting for Filipino's vowel variation. Second, we show that
+zero-shot LLM prompting with explicit linguistic rules underperforms the
+structured rewrite cascade by over 10 percentage points, which indicates that
+rule execution architecture matters independently of rule knowledge. Third, we
+provide an empirical case study on English-Filipino borrowing using a newly
+constructed gold standard of 2,319 loanword pairs, identifying systematic error
+patterns and validating the utility of phonetic disambiguation for vowel
 adaptation.

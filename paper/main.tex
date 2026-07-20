@@ -22,10 +22,10 @@
 % Change this to final author list
 \author{
     \IEEEauthorblockN{
-        Erin Gabrielle Chua, 
-        Zhean Robby Ganituen\textsuperscript{*}, 
-        Justin Ching, 
-        Jaztin Jacob Jimenez, 
+        Erin Gabrielle Chua,
+        Zhean Robby Ganituen\textsuperscript{*},
+        Justin Ching,
+        Jaztin Jacob Jimenez,
         Nathaniel Oco}
     \IEEEauthorblockA{\textit{De La Salle University} \\
         Manila, Philippines \\
@@ -36,7 +36,24 @@
 \maketitle
 
 \begin{abstract}
-Orthographic nativization, generating standardized written forms of loanwords in a recipient language, remains understudied computationally despite its importance for text normalization and multilingual NLP. We present a rule-based rewrite cascade for orthographic nativization of English loanwords into Filipino. The system operates through four stages: graphemic tokenization, priority-ordered rewrite rules, phonetic resolution via grapheme-to-phoneme lookup, and output normalization. Rules are hand-authored from prescriptive orthographic guidelines and descriptive phonological sources, enabling deployment without parallel training corpora. We evaluate on a newly constructed gold standard of 2,319 English--Filipino loanword pairs. The proposed method achieves 5.14\% character error rate under a 5-vowel evaluation and 4.05\% under a 3-vowel evaluation that accounts for Filipino's vowel variation. The system outperforms a regular expressions, an orthographic-only ablation without phonetic resolution, and zero-shot prompting of a large language model given the same mapping rules. Error analysis reveals that most remaining errors stem from schwa ambiguity in unstressed syllables, glide insertion, and the quality of the phonetic transcription, suggesting directions for refinement. The linguistically grounded approach demonstrates that prescriptive rules can be operationalized into effective orthographic nativization systems for low-resource languages.
+
+    Orthographic nativization, generating standardized written forms of loanwords,
+    remains understudied computationally despite its importance for text
+    normalization and multilingual NLP. We present a rule-based approach for
+    orthographic nativization of English loanwords into Filipino. The system
+    operates through multiple stages: graphemic tokenization, priority-ordered
+    rewrite rules, and grapheme-to-phoneme lookup. Rules are hand-authored from
+    orthographic guidelines and phonological sources, enabling deployment without
+    parallel training corpora. We evaluate on a newly constructed gold standard of
+    2,319 English--Filipino loanword pairs. The proposed method achieves 5.14\%
+    error rate under a 5-vowel and 4.05\% under a 3-vowel evaluation. The system
+    outperforms a regular expressions and zero-shot prompting of a large language model given
+    the same mapping rules. Error analysis reveals that most remaining errors stem
+    from schwa ambiguity in unstressed syllables, glide insertion, and the quality
+    of the phonetic transcription. The linguistically grounded approach
+    demonstrates that prescriptive rules can be operationalized into effective
+    orthographic nativization systems for low-resource languages.
+
 \end{abstract}
 
 \begin{IEEEkeywords}
