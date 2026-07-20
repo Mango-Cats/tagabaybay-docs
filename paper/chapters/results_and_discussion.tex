@@ -9,7 +9,7 @@ The system was evaluated on 2,319 English-Filipino loanword pairs.
     \label{tab:CER}
     \begin{tabular}{l|cccc}
         \hline
-        \textbf{System}           & \textbf{5-vowel} & \textbf{(\emph{e}, \emph{i}, \emph{y})} & \textbf{(\emph{o}, \emph{u})} & \textbf{3-vowel} \\
+        \textbf{System}           & \textbf{5-vowel} & \textbf{(\gr{e}, \gr{i}, \gr{y})} & \textbf{(\gr{o}, \gr{u})} & \textbf{3-vowel} \\
         \hline
         Baseline                  & 20.38            & 17.17                                   & 20.04                         & 16.83            \\
         Ortho-only                & 17.73            & 14.50                                   & 17.42                         & 14.19            \\
@@ -27,12 +27,12 @@ underperforming the ortho-only ablation. This result indicates that even with
 explicit nativization rules in the prompt, an LLM cannot reliably apply them at
 the character level, and that the rewrite cascade substantially
 outperforms prompting-based approaches for this task.
-Under (\emph{e}, \emph{i}, \emph{y}) equivalence, CER fell to 4.14\%; under
-(\emph{o}, \emph{u}) equivalence it yielded 5.05\%; the combination of both
-produced 4.05\%. The larger gain from (\emph{e}, \emph{i}, \emph{y})
+Under (\gr{e}, \gr{i}, \gr{y}) equivalence, CER fell to 4.14\%; under
+(\gr{o}, \gr{u}) equivalence it yielded 5.05\%; the combination of both
+produced 4.05\%. The larger gain from (\gr{e}, \gr{i}, \gr{y})
 equivalence reflects two overlapping sources of vowel ambiguity: schwa
-resolution and (\emph{i}, \emph{y}) alternation in glide contexts. The marginal
-effect of (\emph{o}, \emph{u}) equivalence confirms that
+resolution and (\gr{i}, \gr{y}) alternation in glide contexts. The marginal
+effect of (\gr{o}, \gr{u}) equivalence confirms that
 this alternation is rare in the evaluation data.
 
 \subsection{Error Analysis}
@@ -43,17 +43,17 @@ reveals four dominant failure modes.
 \subsubsection{Unstressed Vowel Ambiguity}
 
 Schwa resolution is the largest error source. Under 3-vowel evaluation,
-vowel-to-vowel substitutions dominate: \emph{a}~$\mapsto$~\emph{o} accounts for
-46 errors, \emph{e}~$\mapsto$~\emph{a} for 37, \emph{o}~$\mapsto$~\emph{a} for
-27, and \emph{a}~$\mapsto$~\emph{e} for 23, which total over 133 vowel
-substitutions. The (\emph{a}, \emph{o}) contrast persists even after (\emph{e},
-\emph{i}, \emph{y}) and (\emph{o}, \emph{u}) are collapsed, so this ambiguity
+vowel-to-vowel substitutions dominate: \gr{a}~$\mapsto$~\gr{o} accounts for
+46 errors, \gr{e}~$\mapsto$~\gr{a} for 37, \gr{o}~$\mapsto$~\gr{a} for
+27, and \gr{a}~$\mapsto$~\gr{e} for 23, which total over 133 vowel
+substitutions. The (\gr{a}, \gr{o}) contrast persists even after (\gr{e},
+\gr{i}, \gr{y}) and (\gr{o}, \gr{u}) are collapsed, so this ambiguity
 is structural and requires lexical stress information to resolve.
 
 \subsubsection{Incomplete Glide Insertion}
 
 Filipino phonotactics requires glides /w/ and /j/ to break vowel hiatus. The
-current rules miss 42 \emph{w}-insertion and 40 \emph{y}-insertion sites under
+current rules miss 42 \gr{w}-insertion and 40 \gr{y}-insertion sites under
 5-vowel evaluation. ``tiara'' maps to ``tiara'' instead of the expected
 ``tiyara''. Additional context conditions for vowel-initial suffixes and
 word-final sequences would close these gaps.
@@ -71,7 +71,7 @@ would directly reduce this error class.
 \subsubsection{Conventional Loanword Divergence}
 
 Established borrowing conventions override phonetic predictions in 19
-\emph{f}~$\mapsto$~\emph{p} errors. Filipino historically lacked /f/, and
+\gr{f}~$\mapsto$~\gr{p} errors. Filipino historically lacked /f/, and
 entrenched loanwords preserve the older bilabial mapping. The system applies
 modern rules that recognize /f/ in the extended alphabet and therefore retains
 the fricative in all positions.

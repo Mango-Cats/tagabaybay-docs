@@ -14,6 +14,15 @@
 \usepackage{tipa}
 \usepackage{booktabs}
 
+% Typographic conventions: cited words, graphemes and letters are quoted and
+% upright; phonetic transcriptions are slashed. Both work in text and math.
+\newcommand{\gr}[1]{\ifmmode\text{``#1''}\else``#1''\fi}
+\newcommand{\ipa}[1]{\ifmmode/\text{\textipa{#1}}/\else/\textipa{#1}/\fi}
+
+% algpseudocode's \Call tests its argument with \ifthenelse/\equal, which breaks
+% on nested \Call. This variant is expansion-safe and renders no-arg calls as f().
+\renewcommand{\Call}[2]{\textproc{#1}(#2)}
+
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
