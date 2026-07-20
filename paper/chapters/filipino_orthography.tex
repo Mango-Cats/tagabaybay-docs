@@ -1,72 +1,52 @@
 \section{Filipino Orthography and System Design}\label{sec:filipino_orthography}
 
-The orthographic properties of Filipino directly motivate how our system should
-handle phonetic vowel resolution, consonant mapping, and syllable repair. This
+The orthographic properties of Filipino directly motivate how our system
+handles phonetic vowel resolution, consonant mapping, and syllable repair. This
 section describes these properties and explains how each shapes the
 corresponding stage of the system.
 
 \subsection{Vowel Spelling and Phonetic Resolution}
 
-Filipino orthography uses five vowel letters: \emph{a}, \emph{e}, \emph{i},
-\emph{o}, and \emph{u} with a distinct sound for each letter, because English's
-vowel inventory is larger, multiple English vowels must collapse onto a single
-Filipino letter. For instance, English /\textipa{\ae}/ (``cat'') and
-/\textipa{A:}/ (``father'') are both written as \emph{a} or the /\textipa{a}/
-in Filipino. This many-to-one mapping creates ambiguity that cannot be resolved
-from English spelling alone: ``a'' in ``make'' /\textipa{eI}/ becomes
-\emph{ey}, while ``a'' in ``cat'' /\textipa{\ae}/ becomes \emph{a}. This
-motivates our phonetic resolution stage, which invokes a G2P component to
-determine which English vowel sound is present, enabling correct mapping to
-Filipino letters.
+Filipino orthography uses five vowel letters (\emph{a}, \emph{e}, \emph{i},
+\emph{o}, \emph{u}), each with a stable sound. Because English's vowel
+inventory is larger, multiple English vowels must collapse onto a single
+Filipino letter: English /\textipa{\ae}/ (``cat'') and /\textipa{A:}/
+(``father'') are both written \emph{a}. This many-to-one relation creates an
+ambiguity that English spelling alone cannot resolve, since the same letter
+\emph{a} corresponds to /\textipa{eI}/ in ``make'' but /\textipa{\ae}/ in
+``cat.'' Compounding this, English is stress-timed, so unstressed vowels reduce
+to schwa /\textipa{@}/, a distinction that orthography does not encode at all.
+Resolving which English vowel sound underlies a given letter therefore requires
+information beyond spelling: the pronunciation itself.
 
-Furthermore, the pairs (\emph{e}, \emph{i}, \emph{y}) and (\emph{o}, \emph{u})
-are widely treated as interchangeable in many lexical contexts, a convention
-rooted in the historical allophonic status of these pairs in
-Filipino~\cite{schachter1972}. In practice, native speakers often accept either
-spelling variant without perceiving an error. This variation is especially
-common in borrowed vocabulary, where prescriptive sources do not always
-uniquely specify a choice.
-% This flexibility motivates our additional
-% evaluation conditions, in which (\emph{e}, \emph{i}, \emph{y}) and (\emph{o},
-% \emph{u}) are treated as equivalent, providing a more linguistically realistic
-% assessment of system performance.
+The second property is one of spelling convention. The letter pairs (\emph{e},
+\emph{i}, \emph{y}) and (\emph{o}, \emph{u}) are widely treated as
+interchangeable in many lexical contexts, a convention rooted in the historical
+allophonic status of these pairs in Filipino~\cite{schachter1972}. Native
+speakers often accept either variant without perceiving an error, and this
+latitude is especially common in borrowed vocabulary, where prescriptive
+sources do not always fix a unique choice.
 
 \subsection{Consonant Letter Correspondences and Context-Sensitive Rules}
 
 For the consonant letters native to the Filipino alphabet~\cite{llamzon1966},
-spelling correspondences between English and Filipino are largely predictable
-through one-to-one mappings. However, English loanwords frequently contain
-sounds that have no native Filipino letter, including /\textipa{S}/,
-/\textipa{tS}/, and /\textipa{dZ}/. Prescriptive
-guidelines~\cite{almario2014,llamzon1966} provide standard written forms for
-these cases: /\textipa{tS}/ is written as \emph{ts}, /\textipa{dZ}/ as
-\emph{dy}, and /\textipa{S}/ as \emph{s} or \emph{sy}.
-% These systematic
-% correspondences motivate our context-free mapping rules, which handle the
-% majority of consonant adaptations through direct substitution.
+English--Filipino spelling correspondences are largely predictable one-to-one
+mappings. However, English loanwords frequently contain sounds with no native
+Filipino letter, notably /\textipa{S}/, /\textipa{tS}/, and /\textipa{dZ}/.
+Prescriptive guidelines~\cite{almario2014,llamzon1966} supply standard written
+forms: /\textipa{tS}/ is written \emph{ts}, /\textipa{dZ}/ as \emph{dy}, and
+/\textipa{S}/ as \emph{s} or \emph{sy}. Because such correspondences are fixed,
+they can be applied as invariant substitutions.
 
-Some graphemes, however, require context-sensitive treatment. For example, the
-letter \emph{c} maps to \emph{s} before \emph{i} or \emph{e} (``cinema''
-$\mapsto$ ``sinema'') but to \emph{k} elsewhere (``computer'' $\mapsto$
-``kompyuter''). Similarly, doubled consonants are simplified (``addict''
-$\mapsto$ ``adik'').
-% These environment-dependent patterns motivate our
-% context-sensitive rule layer, which inspects neighboring graphemes to select
-% the appropriate mapping.
+However, not all consonant graphemes are invariant. Some are nativized
+depending on adjacent graphemes.
 
 \subsection{Syllable-Level Spelling Repairs and Output Normalization}
 
-Filipino spelling strongly favors syllable patterns of the form CV or
-CVC~\cite{llamzon1966,magpale2024}. When direct grapheme-to-grapheme mapping
-would produce a consonant cluster that violates these patterns prescriptive
-convention inserts a vowel letter to break up the illegal
-sequence~\cite{almario2014}. For example, notice the ``-bl'' in ``rumble''
-$\mapsto$ ``rambol''. 
+Filipino spelling strongly favours syllables of the form consonant-vowel or
+consonant-vowel-consonant~\cite{llamzon1966,magpale2024}. When a direct mapping
+would yield a consonant cluster that violates this template, prescriptive
+convention inserts a vowel letter to break the illegal
+sequence~\cite{almario2014}. Enforcing this constraint requires a repair pass
+over the mapped output.
 
-% This phonotactic constraint motivates our output
-% normalization stage, which detects word-final consonant clusters ending in
-% \emph{l} or \emph{r} and inserts epenthetic \emph{o} where needed. The
-% normalization pass also collapses contiguous duplicate graphemes and removes
-% redundant affricate prefixes, ensuring that the final output conforms to
-% Filipino orthographic conventions even when individual rule applications
-% produce intermediate artifacts.
