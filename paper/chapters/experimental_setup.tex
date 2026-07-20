@@ -3,62 +3,61 @@ The source code and gold standard are publicly available at
 \url{https://github.com/Mango-Cats/tagabaybay}.
 
 \subsection{Implementation}
-The system is implemented in Rust. The G2P backend for vowel resolution is
-provided by the phonemizer library~\cite{bernard2021}, which wraps the
-eSpeak-NG speech synthesizer and is invoked as a Python subprocess only when a
-vowel grapheme requires phonetic disambiguation; otherwise, the system operates
-entirely within the Rust process.
+
+The rules are implemented in Rust; the G2P backend uses the phonemizer
+library~\cite{bernard2021}, which wraps eSpeak-NG.
 
 \subsection{Gold Standard}
 
-\subsubsection{Construction}
-The gold standard corpus comprises 2,319 English-Filipino loanword pairs
-constructed by native Filipino speakers, drawn from general English vocabulary
-(1,858 pairs) and pharmaceutical terminology (461 pairs). Annotators applied
-the spelling conventions prescribed in~\cite{almario2014}; where the manual did
-not prescribe a specific nativization, they consulted descriptive phonological
+The gold standard corpus comprises 2,319 English--Filipino loanword pairs,
+drawn from general English vocabulary (1,858 pairs) and pharmaceutical
+terminology (461 pairs). The word list was compiled from a frequency-based
+corpus of English loanwords in Filipino usage. Five native Filipino speakers,
+familiar with the KWF manual and consulting it directly during annotation,
+produced the initial nativized forms. Annotators applied the spelling
+conventions prescribed in~\cite{almario2014}; where the manual did not
+prescribe a specific nativization, they consulted descriptive phonological
 sources to determine the most plausible form under the five-vowel system.
 
-\subsubsection{Inter-Annotator Agreement}
-To validate corpus quality, a random subsample of 60\% of entries was
-independently re-annotated by a second native-Filipino speaker. Raw agreement,
-the percentage of entries on which both annotators produced identical nativized
-forms, averaged 92\% across the corpus. Disagreements were adjudicated by
-discussion and the gold standard was corrected accordingly; the evaluation
-results reported later on reflect the post-adjudication corpus.
+To validate corpus quality, a stratified random subsample of 60\% of entries,
+proportionally balanced across the general-vocabulary and pharmaceutical
+subsets, was independently re-annotated by a second native Filipino speaker
+with equivalent qualifications and manual access. Raw exact-match agreement is
+92\% across the resample. Disagreements were adjudicated by discussion between
+the two annotators, and the gold standard was corrected accordingly.
 
 \subsection{Evaluation Metrics}\label{ssec:evaluation_metrics}
+
 The primary evaluation metric is Character Error Rate (CER), computed as the
 Levenshtein edit distance between the system output and the gold standard
 reference, normalized by the total character count of the reference across the
 entire corpus:
 \begin{equation}
-    \text{CER} = \frac{\sum_{i} \mathrm{lev}(\hat{y}_i,\, y_i)}
+    \text{CER} = \frac{\sum_{i} \textsc{Levenshtein}(\hat{y}_i,\, y_i)}
     {\sum_{i} |y_i|}
     \times 100\%
 \end{equation}
 where \(\hat{y}_i\) is the system's nativized form of the \(i\)-th word,
-\(y_i\) is the gold standard reference, \(\mathrm{lev}(\cdot,\cdot)\) denotes
-character-level Levenshtein distance, and \(|y_i|\) is the character length of
+\(y_i\) is the gold standard reference, \(\textsc{Levenshtein}(\cdot,\cdot)\) denotes
+Levenshtein distance, and \(|y_i|\) is the character length of
 the reference. CER is preferred over word-level accuracy because nativization
 errors are often minor, and a word-level metric would treat a one-character
 discrepancy as harshly as a completely incorrect output.
 
 Additionally, because (\emph{e}, \emph{i}, \emph{y}) and (\emph{o}, \emph{u})
 are interchangeable in Filipino~\cite{schachter1972}, we report CER under
-additional conditions treating these pairs as equivalent. This provides a
-linguistically realistic assessment by discounting errors native speakers would
-not perceive.
+additional conditions treating these pairs as equivalent.
 
 \subsection{Comparison Systems}
-Three additional systems are evaluated. The baseline applies a
-flat sequence of regular expression substitutions without graphemic
-tokenization, priority ordering, or phonetic disambiguation. The
-orthographic-only ablation runs the full proposed pipeline with phonetic
-vowel resolution disabled; all orthographic rules remain active, but vowel
-graphemes map to their identity. The LLM prompting system sends each
-word individually to Claude Haiku 4.5. The prompt provides the KWF mapping rules as a
-bulleted list covering consonant correspondences, diphthong conventions,
-doubled-consonant simplification, silent letter deletion, and epenthesis
-instructions. Each word is sent as a single API call with no examples
-and no prompt engineering iteration beyond the initial rule list.
+
+Three additional systems are evaluated. The baseline applies a flat sequence of
+regular expression substitutions without graphemic tokenization, priority
+ordering, or phonetic disambiguation. The orthographic-only ablation runs the
+full proposed pipeline with phonetic vowel resolution disabled; all
+orthographic rules remain active, but vowel graphemes map to their identity.
+The LLM prompting system sends each word individually to Claude Haiku 4.5. The
+prompt provides the KWF mapping rules as a bulleted list covering consonant
+correspondences, diphthong conventions, doubled-consonant simplification,
+silent letter deletion, and epenthesis instructions. Each word is sent as a
+single API call with no examples and no prompt engineering iteration beyond the
+initial rule list.
