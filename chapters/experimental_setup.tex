@@ -1,26 +1,24 @@
 \section{Experimental Setup}
 The source code and gold standard are publicly available at
-\url{https://github.com/Mango-Cats/tagabaybay}. The rules are implemented in Rust; the G2P backend uses the phonemizer
-library~\cite{bernard2021}, which wraps eSpeak-NG.
+\url{https://github.com/Mango-Cats/tagabaybay}. The rules are implemented in
+Rust; the G2P backend uses the phonemizer library~\cite{bernard2021}, which
+wraps eSpeak-NG.
 
 \subsection{Gold Standard}
 
 The gold standard corpus comprises 2,319 English--Filipino loanword pairs,
-drawn from general English vocabulary (1,858 pairs) and pharmaceutical
-terminology (461 pairs). The word list was compiled from a frequency-based
-corpus of English loanwords in Filipino usage. Five native Filipino speakers,
-familiar with the KWF manual and consulting it directly during annotation,
-produced the initial nativized forms. Annotators applied the spelling
-conventions prescribed in~\cite{almario2014}; where the manual did not
-prescribe a specific nativization, they consulted descriptive phonological
-sources to determine the most plausible form under the five-vowel system.
+drawn from a list English words commonly used in Filipino everyday speech
+(1,858 pairs) and pharmaceutical terminology (461 pairs). Three native Filipino
+mesolectal speakers, familiar with the KWF manual beforehand, independently
+annotated the full word list to produce nativized forms. Annotators applied the
+spelling conventions prescribed in~\cite{almario2014,schachter1972}; where the
+manual did not prescribe a specific nativization, they
+consulted~\cite{llamzon1966,llamzon1997} to determine the most plausible form
+under the five-vowel system.
 
-To validate corpus quality, a stratified random subsample of 60\% of entries,
-proportionally balanced across the general-vocabulary and pharmaceutical
-subsets, was independently re-annotated by a second native Filipino speaker
-with equivalent qualifications and manual access. Raw exact-match agreement is
-92\% across the resample. Disagreements were adjudicated by discussion between
-the two annotators, and the gold standard was corrected accordingly.
+Before adjudication, majority-match agreement was 92\%. The remaining items,
+where no two annotators agreed, were resolved through discussion among all
+three annotators, and the corpus was finalized accordingly.
 
 \subsection{Evaluation Metrics}\label{ssec:evaluation_metrics}
 
@@ -40,8 +38,8 @@ the reference. CER is preferred over word-level accuracy because nativization
 errors are often minor, and a word-level metric would treat a one-character
 discrepancy as harshly as a completely incorrect output.
 
-Additionally, because (\gr{e}, \gr{i}, \gr{y}) and (\gr{o}, \gr{u})
-are interchangeable in Filipino~\cite{schachter1972}, we report CER under
+Additionally, because (\gr{e}, \gr{i}, \gr{y}) and (\gr{o}, \gr{u}) are
+interchangeable in Filipino~\cite{schachter1972}, we report CER under
 additional conditions treating these pairs as equivalent.
 
 \subsection{Comparison Systems}
