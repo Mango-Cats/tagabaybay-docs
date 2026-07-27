@@ -89,22 +89,21 @@ repeated letters can be resolved by it.
 
 \paragraph{Context-sensitive rules}
 
-The context-sensitive rules are organized by the specific letter or sequence
-being evaluated. The system checks the current letter and its neighbors to
-decide how it should be replaced. Example cases include:
+The rewriting rules are organized by the specific letter or sequence being
+evaluated. The system checks the current letter and its neighbors to decide how
+it should be replaced. Example cases include:
 
 \begin{itemize}
-      \item Repeated letters: A sequence of identical letters is normally treated as a
-            single unit and replaced by its default sound. The exception is \gr{cc} before
-            \gr{e}, \gr{i}, \gr{y}, or \gr{ee}. These are evaluated separately by the
-            \gr{c} rules so each \gr{c} can make a different sound: ``accept'' $\mapsto$
-            \gr{aksept}, ``success'' $\mapsto$ \gr{sakses}.
-      \item Cases for \gr{c}: When followed by specific vowels,
-            \(\gr{c}\cdot(\gr{e}\mid\gr{i}\mid\gr{y}\mid\gr{ee}) \mapsto\gr{s}\). The
-            combinations \(\gr{ck}\mapsto\gr{k}\) and \(\gr{cch}\mapsto\gr{k}\) are read
-            together as a single sound. In all other cases, \(\gr{c}\mapsto\gr{k}\).
-      \item Silent \gr{e}: An \gr{e} at the end of a word is always dropped, regardless of
-            the preceding letter.
+      \item Repeated letters: a maximal run of identical graphemes is consumed whole and
+            emits the context-free replacement of the first. The exception is \gr{cc}
+            before \gr{e}, \gr{i}, \gr{y}, or \gr{ee}, which the \gr{c} rules take instead
+            so that the two letters may map differently: ``accept'' $\mapsto$ \gr{aksept},
+            ``success'' $\mapsto$ \gr{sakses}.
+      \item Cases for \gr{c}: \(\gr{c}\cdot(\gr{e}\mid\gr{i}\mid\gr{y}\mid\gr{ee})
+            \mapsto\gr{s}\); \(\gr{ck}\mapsto\gr{k}\) and \(\gr{cch}\mapsto\gr{k}\), both
+            consuming two; otherwise \(\gr{c}\mapsto\gr{k}\).
+      \item Silent \gr{e}: a word-final \gr{e} is dropped unconditionally, regardless of
+            the preceding grapheme.
 \end{itemize}
 
 \subsection{Phonetic Resolution}\label{subsec:phonetic_resolution}
