@@ -1,28 +1,20 @@
 \section{Results and Discussion}
 
 The system was evaluated on 2,319 English-Filipino loanword pairs.
-\Cref{tab:CER} reports overall CER under four vowel-equivalence conditions.
+\Cref{fig:results} reports overall CER under four vowel-equivalence
+conditions.
 
-\begin{table}[h]
+\begin{figure}[htbp]
     \centering
     \caption{Overall CER (\%) under four vowel-equivalence conditions.}
-    \label{tab:CER}
-    \begin{tabular}{l|cccc}
-        \hline
-        \textbf{System} & \textbf{5-vowel} & \textbf{(\gr{e}, \gr{i}, \gr{y})} & \textbf{(\gr{o}, \gr{u})} & \textbf{3-vowel} \\
-        \hline
-        Baseline        & 20.38            & 17.17                             & 20.04                     & 16.83            \\
-        Spelling-only   & 17.73            & 14.50                             & 17.42                     & 14.19            \\
-        IPA-guided      & 5.14             & 4.14                              & 5.05                      & 4.05             \\
-        LLM             & 15.54            & 13.39                             & 15.29                     & 13.14            \\
-        \hline
-    \end{tabular}
-\end{table}
+    \label{fig:results}
+    \includegraphics[width=\columnwidth]{assets/results.png}
+\end{figure}
 
 The IPA-guided system achieved 5.14\% CER under strict five-vowel evaluation, a
 12.59-point reduction from the 17.73\% spelling-only ablation and a 15.24-point
-reduction from the 20.38\% identity baseline. The LLM achieved 15.54\% CER,
-outperforming the identity baseline but underperforming the spelling-only
+reduction from the 20.38\% regex-based system. The LLM achieved 15.54\% CER,
+outperforming the regex-based system but underperforming the spelling-only
 ablation. This result indicates that even with explicit nativization rules in
 the prompt, an LLM cannot reliably apply them at the character level, and that
 the rewrite cascade substantially outperforms prompting-based approaches for
@@ -81,9 +73,12 @@ these concentrate in pharmaceutical terms and long compound words where
 eSpeak-NG's accuracy degrades. A specialized pronunciation lexicon would
 directly reduce this error class.
 
-\subsection{Generalizability}
+\subsection{Limitations}
 
-The rule set is Filipino-specific, though the pipeline architecture, multigraph
-tokenizer, and rewrite cascade are language-general; only the rule inventory,
-phoneme-to-grapheme mappings, and normalization repairs require re-engineering
-per target language.
+The rules derive from
+prescriptive sources and may not capture informal nativization patterns.
+Furthermore, the rule set is Filipino-specific, though the pipeline architecture,
+multigraph tokenizer, and rewrite cascade are language-general; only the rule
+inventory, phoneme-to-grapheme mappings, and normalization repairs require
+re-engineering per target language. Finally, G2P accuracy bounds overall
+performance, as phonemization errors propagate directly to the output.

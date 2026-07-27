@@ -44,14 +44,12 @@ additional conditions treating these pairs as equivalent.
 
 \subsection{Comparison Systems}
 
-Three additional systems are evaluated. The baseline applies a flat sequence of
-regular expression substitutions without graphemic tokenization, priority
-ordering, or phonetic disambiguation. The orthographic-only ablation runs the
-full proposed pipeline with phonetic vowel resolution disabled; all
-orthographic rules remain active, but vowel graphemes map to their identity.
-The LLM prompting system sends each word individually to Claude Haiku 4.5. The
-prompt provides the KWF mapping rules as a bulleted list covering consonant
-correspondences, diphthong conventions, doubled-consonant simplification,
-silent letter deletion, and epenthesis instructions. Each word is sent as a
-single API call with no examples and no prompt engineering iteration beyond the
-initial rule list.
+We evaluate three additional systems. First, a regex-based system applies all
+proposed rules that allow for direct pattern substitution as a flat, unordered
+sequence, excluding rules that require graphemic tokenization, priority
+ordering, or phonetic disambiguation. Second, a spelling-only ablation runs the
+full proposed system but disables phonetic vowel resolution to isolate the
+impact of G2P-based disambiguation. Finally, we also evaluate an LLM. We use
+Claude Haiku 4.5 to process each word individually. The prompt provides
+examples alongside a bulleted list of the KWF mapping rules without any further
+prompt engineering.
