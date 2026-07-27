@@ -26,6 +26,17 @@
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
+% Widen the margins beyond IEEEtran's stock A4 conference defaults (which
+% leave side margins right at the 1.4cm minimum and top margin under the
+% 1.8cm minimum), so overfull content (tables, algorithms) can't push a page
+% below the submission portal's required A4 margins.
+\IEEEsettextwidth{1.7cm}{1.7cm}
+\IEEEsetsidemargin{c}{0pt}
+
+\IEEEsettopmargin{t}{2.1cm}
+\IEEEquantizetextheight{c}
+\IEEEsettopmargin{q}{0sp}
+
 \begin{document}
 \title{Orthographic Nativization as Rule-Based Rewrite Cascades}
 

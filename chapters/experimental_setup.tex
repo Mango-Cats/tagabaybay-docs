@@ -26,15 +26,17 @@ The primary evaluation metric is Character Error Rate (CER), computed as the
 Levenshtein edit distance between the system output and the gold standard
 reference, normalized by the total character count of the reference ascross the
 entire corpus:
-\begin{equation}
+
+\begin{equation*}
     \text{CER} = \frac{\sum_{i} \textsc{Levenshtein}(\hat{y}_i,\, y_i)}
     {\sum_{i} |y_i|}
     \times 100\%
-\end{equation}
+\end{equation*}
+
 where \(\hat{y}_i\) is the system's nativized form of the \(i\)-th word,
-\(y_i\) is the gold standard reference, \(\textsc{Levenshtein}(\cdot,\cdot)\) denotes
-Levenshtein distance, and \(|y_i|\) is the character length of
-the reference. CER is preferred over word-level accuracy because nativization
+\(y_i\) is the gold standard reference, \(\textsc{Levenshtein}(\cdot,\cdot)\)
+denotes Levenshtein distance, and \(|y_i|\) is the character length of the
+reference. CER is preferred over word-level accuracy because nativization
 errors are often minor, and a word-level metric would treat a one-character
 discrepancy as harshly as a completely incorrect output.
 

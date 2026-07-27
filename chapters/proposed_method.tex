@@ -20,12 +20,11 @@ top-level control flow.
 \end{figure*}
 
 \begin{algorithm}[t]
-      \caption{Orthographic Nativization}\label{alg:nativize}s
+      \caption{Orthographic Nativization}\label{alg:nativize}
       \begin{algorithmic}[1]
             \Require English loanword $w$
             \Ensure Filipino orthographic form
-            \State $G \gets \Call{Tokenize}{w}$
-            \State $P \gets \Call{G2P}{w}$
+            \State $G \gets \Call{Tokenize}{w}; \quad P \gets \Call{G2P}{w}$
             \State $R \gets \langle\,\rangle$; \quad $i \gets 1$
             \While{$i \le |G|$}
             \For{$\rho \in \langle \textsc{Sensitive}, \textsc{Phonetic}, \textsc{Free}\rangle$}
