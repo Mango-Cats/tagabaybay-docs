@@ -126,13 +126,13 @@ grapheme, the system resolves it from the pronunciation (\cref{alg:phonetic}).
             \If{$p$ is r-colored}
             \State \Return $(\langle t \rangle, 1)$ if medial, else $(\langle \gr{e}, \gr{r} \rangle, 1)$
             \EndIf
-            \If{$p = \ipa{@}$} \Comment{schwa}
+            \If{$p = \ipa{@}$} 
             \State \Return $(\langle \gr{o} \rangle, 1)$ if word-final and $t \in \{\gr{o}, \gr{u}\}$;
             \State \quad $(\langle \gr{e} \rangle, 1)$ if word-final; \textbf{fail} otherwise
             \EndIf
-            \State $(r, d) \gets \Call{P2G}{p}$ \Comment{$d$: is $p$ a diphthong?}
+            \State $(r, d) \gets \Call{P2G}{p}$ 
             \If{$r = \langle \gr{a} \rangle$ \textbf{and} $t \in \{\gr{o}, \gr{u}\}$}
-            \State $r \gets \langle t \rangle$ \Comment{written letter overrides}
+            \State $r \gets \langle t \rangle$ 
             \EndIf
             \State \Return $(r, \Call{Consumed}{G, i, d})$
             \EndProcedure
