@@ -12,7 +12,7 @@ The system was evaluated on 2,319 English-Filipino loanword pairs.
         \textbf{System}           & \textbf{5-vowel} & \textbf{(\gr{e}, \gr{i}, \gr{y})} & \textbf{(\gr{o}, \gr{u})} & \textbf{3-vowel} \\
         \hline
         Baseline                  & 20.38            & 17.17                                   & 20.04                         & 16.83            \\
-        Ortho-only                & 17.73            & 14.50                                   & 17.42                         & 14.19            \\
+        Spelling-only                & 17.73            & 14.50                                   & 17.42                         & 14.19            \\
         IPA-guided                & 5.14             & 4.14                                    & 5.05                          & 4.05             \\
         LLM Prompting & 15.54            & 13.39                                   & 15.29                         & 13.14            \\
         \hline
@@ -20,10 +20,10 @@ The system was evaluated on 2,319 English-Filipino loanword pairs.
 \end{table}
 
 The IPA-guided system achieved 5.14\% CER under strict five-vowel evaluation,
-a 12.59-point reduction from the 17.73\% ortho-only ablation and a
+a 12.59-point reduction from the 17.73\% spelling-only ablation and a
 15.24-point reduction from the 20.38\% identity baseline. LLM
 prompting achieved 15.54\% CER, outperforming the identity baseline but
-underperforming the ortho-only ablation. This result indicates that even with
+underperforming the spelling-only ablation. This result indicates that even with
 explicit nativization rules in the prompt, an LLM cannot reliably apply them at
 the character level, and that the rewrite cascade substantially
 outperforms prompting-based approaches for this task.
@@ -42,13 +42,25 @@ reveals four dominant failure modes.
 
 \subsubsection{Unstressed Vowel Ambiguity}
 
-Schwa resolution is the largest error source. Under 3-vowel evaluation,
-vowel-to-vowel substitutions dominate: \gr{a}~$\mapsto$~\gr{o} accounts for
-46 errors, \gr{e}~$\mapsto$~\gr{a} for 37, \gr{o}~$\mapsto$~\gr{a} for
-27, and \gr{a}~$\mapsto$~\gr{e} for 23, which total over 133 vowel
-substitutions. The (\gr{a}, \gr{o}) contrast persists even after (\gr{e},
-\gr{i}, \gr{y}) and (\gr{o}, \gr{u}) are collapsed, so this ambiguity
-is structural and requires lexical stress information to resolve.
+Because English heavily relies on the unstressed schwa sound, which lacks a direct 
+phonological equivalent in Filipino, nativization often forces an arbitrary 
+mapping to either \gr{e}, \gr{i}, or other vowels based on auditory approximation. 
+Consequently, schwa resolution is the largest error source for the system. 
+
+Even with phonetic resolution, the system still fails on some of these mappings 
+because the ambiguity is structural. The G2P mapping can identify the unstressed 
+vowel, but accurately predicting which specific orthographic vowel a Filipino 
+speaker will substitute requires lexical stress information that the pipeline 
+cannot fully resolve on its own. 
+
+Under 3-vowel evaluation, these vowel-to-vowel substitutions dominate the error 
+rates: \gr{a}~$\mapsto$~\gr{o} accounts for 46 errors, \gr{e}~$\mapsto$~\gr{a} for 
+37, \gr{o}~$\mapsto$~\gr{a} for 27, and \gr{a}~$\mapsto$~\gr{e} for 23, which total 
+over 133 vowel substitutions. The (\gr{a}, \gr{o}) contrast persists even after 
+(\gr{e}, \gr{i}, \gr{y}) and (\gr{o}, \gr{u}) are collapsed. By contrast, the 
+marginal effect of (\gr{o}, \gr{u}) equivalence confirms that this particular 
+alternation is rare in the evaluation data, likely because English \gr{o} and 
+\gr{u} sounds map more predictably into Filipino's vowel space.
 
 \subsubsection{Incomplete Glide Insertion}
 

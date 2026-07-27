@@ -1,10 +1,6 @@
 \section{Experimental Setup}
 The source code and gold standard are publicly available at
-\url{https://github.com/Mango-Cats/tagabaybay}.
-
-\subsection{Implementation}
-
-The rules are implemented in Rust; the G2P backend uses the phonemizer
+\url{https://github.com/Mango-Cats/tagabaybay}. The rules are implemented in Rust; the G2P backend uses the phonemizer
 library~\cite{bernard2021}, which wraps eSpeak-NG.
 
 \subsection{Gold Standard}
@@ -30,7 +26,7 @@ the two annotators, and the gold standard was corrected accordingly.
 
 The primary evaluation metric is Character Error Rate (CER), computed as the
 Levenshtein edit distance between the system output and the gold standard
-reference, normalized by the total character count of the reference across the
+reference, normalized by the total character count of the reference ascross the
 entire corpus:
 \begin{equation}
     \text{CER} = \frac{\sum_{i} \textsc{Levenshtein}(\hat{y}_i,\, y_i)}
