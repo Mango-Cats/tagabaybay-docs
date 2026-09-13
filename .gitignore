@@ -323,3 +323,5 @@ TSWLatexianTemp*
 #*Notes.bib
 
 .vscode
+node_modules/
+_site/
