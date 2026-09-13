@@ -31,7 +31,7 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/style.css?v=2" />
   </head>
 
   <body>
@@ -43,17 +43,14 @@
         </a>
 
         <nav class="nav-links" aria-label="Page Navigation">
-          <a href="index.html">← Back to Overview</a>
+          <a href="index.html#overview">Overview</a>
           <a href="index.html#pipeline">Architecture</a>
           <a href="index.html#demo">Live Demo</a>
           <a href="index.html#benchmarks">Results</a>
           <a href="index.html#team">Team</a>
-          <a
-            href="../slides/deck.pdf"
-            class="btn btn-sm btn-primary"
-            download="tagabaybay-deck.pdf"
-            >Download Deck</a
-          >
+          <a href="index.html#citation">Citation</a>
+          <a href="index.html#questions">Questions</a>
+          <a href="presentation.html">Presentation</a>
         </nav>
       </div>
     </header>
@@ -148,64 +145,28 @@
             <h2 class="section-title">Slide Deck</h2>
           </div>
 
-          <div class="deck-placeholder" id="deck-status-box">
-            <div class="deck-placeholder-icon">📊</div>
-            <h3
-              style="
-                font-size: 1.2rem;
-                margin-bottom: 0.5rem;
-                color: var(--text-main);
-              "
+          <div class="deck-actions-row" style="display: flex; justify-content: center; align-items: center; gap: 1rem; margin-top: 1.5rem; margin-bottom: 2.25rem; text-align: center;">
+            <a
+              href="../slides/deck.pdf"
+              class="btn btn-primary"
+              id="deck-download-action"
+              download="tagabaybay-deck.pdf"
             >
-              Presentation Slides
-            </h3>
-            <p
-              style="
-                color: var(--text-muted);
-                font-size: 0.95rem;
-                max-width: 580px;
-                margin: 0 auto 1.25rem;
-                line-height: 1.6;
-              "
+              Download deck.pdf
+            </a>
+            <a
+              href="../slides/deck.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-secondary"
             >
-              The complete slide deck will be available as
-              <code>slides/deck.pdf</code>. You can preview the presentation
-              outline below or download the file once uploaded.
-            </p>
-            <div
-              style="
-                display: flex;
-                gap: 0.75rem;
-                justify-content: center;
-                flex-wrap: wrap;
-              "
-            >
-              <a
-                href="../slides/deck.pdf"
-                class="btn btn-primary"
-                id="deck-download-action"
-                download="tagabaybay-deck.pdf"
-              >
-                Download deck.pdf
-              </a>
-              <a
-                href="../slides/deck.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn btn-secondary"
-              >
-                Open in Browser Viewer
-              </a>
-            </div>
+              Open in Browser Viewer
+            </a>
           </div>
 
-          <div
-            class="deck-viewer-wrapper"
-            id="deck-iframe-container"
-            style="display: none"
-          >
+          <div class="deck-viewer-wrapper" id="deck-iframe-container">
             <iframe
-              src="../slides/deck.pdf"
+              src="../slides/deck.pdf#toolbar=0&navpanes=0&scrollbar=0"
               class="deck-iframe"
               title="Slide Deck PDF Preview"
             ></iframe>
@@ -254,9 +215,6 @@
       (function () {
         const video = document.getElementById("presentation-player");
         const overlay = document.getElementById("video-pending-overlay");
-        const iframeContainer = document.getElementById(
-          "deck-iframe-container",
-        );
 
         if (video && overlay) {
           video.addEventListener("canplay", function () {
@@ -266,14 +224,6 @@
             overlay.classList.remove("hidden");
           });
         }
-
-        fetch("../slides/deck.pdf", { method: "HEAD" })
-          .then(function (res) {
-            if (res.ok && iframeContainer) {
-              iframeContainer.style.display = "block";
-            }
-          })
-          .catch(function () {});
       })();
     </script>
   </body>

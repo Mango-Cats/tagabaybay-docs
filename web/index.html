@@ -35,6 +35,7 @@
         <a href="#benchmarks">Results</a>
         <a href="#team">Team</a>
         <a href="#citation">Citation</a>
+        <a href="#questions">Questions</a>
         <a href="presentation.html">Presentation</a>
       </nav>
     </div>
@@ -360,9 +361,6 @@
         <div class="section-header">
           <span class="section-kicker">Research Team</span>
           <h2 class="section-title">Project Members</h2>
-          <p class="section-desc">
-            Researchers from the <strong>MangoCats Research Group</strong> at <strong>De La Salle University</strong>.
-          </p>
         </div>
 
         <div id="team-cards-grid" class="team-cards-grid"></div>
@@ -385,11 +383,7 @@
     <section id="citation" class="section">
       <div class="container">
         <div class="section-header">
-          <span class="section-kicker">Academic Citation</span>
           <h2 class="section-title">Cite TagaBaybay</h2>
-          <p class="section-desc">
-            If you find this work, algorithm, or dataset useful in your research, please cite our IEEE TENCON 2026 paper.
-          </p>
         </div>
 
         <div class="citation-box">
@@ -415,6 +409,85 @@
   url       = {https://github.com/Mango-Cats/tagabaybay},
   license   = {Apache-2.0}
 }</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="questions" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">Communication & Inquiry</span>
+          <h2 class="section-title">Send us a Question</h2>
+        </div>
+
+        <div class="question-form-card">
+          <form id="question-form" class="question-form">
+            <div class="form-row grid-2-form">
+              <div class="form-group">
+                <label for="question-sender-name">
+                  Your Name <span class="required-star">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="question-sender-name"
+                  class="form-control"
+                  placeholder="e.g. J. Doe"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="question-sender-affiliation">
+                  Your Affiliation / Contact (Optional)
+                </label>
+                <input
+                  type="text"
+                  id="question-sender-affiliation"
+                  class="form-control"
+                  placeholder="e.g. University / Research Lab"
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="question-subject">
+                Subject <span class="required-star">*</span>
+              </label>
+              <div class="subject-input-wrapper">
+                <span class="subject-prefix-tag">[TagaBaybay]</span>
+                <input
+                  type="text"
+                  id="question-subject"
+                  class="form-control subject-input"
+                  placeholder="Topic or question title (e.g. Query on Rule Cascades)"
+                  required
+                />
+              </div>
+              <span class="form-hint">The subject starter [TagaBaybay] is automatically included.</span>
+            </div>
+
+            <div class="form-group">
+              <label for="question-message">
+                Question or Message <span class="required-star">*</span>
+              </label>
+              <textarea
+                id="question-message"
+                class="form-control form-textarea"
+                rows="5"
+                placeholder="Type your question or feedback about TagaBaybay here..."
+                required
+              ></textarea>
+            </div>
+
+            <div class="form-actions-row">
+              <button type="submit" class="btn btn-primary" id="btn-submit-question">
+                ✉️ Send Question
+              </button>
+              <button type="button" class="btn btn-secondary" id="btn-copy-question">
+                📋 Copy Question Details
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </section>

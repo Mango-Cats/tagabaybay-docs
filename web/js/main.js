@@ -6,6 +6,7 @@ function initApp() {
     initDemo();
     initCopyActions();
     initGlobalDelegation();
+    initQuestionForm();
 }
 function renderTeamCards() {
     const container = document.getElementById("team-cards-grid");
@@ -478,6 +479,74 @@ function showToast(message) {
     setTimeout(() => {
         toast.remove();
     }, 2800);
+}
+function initQuestionForm() {
+    const form = document.getElementById("question-form");
+    const copyBtn = document.getElementById("btn-copy-question");
+    if (!form)
+        return;
+    const getAllAuthorEmails = () => {
+        const members = window.projectMembers || [];
+        const emails = members.map(m => m.email).filter(Boolean);
+        if (emails.length > 0)
+            return emails.join(", ");
+        return "zhean_robby_ganituen@dlsu.edu.ph, erin_gabrielle_chua@dlsu.edu.ph, justin_ethan_ching@dlsu.edu.ph, jaztin_jacob_jimenez@dlsu.edu.ph";
+    };
+    const getQuestionDetails = () => {
+        const recipient = getAllAuthorEmails();
+        const nameInput = document.getElementById("question-sender-name");
+        const affilInput = document.getElementById("question-sender-affiliation");
+        const subjectInput = document.getElementById("question-subject");
+        const messageInput = document.getElementById("question-message");
+        const senderName = nameInput?.value.trim() || "";
+        const senderAffil = affilInput?.value.trim() || "";
+        let rawSubject = subjectInput?.value.trim() || "Research Inquiry";
+        if (rawSubject.startsWith("[TagaBaybay]")) {
+            rawSubject = rawSubject.replace(/^\[TagaBaybay\]\s*/, "");
+        }
+        const finalSubject = `[TagaBaybay] ${rawSubject}`;
+        const message = messageInput?.value.trim() || "";
+        const lines = [];
+        if (senderName)
+            lines.push(`Name: ${senderName}`);
+        if (senderAffil)
+            lines.push(`Affiliation / Contact: ${senderAffil}`);
+        if (lines.length > 0)
+            lines.push("");
+        lines.push("Question / Inquiry:");
+        lines.push(message);
+        lines.push("");
+        lines.push("---");
+        lines.push("Sent via TagaBaybay Project Website (https://github.com/Mango-Cats/tagabaybay)");
+        return {
+            recipient,
+            subject: finalSubject,
+            body: lines.join("\n"),
+            message
+        };
+    };
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const details = getQuestionDetails();
+        if (!details.message) {
+            showToast("Please enter a question or message.");
+            return;
+        }
+        const mailtoUrl = `mailto:${encodeURIComponent(details.recipient)}?subject=${encodeURIComponent(details.subject)}&body=${encodeURIComponent(details.body)}`;
+        window.location.href = mailtoUrl;
+        showToast("Opening email client to send question...");
+    });
+    if (copyBtn) {
+        copyBtn.addEventListener("click", () => {
+            const details = getQuestionDetails();
+            if (!details.message) {
+                showToast("Please enter a question or message to copy.");
+                return;
+            }
+            const fullText = `To: ${details.recipient}\nSubject: ${details.subject}\n\n${details.body}`;
+            copyToClipboard(fullText, "Copied question details to clipboard!");
+        });
+    }
 }
 function escapeHtml(str) {
     if (typeof str !== "string")

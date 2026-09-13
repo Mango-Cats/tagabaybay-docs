@@ -1175,6 +1175,18 @@ h1, h2, h3, h4 {
   line-height: 1.5;
 }
 
+.deck-actions-row {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 1.5rem;
+  margin-bottom: 2.25rem;
+  text-align: center;
+}
+
 .deck-viewer-wrapper {
   width: 100%;
   height: 650px;
@@ -1293,3 +1305,136 @@ h1, h2, h3, h4 {
     align-items: flex-start;
   }
 }
+
+.question-form-card {
+  max-width: 720px;
+  margin: 0 auto;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 2.25rem 2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.question-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.grid-2-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 640px) {
+  .grid-2-form {
+    grid-template-columns: 1fr;
+  }
+  .question-form-card {
+    padding: 1.5rem 1.25rem;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-group label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.required-star {
+  color: var(--mango-dark);
+  font-weight: 700;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  color: var(--text-main);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.form-control:focus {
+  border-color: var(--mango-pulp);
+  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.15);
+}
+
+.subject-input-wrapper {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: #ffffff;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.subject-input-wrapper:focus-within {
+  border-color: var(--mango-pulp);
+  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.15);
+}
+
+.subject-prefix-tag {
+  background: var(--mango-light);
+  color: var(--mango-dark);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.65rem 0.85rem;
+  border-right: 1px solid var(--border-color);
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.subject-input {
+  border: none;
+  border-radius: 0;
+  flex: 1;
+}
+
+.subject-input:focus {
+  box-shadow: none;
+}
+
+.form-hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.2rem;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.5;
+}
+
+.form-actions-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
