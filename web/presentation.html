@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Presentation &amp; Slide Deck — TagaBaybay | IEEE TENCON 2026</title>
+
+    <meta
+      name="description"
+      content="Watch the conference presentation video and download the slide deck for Orthographic Nativization as Rule-Based Rewrite Cascades (IEEE TENCON 2026)."
+    />
+    <meta
+      name="author"
+      content="Erin Gabrielle Chua, Zhean Robby Ganituen, Justin Ethan Ching, Jaztin Jacob Jimenez, Nathaniel Oco"
+    />
+
+    <meta
+      property="og:title"
+      content="TagaBaybay: Presentation &amp; Slide Deck"
+    />
+    <meta
+      property="og:description"
+      content="Conference presentation recording and slide deck download for IEEE TENCON 2026."
+    />
+    <meta property="og:type" content="website" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&family=Fira+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+Tagalog&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="container nav-bar">
+        <a href="index.html" class="brand-link">
+          <span class="brand-baybayin">ᜆᜄᜊᜌ᜔ᜊᜌ᜔</span>
+          <span class="brand-name">TagaBaybay</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Page Navigation">
+          <a href="index.html">← Back to Overview</a>
+          <a href="index.html#pipeline">Architecture</a>
+          <a href="index.html#demo">Live Demo</a>
+          <a href="index.html#benchmarks">Results</a>
+          <a href="index.html#team">Team</a>
+          <a
+            href="../slides/deck.pdf"
+            class="btn btn-sm btn-primary"
+            download="tagabaybay-deck.pdf"
+            >Download Deck</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero-section">
+        <div class="container hero-content">
+          <div class="conference-tag">
+            📍 Forthcoming in IEEE Region 10 Conference (TENCON 2026) • Bali,
+            Indonesia
+          </div>
+
+          <h1 class="hero-title">Presentation &amp; Slide Deck</h1>
+
+          <div class="author-chip-row">
+            <span class="author-chip">Erin Gabrielle Chua</span>
+            <span class="author-chip">Zhean Robby Ganituen</span>
+            <span class="author-chip">Justin Ethan Ching</span>
+            <span class="author-chip">Jaztin Jacob Jimenez</span>
+            <span class="author-chip">Nathaniel Oco</span>
+          </div>
+
+          <p class="affiliation-tag">
+            College of Computer Studies,
+            <strong>De La Salle University</strong>, Manila, Philippines<br />
+            <strong>MangoCats Research Group</strong> •
+            <code>zhean_robby_ganituen@dlsu.edu.ph</code>
+          </p>
+
+          <div class="hero-actions">
+            <a href="#video-section" class="btn btn-primary">
+              Watch Presentation Video
+            </a>
+            <a
+              href="../slides/deck.pdf"
+              class="btn btn-secondary"
+              id="hero-download-btn"
+              download="tagabaybay-deck.pdf"
+            >
+              Download Slide Deck (PDF)
+            </a>
+            <a
+              href="../slides/deck.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-secondary"
+            >
+              Open PDF in New Tab
+            </a>
+            <a href="index.html" class="btn btn-outline">
+              ← Back to Paper Overview
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section id="video-section" class="section">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">Presentation Video</h2>
+          </div>
+
+          <div class="video-wrapper">
+            <video
+              controls
+              preload="metadata"
+              class="video-element"
+              id="presentation-player"
+              playsinline
+            >
+              <source src="../slides/presentation.mp4" type="video/mp4" />
+              Your browser does not support the HTML5 video element.
+            </video>
+            <div class="video-placeholder" id="video-pending-overlay">
+              <div class="video-placeholder-icon">🎥</div>
+              <h3>Presentation Video Recording</h3>
+              <p>
+                The conference recording will be published here upon
+                presentation at IEEE TENCON 2026. Once
+                <code>slides/presentation.mp4</code> is placed in the
+                repository, this player will stream it directly.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="deck-section"
+        class="section"
+        style="background: var(--bg-subtle)"
+      >
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">Slide Deck</h2>
+          </div>
+
+          <div class="deck-placeholder" id="deck-status-box">
+            <div class="deck-placeholder-icon">📊</div>
+            <h3
+              style="
+                font-size: 1.2rem;
+                margin-bottom: 0.5rem;
+                color: var(--text-main);
+              "
+            >
+              Presentation Slides
+            </h3>
+            <p
+              style="
+                color: var(--text-muted);
+                font-size: 0.95rem;
+                max-width: 580px;
+                margin: 0 auto 1.25rem;
+                line-height: 1.6;
+              "
+            >
+              The complete slide deck will be available as
+              <code>slides/deck.pdf</code>. You can preview the presentation
+              outline below or download the file once uploaded.
+            </p>
+            <div
+              style="
+                display: flex;
+                gap: 0.75rem;
+                justify-content: center;
+                flex-wrap: wrap;
+              "
+            >
+              <a
+                href="../slides/deck.pdf"
+                class="btn btn-primary"
+                id="deck-download-action"
+                download="tagabaybay-deck.pdf"
+              >
+                Download deck.pdf
+              </a>
+              <a
+                href="../slides/deck.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-secondary"
+              >
+                Open in Browser Viewer
+              </a>
+            </div>
+          </div>
+
+          <div
+            class="deck-viewer-wrapper"
+            id="deck-iframe-container"
+            style="display: none"
+          >
+            <iframe
+              src="../slides/deck.pdf"
+              class="deck-iframe"
+              title="Slide Deck PDF Preview"
+            ></iframe>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <div>
+          <p
+            style="
+              font-weight: 700;
+              color: var(--text-main);
+              margin-bottom: 0.25rem;
+            "
+          >
+            ᜆᜄᜊᜌ᜔ᜊᜌ᜔ / TagaBaybay
+          </p>
+          <p>
+            Department of Software Technology, De La Salle University,
+            Manila.<br />
+            Developed by the <strong>MangoCats Research Group</strong>.
+          </p>
+        </div>
+        <div class="footer-links">
+          <a href="index.html">Paper Overview</a>
+          <a
+            href="https://github.com/Mango-Cats/tagabaybay"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Code (GitHub)</a
+          >
+          <a
+            href="https://github.com/Mango-Cats"
+            target="_blank"
+            rel="noopener noreferrer"
+            >MangoCats Org</a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        const video = document.getElementById("presentation-player");
+        const overlay = document.getElementById("video-pending-overlay");
+        const iframeContainer = document.getElementById(
+          "deck-iframe-container",
+        );
+
+        if (video && overlay) {
+          video.addEventListener("canplay", function () {
+            overlay.classList.add("hidden");
+          });
+          video.addEventListener("error", function () {
+            overlay.classList.remove("hidden");
+          });
+        }
+
+        fetch("../slides/deck.pdf", { method: "HEAD" })
+          .then(function (res) {
+            if (res.ok && iframeContainer) {
+              iframeContainer.style.display = "block";
+            }
+          })
+          .catch(function () {});
+      })();
+    </script>
+  </body>
+</html>

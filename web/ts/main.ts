@@ -441,15 +441,6 @@ function initCopyActions(): void {
   }
 }
 
-function initPresentationButton(): void {
-  const presentationBtn = document.getElementById("btn-presentation");
-  if (presentationBtn) {
-    presentationBtn.addEventListener("click", (e: MouseEvent) => {
-      e.preventDefault();
-      showToast("Conference presentation slides will be available during IEEE TENCON 2026 in Bali, Indonesia.");
-    });
-  }
-}
 
 function copyToClipboard(text: string, successMsg: string): void {
   if (navigator.clipboard && navigator.clipboard.writeText) {
