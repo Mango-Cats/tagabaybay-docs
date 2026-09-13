@@ -4,7 +4,8 @@
   "description": "TagaBaybay Project Webpage.",
   "scripts": {
     "build": "tsc -p web/tsconfig.json",
-    "watch": "tsc -p web/tsconfig.json --watch"
+    "watch": "tsc -p web/tsconfig.json --watch",
+    "serve": "python3 -m http.server 8000"
   },
   "devDependencies": {
     "typescript": "^5.0.0"
