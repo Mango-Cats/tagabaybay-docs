@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TagaBaybay — Orthographic Nativization as Rule-Based Rewrite Cascades | IEEE TENCON 2026</title>
+  
+  <meta name="description" content="A linguistically grounded rule-based rewrite cascade for orthographic nativization of English loanwords into Filipino. Forthcoming at IEEE TENCON 2026." />
+  <meta name="author" content="Erin Gabrielle Chua, Zhean Robby Ganituen, Justin Ethan Ching, Jaztin Jacob Jimenez, Nathaniel Oco" />
+  <meta name="keywords" content="orthographic nativization, loanword adaptation, Filipino, rule-based systems, low-resource NLP, G2P, IEEE TENCON 2026, MangoCats, DLSU" />
+
+  <meta property="og:title" content="TagaBaybay: Orthographic Nativization as Rule-Based Rewrite Cascades" />
+  <meta property="og:description" content="Orthographic nativization for Filipino loanwords using priority-ordered rewrite cascades and phonetic resolution. IEEE TENCON 2026." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&family=Fira+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+Tagalog&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a href="#" class="brand-link">
+        <span class="brand-baybayin">ᜆᜄᜊᜌ᜔ᜊᜌ᜔</span>
+        <span class="brand-name">TagaBaybay</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Page Navigation">
+        <a href="#overview">Overview</a>
+        <a href="#pipeline">Architecture</a>
+        <a href="#demo">Live Demo</a>
+        <a href="#benchmarks">Results</a>
+        <a href="#team">Team</a>
+        <a href="#citation">Citation</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-section">
+      <div class="container hero-content">
+        <div class="conference-tag">
+          📍 Forthcoming in IEEE Region 10 Conference (TENCON 2026) • Bali, Indonesia
+        </div>
+
+        <h1 class="hero-title">Orthographic Nativization as Rule-Based Rewrite Cascades</h1>
+        
+        <p class="hero-subtitle">
+          A linguistically grounded, priority-ordered rewrite cascade for adapting English loanwords into standardized Filipino orthography without parallel training corpora.
+        </p>
+
+        <div class="author-chip-row">
+          <span class="author-chip">Erin Gabrielle Chua</span>
+          <span class="author-chip">Zhean Robby Ganituen</span>
+          <span class="author-chip">Justin Ethan Ching</span>
+          <span class="author-chip">Jaztin Jacob Jimenez</span>
+          <span class="author-chip">Nathaniel Oco</span>
+        </div>
+
+        <p class="affiliation-tag">
+          College of Computer Studies, <strong>De La Salle University</strong>, Manila, Philippines<br />
+          <strong>MangoCats Research Group</strong> • <code>zhean_robby_ganituen@dlsu.edu.ph</code>
+        </p>
+
+        <div class="hero-actions">
+          <a href="https://github.com/Mango-Cats/tagabaybay" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+            GitHub Repository
+          </a>
+          <a href="#" class="btn btn-secondary disabled" title="IEEE Xplore link will be available upon conference proceedings publication" onclick="return false;">
+            IEEE Xplore (Forthcoming)
+          </a>
+          <a href="#" class="btn btn-secondary" id="btn-presentation" title="Conference presentation slides will be available during IEEE TENCON 2026">
+            View Presentation
+          </a>
+          <a href="#demo" class="btn btn-secondary">
+            Try Live Demo
+          </a>
+          <a href="#team" class="btn btn-outline">
+            Meet the Team
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="overview" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">Research Motivation</span>
+          <h2 class="section-title">The Orthographic Nativization Challenge</h2>
+          <p class="section-desc">
+            Generating standardized written forms of loanwords in low-resource recipient languages.
+          </p>
+        </div>
+
+        <div class="abstract-box">
+          <div class="abstract-title">Abstract & Linguistic Formulation</div>
+          <p class="abstract-text">
+            <strong>Orthographic nativization</strong>—generating standardized written forms of loanwords in a recipient language—remains understudied computationally despite its importance for text normalization, spell-checking, and multilingual NLP. When English loanwords enter Filipino, they undergo substantial phonotactic and graphemic changes prescribed by the official <em>Komisyon sa Wikang Filipino (KWF)</em> guidelines (e.g., <em>computer</em> → <strong>kompyuter</strong>, <em>straight</em> → <strong>istreyt</strong>, <em>schedule</em> → <strong>iskedyul</strong>).
+          </p>
+          <p class="abstract-text" style="margin-top: 0.75rem;">
+            Unlike abstract phonological adaptation, orthographic nativization requires producing concrete character sequences obeying the target language's orthography. <strong>TagaBaybay</strong> operationalizes prescriptive linguistic rules and phonological descriptions into a deterministic four-stage rewrite cascade, eliminating the need for expensive parallel training corpora.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <div class="simple-card">
+            <h3>Linguistic Grounding</h3>
+            <p>
+              Directly formalizes the codified prescriptive manual by Virgilio Almario (KWF 2014) alongside phonological descriptions of Philippine English and Filipino.
+            </p>
+          </div>
+          <div class="simple-card">
+            <h3>Zero Parallel Corpora</h3>
+            <p>
+              Deployed with zero training data requirements. Deterministic execution produces zero hallucinations, sub-millisecond throughput, and fully interpretable rewrite steps.
+            </p>
+          </div>
+          <div class="simple-card">
+            <h3>5.14% Character Error Rate</h3>
+            <p>
+              Evaluated on 2,319 gold-standard pairs, outperforming both regular expressions (20.38% CER) and zero-shot LLMs with identical rules (15.54% CER).
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pipeline" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">System Architecture</span>
+          <h2 class="section-title">Four-Stage Rewrite Pipeline</h2>
+          <p class="section-desc">
+            An English loanword passes through tokenization, context-sensitive cascades, phonetic lookup, and normalization.
+          </p>
+        </div>
+
+        <div style="margin-bottom: 2rem;">
+          <div class="figure-wrapper">
+            <img src="../paper/assets/system.svg" alt="TagaBaybay Orthographic Nativization Pipeline Diagram" />
+          </div>
+          <p class="figure-caption">
+            Figure 1: Orthographic nativization pipeline. An English loanword is tokenized into multigraphs, passed through priority-ordered rewrite rules and G2P phonetic resolution, followed by repair and cleanup.
+          </p>
+        </div>
+
+        <div class="grid-4">
+          <div class="stage-card">
+            <div class="stage-num">1</div>
+            <div class="stage-name">Graphemic Tokenization</div>
+            <div class="stage-desc">
+              Greedy longest-match multigraph tokenization identifying tetragraphs (<em>augh</em>, <em>eigh</em>), trigraphs (<em>tch</em>, <em>ore</em>), and digraphs (<em>ph</em>, <em>ch</em>, <em>sh</em>).
+            </div>
+          </div>
+
+          <div class="stage-card">
+            <div class="stage-num">2</div>
+            <div class="stage-name">Context-Sensitive Rules</div>
+            <div class="stage-desc">
+              Priority-ordered rewrite cascade testing neighbor contexts (e.g. <em>c</em> before front vowels <em>e/i/y</em> → <em>s</em>, otherwise <em>k</em>; geminate collapse <em>cc</em> → <em>ks</em>).
+            </div>
+          </div>
+
+          <div class="stage-card">
+            <div class="stage-num">3</div>
+            <div class="stage-name">Phonetic Resolution (G2P)</div>
+            <div class="stage-desc">
+              Consults upstream grapheme-to-phoneme lookup to resolve ambiguous vowels (such as unstressed schwa /ə/ or glide expansions /juː/).
+            </div>
+          </div>
+
+          <div class="stage-card">
+            <div class="stage-num">4</div>
+            <div class="stage-name">Output Normalization</div>
+            <div class="stage-desc">
+              Final repairs: sC cluster prosthesis (<em>schedule</em> → <em>is-</em>), glide insertion (hiatus repair), silent <em>-e</em> truncation, and orthographic cleanup.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="demo" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">Interactive Showcase</span>
+          <h2 class="section-title">Rewrite Cascade in Action</h2>
+          <p class="section-desc">
+            Select an English loanword below to inspect its grapheme tokenization and priority-ordered rewrite cascade.
+          </p>
+        </div>
+
+        <div class="demo-console">
+          <div class="demo-instruction">Choose an English loanword:</div>
+          <div class="preset-choice-bar" role="group" aria-label="Word selection">
+            <button class="word-choice-btn active" data-word="computer">computer</button>
+            <button class="word-choice-btn" data-word="traffic">traffic</button>
+            <button class="word-choice-btn" data-word="schedule">schedule</button>
+            <button class="word-choice-btn" data-word="basketball">basketball</button>
+            <button class="word-choice-btn" data-word="straight">straight</button>
+            <button class="word-choice-btn" data-word="cake">cake</button>
+            <button class="word-choice-btn" data-word="xylophone">xylophone</button>
+            <button class="word-choice-btn" data-word="chalk">chalk</button>
+            <button class="word-choice-btn" data-word="taxi">taxi</button>
+            <button class="word-choice-btn" data-word="cotrimoxazole">cotrimoxazole</button>
+            <button class="word-choice-btn" data-word="doxycycline">doxycycline</button>
+            <button class="word-choice-btn" data-word="amoxicillin">amoxicillin</button>
+            <button class="word-choice-btn" data-word="amlodipine">amlodipine</button>
+          </div>
+
+          <div class="demo-display-panel">
+            <div class="demo-box">
+              <div class="demo-box-header">
+                <span>Filipino Nativized Form</span>
+                <span id="demo-ipa" class="output-ipa">/kəmˈpjuː.tɚ/</span>
+              </div>
+              <div id="demo-output" class="output-hero">kompyuter</div>
+
+              <div class="demo-box-header" style="margin-top: 1.25rem;">
+                <span>Stage 1: Graphemic Tokens</span>
+              </div>
+              <div id="demo-tokens" class="token-stream"></div>
+
+              <div id="demo-notes" class="demo-footer-note">
+                KWF standard loanword nativization: preserving phonotactic glide /j/.
+              </div>
+            </div>
+
+            <div class="demo-box">
+              <div class="demo-box-header">
+                <span>Stages 2 & 3: Rewrite Cascade Trace</span>
+                <span>Rule Application</span>
+              </div>
+              <div id="demo-cascade-steps" class="cascade-stream"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="benchmarks" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">Experimental Evaluation</span>
+          <h2 class="section-title">Benchmark Results on 2,319 Loanwords</h2>
+          <p class="section-desc">
+            Evaluated against a newly constructed gold standard of English–Filipino loanword pairs under multiple vowel-equivalence conditions.
+          </p>
+        </div>
+
+        <div class="metrics-row">
+          <div class="metric-card highlight">
+            <div class="metric-value">5.14%</div>
+            <div class="metric-label">5-Vowel CER</div>
+            <div class="metric-sub">Strict evaluation</div>
+          </div>
+
+          <div class="metric-card highlight">
+            <div class="metric-value">4.05%</div>
+            <div class="metric-label">3-Vowel CER</div>
+            <div class="metric-sub">Accounting for e/i and o/u</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-value">2,319</div>
+            <div class="metric-label">Gold Standard Pairs</div>
+            <div class="metric-sub">Constructed test dataset</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-value">12.59%</div>
+            <div class="metric-label">CER Reduction</div>
+            <div class="metric-sub">vs. spelling-only ablation</div>
+          </div>
+        </div>
+
+        <div class="benchmark-table-box">
+          <table class="benchmark-table">
+            <thead>
+              <tr>
+                <th>Method / Model</th>
+                <th>Paradigm</th>
+                <th>5-Vowel CER</th>
+                <th>3-Vowel CER</th>
+                <th>Notes / Behavior</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="highlight-row">
+                <td><strong>TagaBaybay (Proposed)</strong></td>
+                <td>Rule-Based Rewrite Cascade + G2P</td>
+                <td><strong>5.14%</strong></td>
+                <td><strong>4.05%</strong></td>
+                <td>Highest accuracy; deterministic & interpretable</td>
+              </tr>
+              <tr>
+                <td>Spelling-Only Ablation</td>
+                <td>Rules without G2P Resolution</td>
+                <td>17.73%</td>
+                <td>16.02%</td>
+                <td>Fails on ambiguous vowels and schwa reductions</td>
+              </tr>
+              <tr>
+                <td>Large Language Model (LLM)</td>
+                <td>Zero-Shot Prompting (Rules in Prompt)</td>
+                <td>15.54%</td>
+                <td>14.10%</td>
+                <td>Cannot reliably execute character-level constraints</td>
+              </tr>
+              <tr>
+                <td>Regular Expressions Baseline</td>
+                <td>Unordered Pattern Substitutions</td>
+                <td>20.38%</td>
+                <td>19.12%</td>
+                <td>Suffers from rule collisions & context bleed</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="figure-wrapper">
+            <img src="../paper/assets/results.png" alt="Overall CER across vowel equivalence conditions" />
+            <p class="figure-caption">Figure 2: Overall CER (%) under four vowel-equivalence conditions from the paper.</p>
+          </div>
+
+          <div>
+            <h3 style="font-size: 1.15rem; margin-bottom: 0.75rem;">Primary Error Analysis Takeaways</h3>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; color: var(--text-muted); font-size: 0.95rem;">
+              <li style="display: flex; gap: 0.5rem;">
+                <strong style="color: var(--mango-dark);">1.</strong>
+                <div>
+                  <strong style="color: var(--text-main);">Unstressed Schwa Ambiguity:</strong> English schwa /ə/ lacks an exact Filipino counterpart, leading to auditory substitutions between <em>e</em>, <em>i</em>, and <em>a</em>.
+                </div>
+              </li>
+              <li style="display: flex; gap: 0.5rem;">
+                <strong style="color: var(--mango-dark);">2.</strong>
+                <div>
+                  <strong style="color: var(--text-main);">Vowel Hiatus Glide Insertion:</strong> Glides /w/ and /j/ break vowel hiatus (e.g. <em>tiara</em> → <em>tiyara</em>).
+                </div>
+              </li>
+              <li style="display: flex; gap: 0.5rem;">
+                <strong style="color: var(--mango-dark);">3.</strong>
+                <div>
+                  <strong style="color: var(--text-main);">Upstream G2P Quality:</strong> 40 character edits traced directly to pronunciation lexicons on long pharmaceutical terms.
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="team" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">Research Team</span>
+          <h2 class="section-title">Project Members</h2>
+          <p class="section-desc">
+            Researchers from the <strong>MangoCats Research Group</strong> at <strong>De La Salle University</strong>.
+          </p>
+        </div>
+
+        <div id="team-cards-grid" class="team-cards-grid"></div>
+
+        <div class="adviser-collab-section">
+          <p class="adviser-line">
+            <strong>Faculty Adviser:</strong> <span id="faculty-adviser-name">Nathaniel Oco</span>
+          </p>
+
+          <div class="collaborators-box">
+            <p class="collab-heading">
+              We would also like to thank the following people for their contributions to an earlier prototype of the system:
+            </p>
+            <ul id="collaborators-bullet-list" class="bullet-list"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="citation" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">Academic Citation</span>
+          <h2 class="section-title">Cite TagaBaybay</h2>
+          <p class="section-desc">
+            If you find this work, algorithm, or dataset useful in your research, please cite our IEEE TENCON 2026 paper.
+          </p>
+        </div>
+
+        <div class="citation-box">
+          <div class="code-header">
+            <span class="code-lang-tag">BibTeX</span>
+            <button id="copy-bibtex-btn" class="btn btn-sm btn-primary">
+              Copy BibTeX
+            </button>
+          </div>
+          <pre class="code-block"><code id="bibtex-code">@inproceedings{tagabaybay2026tencon,
+  author    = {Chua, Erin Gabrielle and Ganituen, Zhean Robby and Ching, Justin Ethan and Jimenez, Jaztin Jacob and Oco, Nathaniel},
+  title     = {Orthographic Nativization as Rule-Based Rewrite Cascades},
+  booktitle = {Proceedings of the 2026 IEEE Region 10 Conference (TENCON)},
+  location  = {Bali, Indonesia},
+  year      = {2026},
+  publisher = {IEEE}
+}
+
+@software{tagabaybay_code,
+  author    = {Ganituen, Zhean Robby and Chua, Erin Gabrielle and Ching, Justin Ethan and Jimenez, Jaztin Jacob and Ang, Clive Jarel and Ang, Clarence Ivan and Campo, Roan Cedric and Oco, Nathaniel},
+  title     = {{TagaBaybay: A Phonetic Nativization Algorithm for Filipino Loanwords}},
+  year      = {2026},
+  url       = {https://github.com/Mango-Cats/tagabaybay},
+  license   = {Apache-2.0}
+}</code></pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="bio-modal" class="modal-wrapper" role="dialog" aria-modal="true" aria-labelledby="modal-name">
+    <div id="modal-overlay" class="modal-overlay"></div>
+    <div class="modal-container">
+      <button id="modal-close-btn" class="modal-close-btn" aria-label="Close modal">×</button>
+
+      <div class="modal-header">
+        <div id="modal-avatar" class="modal-avatar">ZG</div>
+        <div class="modal-title-box">
+          <h2 id="modal-name">Member Name</h2>
+          <p id="modal-role">Project Role</p>
+          <span id="modal-dept" class="modal-dept">Department • University</span>
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">Bio & Research Background</div>
+        <p id="modal-about-text" class="modal-bio-text">Detailed about bio goes here.</p>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">Research Interests</div>
+        <ul id="modal-interests-list" class="interest-badge-list"></ul>
+      </div>
+
+      <div class="modal-contact-row">
+        <div class="modal-email-box">
+          <button id="modal-copy-email" class="btn btn-sm btn-outline">
+            Copy Email
+          </button>
+          <span id="modal-email-text" style="font-size: 0.82rem; color: var(--text-muted); font-family: var(--font-mono);"></span>
+        </div>
+        <div id="modal-links-container" class="member-social-links"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div>
+        <p style="font-weight: 700; color: var(--text-main); margin-bottom: 0.25rem;">
+          ᜆᜄᜊᜌ᜔ᜊᜌ᜔ / TagaBaybay
+        </p>
+        <p>
+          Department of Software Technology, De La Salle University, Manila.<br />
+          Developed by the <strong>MangoCats Research Group</strong>.
+        </p>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/Mango-Cats/tagabaybay" target="_blank" rel="noopener noreferrer">Code (GitHub)</a>
+        <a href="https://github.com/Mango-Cats" target="_blank" rel="noopener noreferrer">MangoCats Org</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.24.4/babel.min.js"></script>
+  <script type="text/babel" data-presets="typescript" data-type="module" src="ts/team-data.ts"></script>
+  <script type="text/babel" data-presets="typescript" data-type="module" src="ts/main.ts"></script>
+</body>
+</html>

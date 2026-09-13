@@ -1,0 +1,13 @@
+{
+  "name": "tagabaybay-docs",
+  "version": "1.0.0",
+  "description": "TagaBaybay Project Webpage.",
+  "scripts": {
+    "build": "tsc -p web/tsconfig.json",
+    "watch": "tsc -p web/tsconfig.json --watch"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
+
