@@ -1,48 +1,39 @@
-import type { DemoPreset, MemberLinks, ProjectMember, FacultyAdviser } from "./types";
-
 function initApp(): void {
   renderTeamCards();
   renderAdviserAndCollaborators();
   initModal();
   initDemo();
   initCopyActions();
-}
-
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initApp);
-} else {
-  initApp();
+  initGlobalDelegation();
 }
 
 function renderTeamCards(): void {
   const container = document.getElementById("team-cards-grid");
   const members = window.projectMembers || [];
-  if (!container || members.length === 0) return;
+  if (!container) return;
+  if (members.length === 0) {
+    setTimeout(renderTeamCards, 50);
+    return;
+  }
 
   container.innerHTML = members.map((member: ProjectMember) => {
-    const researchPills = (member.bio?.researchInterests || [])
-      .slice(0, 3)
-      .map(tag => `<span class="badge-pill">${escapeHtml(tag)}</span>`)
-      .join("");
-
     const linksHtml = generateLinksHtml(member.links);
+    const avatarHtml = renderAvatar(member.avatar, member.name);
 
     return `
       <article class="business-card" id="card-${escapeHtml(member.id)}">
         <header class="card-header">
           <div class="avatar-box">
-            <span>${escapeHtml(member.initials)}</span>
+            ${avatarHtml}
           </div>
           <div class="card-meta">
             <h3 class="member-name">${escapeHtml(member.name)}</h3>
-            <p class="member-role">${escapeHtml(member.role)}</p>
           </div>
         </header>
 
         <div class="card-body">
           <p class="member-affiliation">🏛️ ${escapeHtml(member.affiliation)}</p>
           <p class="member-bio">${escapeHtml(member.shortBio)}</p>
-          <div class="member-tags" aria-label="Research Areas">${researchPills}</div>
         </div>
 
         <div class="card-footer">
@@ -59,21 +50,6 @@ function renderTeamCards(): void {
       </article>
     `;
   }).join("");
-
-  container.querySelectorAll<HTMLButtonElement>(".btn-bio").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const id = btn.dataset.id;
-      if (id) openBioModal(id);
-    });
-  });
-
-  container.querySelectorAll<HTMLButtonElement>(".btn-copy-email").forEach(btn => {
-    btn.addEventListener("click", (e: MouseEvent) => {
-      e.stopPropagation();
-      const email = btn.dataset.email;
-      if (email) copyToClipboard(email, `Copied: ${email}`);
-    });
-  });
 }
 
 function generateLinksHtml(links: MemberLinks = {}): string {
@@ -95,11 +71,25 @@ function generateLinksHtml(links: MemberLinks = {}): string {
     .join("");
 }
 
+function renderAvatar(avatar: string, name: string): string {
+  if (!avatar) return `<span class="avatar-emoji">👤</span>`;
+  const isImage = /\.(jpg|jpeg|png|webp|gif|svg)($|\?)/i.test(avatar) || avatar.startsWith("http://") || avatar.startsWith("https://") || avatar.startsWith("/") || avatar.startsWith("./") || avatar.startsWith("data:image");
+  if (isImage) {
+    return `<img src="${escapeHtml(avatar)}" alt="${escapeHtml(name)}" class="avatar-img" />`;
+  }
+  return `<span class="avatar-emoji">${escapeHtml(avatar)}</span>`;
+}
+
 function renderAdviserAndCollaborators(): void {
   const adviserNameEl = document.getElementById("faculty-adviser-name");
   const collabEl = document.getElementById("collaborators-bullet-list");
   const adviser = window.facultyAdviser;
   const collabList = window.collaborators || [];
+
+  if (!adviser && !window.collaborators) {
+    setTimeout(renderAdviserAndCollaborators, 50);
+    return;
+  }
 
   if (adviserNameEl && adviser) {
     adviserNameEl.textContent = adviser.name || "Nathaniel Oco";
@@ -116,9 +106,6 @@ let activeModalMember: ProjectMember | null = null;
 
 function initModal(): void {
   const modal = document.getElementById("bio-modal");
-  const closeBtn = document.getElementById("modal-close-btn");
-  const overlay = document.getElementById("modal-overlay");
-
   if (!modal) return;
 
   const closeModal = (): void => {
@@ -127,8 +114,13 @@ function initModal(): void {
     activeModalMember = null;
   };
 
-  if (closeBtn) closeBtn.addEventListener("click", closeModal);
-  if (overlay) overlay.addEventListener("click", closeModal);
+  document.addEventListener("click", (e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (!target) return;
+    if (target.id === "modal-close-btn" || target.id === "modal-overlay" || target.closest("#modal-close-btn")) {
+      closeModal();
+    }
+  });
 
   document.addEventListener("keydown", (e: KeyboardEvent) => {
     if (e.key === "Escape" && modal.classList.contains("active")) {
@@ -146,6 +138,29 @@ function initModal(): void {
   }
 }
 
+function initGlobalDelegation(): void {
+  document.addEventListener("click", (e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (!target) return;
+
+    const bioBtn = target.closest(".btn-bio") as HTMLButtonElement | null;
+    if (bioBtn) {
+      e.preventDefault();
+      const id = bioBtn.dataset.id;
+      if (id) openBioModal(id);
+      return;
+    }
+
+    const copyBtn = target.closest(".btn-copy-email") as HTMLButtonElement | null;
+    if (copyBtn) {
+      e.preventDefault();
+      const email = copyBtn.dataset.email;
+      if (email) copyToClipboard(email, `Copied: ${email}`);
+      return;
+    }
+  });
+}
+
 function openBioModal(memberId: string): void {
   const members = window.projectMembers || [];
   const member = members.find((m: ProjectMember) => m.id === memberId);
@@ -157,25 +172,21 @@ function openBioModal(memberId: string): void {
 
   const avatarEl = document.getElementById("modal-avatar");
   const nameEl = document.getElementById("modal-name");
-  const roleEl = document.getElementById("modal-role");
   const deptEl = document.getElementById("modal-dept");
   const aboutEl = document.getElementById("modal-about-text");
   const emailEl = document.getElementById("modal-email-text");
-  const interestsList = document.getElementById("modal-interests-list");
+  const interestsTextEl = document.getElementById("modal-interests-text");
   const linksContainer = document.getElementById("modal-links-container");
 
-  if (avatarEl) avatarEl.textContent = member.initials;
+  if (avatarEl) avatarEl.innerHTML = renderAvatar(member.avatar, member.name);
   if (nameEl) nameEl.textContent = member.name;
-  if (roleEl) roleEl.textContent = member.role;
-  if (deptEl) deptEl.textContent = `${member.department || "Software Technology"} • ${member.affiliation}`;
+  if (deptEl) deptEl.textContent = member.affiliation;
 
   const aboutText = member.bio?.about || member.shortBio;
   if (aboutEl) aboutEl.textContent = aboutText;
 
-  if (interestsList) {
-    interestsList.innerHTML = (member.bio?.researchInterests || [])
-      .map(tag => `<li class="interest-badge">${escapeHtml(tag)}</li>`)
-      .join("");
+  if (interestsTextEl) {
+    interestsTextEl.textContent = (member.bio?.interests || []).join(", ");
   }
 
   if (emailEl) emailEl.textContent = member.email;
@@ -499,3 +510,14 @@ function escapeHtml(str: string): string {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 }
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initApp);
+} else {
+  initApp();
+}
+
+window.addEventListener("team-data-ready", () => {
+  renderTeamCards();
+  renderAdviserAndCollaborators();
+});

@@ -1,12 +1,12 @@
-export interface MemberBio {
+interface MemberBio {
   about: string;
-  researchInterests: string[];
+  interests: string[];
   education?: string;
   funFact?: string;
   currentProjects?: string[];
 }
 
-export interface MemberLinks {
+interface MemberLinks {
   website?: string;
   github?: string;
   scholar?: string;
@@ -15,22 +15,19 @@ export interface MemberLinks {
   email?: string;
 }
 
-export interface ProjectMember {
+interface ProjectMember {
   id: string;
   name: string;
-  initials: string;
-  role: string;
+  avatar: string;
   affiliation: string;
-  department: string;
   email: string;
   shortBio: string;
   bio: MemberBio;
   links: MemberLinks;
 }
 
-export interface FacultyAdviser {
+interface FacultyAdviser {
   name: string;
-  role?: string;
   affiliation?: string;
   lab?: string;
   email?: string;
@@ -38,13 +35,13 @@ export interface FacultyAdviser {
   github?: string;
 }
 
-export interface CascadeStep {
+interface CascadeStep {
   from: string;
   to: string;
   rule: string;
 }
 
-export interface DemoPreset {
+interface DemoPreset {
   ipa: string;
   tokens: string[];
   steps: CascadeStep[];
@@ -52,10 +49,8 @@ export interface DemoPreset {
   notes: string;
 }
 
-declare global {
-  interface Window {
-    projectMembers?: ProjectMember[];
-    facultyAdviser?: FacultyAdviser;
-    collaborators?: string[];
-  }
+interface Window {
+  projectMembers?: ProjectMember[];
+  facultyAdviser?: FacultyAdviser;
+  collaborators?: string[];
 }

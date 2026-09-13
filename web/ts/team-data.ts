@@ -1,22 +1,18 @@
-import type { ProjectMember, FacultyAdviser } from "./types";
-
-export const projectMembers: ProjectMember[] = [
+const projectMembers: ProjectMember[] = [
   {
     id: "zrygan",
     name: "Zhean Robby Ganituen",
-    initials: "ZG",
-    role: "Project Lead",
+    avatar: "🥭",
     affiliation: "De La Salle University, Manila",
-    department: "Department of Software Technology",
     email: "zhean_robby_ganituen@dlsu.edu.ph",
-    shortBio: "Undergraduate researcher working in Theoretical Computer Science, Parallel Algorithms, and Computational Linguistics.",
+    shortBio: "Put your short bio here...",
     bio: {
-      about: "Undergraduate Computer Science student at De La Salle University, Manila. In the MangoCats research group, focuses on low-resource NLP, word confusability, and phonetic/orthographic algorithms for Filipino.",
-      researchInterests: [
-        "Theoretical Computer Science",
-        "Parallel Algorithms",
-        "Computational Linguistics",
-        "Filipino G2P & Phonology"
+      about: "Put your full bio here...",
+      interests: [
+        "A",
+        "B",
+        "C",
+        "D"
       ],
       education: "B.S. Computer Science (Software Technology), De La Salle University"
     },
@@ -31,79 +27,73 @@ export const projectMembers: ProjectMember[] = [
   {
     id: "erin-chua",
     name: "Erin Gabrielle Chua",
-    initials: "EC",
-    role: "Researcher",
+    avatar: "🏳️‍🌈",
     affiliation: "De La Salle University, Manila",
-    department: "Department of Software Technology",
     email: "erin_gabrielle_chua@dlsu.edu.ph",
-    shortBio: "Undergraduate researcher specializing in computational linguistics, Filipino orthographic rules, and rule-based linguistic modeling.",
+    shortBio: "Put your short bio here...",
     bio: {
-      about: "Researcher in the MangoCats group specializing in formalizing natural language phenomena through structured rewrite rules, low-resource domain feature analysis, and orthographic nativization.",
-      researchInterests: [
-        "Computational Linguistics",
-        "Filipino Orthography",
-        "Rule-Based Systems",
-        "Low-Resource NLP"
+      about: "Put your full bio here...",
+      interests: [
+        "A",
+        "B",
+        "C",
+        "D"
       ],
       education: "B.S. Computer Science (Software Technology), De La Salle University"
     },
     links: {
-      github: "https://github.com/Mango-Cats"
+      github: "https://github.com/chua-e"
     }
   },
   {
     id: "justin-ching",
     name: "Justin Ethan Ching",
-    initials: "JC",
-    role: "Researcher",
+    avatar: "🐾",
     affiliation: "De La Salle University, Manila",
-    department: "Department of Software Technology",
     email: "justin_ethan_ching@dlsu.edu.ph",
-    shortBio: "Undergraduate researcher focusing on grammar checking, formal grammars, and computational tools for Philippine languages.",
+    shortBio: "Put your short bio here...",
     bio: {
-      about: "Researcher in the MangoCats group working on low-resource NLP tools for Philippine languages, including Tagalog, Bikol, and Filipino loanword adaptation pipelines.",
-      researchInterests: [
-        "Grammar Checking & Error Detection",
-        "Formal Language Theory",
-        "Philippine Language Technologies",
-        "Low-Resource NLP"
+      about: "Put your full bio here...",
+      interests: [
+        "A",
+        "B",
+        "C",
+        "D"
       ],
       education: "B.S. Computer Science (Software Technology), De La Salle University"
     },
     links: {
-      github: "https://github.com/Mango-Cats"
+      github: "https://github.com/JustinChing30"
     }
   },
   {
     id: "jaztin-jimenez",
     name: "Jaztin Jacob Jimenez",
-    initials: "JJ",
-    role: "Researcher",
+    avatar: "⚡",
     affiliation: "De La Salle University, Manila",
-    department: "Department of Software Technology",
     email: "jaztin_jacob_jimenez@dlsu.edu.ph",
-    shortBio: "Undergraduate researcher exploring phonological adaptation, string transformations, and low-resource NLP systems.",
+    shortBio: "Put your short bio here...",
     bio: {
-      about: "Working with the MangoCats team on linguistic datasets, evaluation benchmarks, and rule cascades that bridge phonology and written orthography in Filipino.",
-      researchInterests: [
-        "Phonological Modeling",
-        "Loanword Adaptation",
-        "Rule-Based NLP Pipelines",
-        "Software Engineering"
+      about: "Put your full bio here...",
+      interests: [
+        "A",
+        "B",
+        "C",
+        "D"
       ],
       education: "B.S. Computer Science (Software Technology), De La Salle University"
     },
     links: {
-      github: "https://github.com/Mango-Cats"
+      github: "https://github.com/jazjimenez"
     }
   }
 ];
 
-export const facultyAdviser: FacultyAdviser = {
+const facultyAdviser: FacultyAdviser = {
   name: "Nathaniel Oco"
 };
 
-export const collaborators: string[] = [
+const collaborators: string[] = [
   "Clarence Ivan Ang",
   "Roan Cedric Campo",
   "Clive Jarel Ang"
@@ -113,4 +103,5 @@ if (typeof window !== "undefined") {
   window.projectMembers = projectMembers;
   window.facultyAdviser = facultyAdviser;
   window.collaborators = collaborators;
+  window.dispatchEvent(new CustomEvent("team-data-ready"));
 }

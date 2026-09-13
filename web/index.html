@@ -426,22 +426,19 @@
       <button id="modal-close-btn" class="modal-close-btn" aria-label="Close modal">×</button>
 
       <div class="modal-header">
-        <div id="modal-avatar" class="modal-avatar">ZG</div>
+        <div id="modal-avatar" class="modal-avatar"></div>
         <div class="modal-title-box">
           <h2 id="modal-name">Member Name</h2>
-          <p id="modal-role">Project Role</p>
-          <span id="modal-dept" class="modal-dept">Department • University</span>
+          <span id="modal-dept" class="modal-dept">Affiliation</span>
         </div>
       </div>
 
       <div class="modal-section">
-        <div class="modal-section-title">Bio & Research Background</div>
+        <div class="modal-section-title">Bio & Background</div>
         <p id="modal-about-text" class="modal-bio-text">Detailed about bio goes here.</p>
-      </div>
-
-      <div class="modal-section">
-        <div class="modal-section-title">Research Interests</div>
-        <ul id="modal-interests-list" class="interest-badge-list"></ul>
+        <p class="modal-interests-line" id="modal-interests-line">
+          <strong>Interests:</strong> <span id="modal-interests-text"></span>
+        </p>
       </div>
 
       <div class="modal-contact-row">
@@ -474,8 +471,7 @@
     </div>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.24.4/babel.min.js"></script>
-  <script type="text/babel" data-presets="typescript" data-type="module" src="ts/team-data.ts"></script>
-  <script type="text/babel" data-presets="typescript" data-type="module" src="ts/main.ts"></script>
+  <script src="js/team-data.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
