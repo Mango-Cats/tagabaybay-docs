@@ -63,7 +63,9 @@ const projectMembers: ProjectMember[] = [
       education: "B.S. Computer Science (Software Technology), De La Salle University"
     },
     links: {
-      github: "https://github.com/JustinChing30"
+      github: "https://github.com/JustinChing30",
+      scholar: "https://scholar.google.com/citations?user=kn0Xv8wAAAAJ",
+      linkedin: "https://www.linkedin.com/in/justinching30/"
     }
   },
   {
