@@ -51,12 +51,12 @@ const projectMembers: ProjectMember[] = [
     avatar: "🐾",
     affiliation: "De La Salle University, Manila",
     email: "justin_ethan_ching@dlsu.edu.ph",
-    shortBio: "Put your short bio here...",
+    shortBio: "I am a fourth-year student.",
     bio: {
       about: "Put your full bio here...",
       interests: [
-        "A",
-        "B",
+        "Computer Vision",
+        "Statistics",
         "C",
         "D"
       ],
