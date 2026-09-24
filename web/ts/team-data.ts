@@ -27,22 +27,24 @@ const projectMembers: ProjectMember[] = [
   {
     id: "erin-chua",
     name: "Erin Gabrielle Chua",
-    avatar: "🏳️‍🌈",
+    avatar: "🦐",
     affiliation: "De La Salle University, Manila",
     email: "erin_gabrielle_chua@dlsu.edu.ph",
-    shortBio: "Put your short bio here...",
+    shortBio: "I am currently an undergraduate student at De La Salle University taking up Computer Science with a specialization in Software Technology.",
     bio: {
-      about: "Put your full bio here...",
+      about: "I am a Computer Science undergraduate at De La Salle University specializing in Software Technology, with a minor in Finance and Risk Analytics. ",
       interests: [
-        "A",
-        "B",
-        "C",
-        "D"
+        "Natural Language Processing",
+        "Machine Learning",
+        "Data Analytics",
+        "Website Development",
+        "Graphic Design & Illustration",
       ],
       education: "B.S. Computer Science (Software Technology), De La Salle University"
     },
     links: {
-      github: "https://github.com/chua-e"
+      github: "https://github.com/chua-e",
+      linkedin: "https://www.linkedin.com/in/erin-gabrielle-chua-3619a134a/",
     }
   },
   {
