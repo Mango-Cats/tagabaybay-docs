@@ -74,19 +74,22 @@ const projectMembers: ProjectMember[] = [
     avatar: "⚡",
     affiliation: "De La Salle University, Manila",
     email: "jaztin_jacob_jimenez@dlsu.edu.ph",
-    shortBio: "Put your short bio here...",
+    shortBio: "I am a Computer Science student at De La Salle University specializing in Software Technology. I am a full-stack developer, the Website Manager for Archers Network, and a researcher focusing on audio-visual speech recognition.",
     bio: {
-      about: "Put your full bio here...",
+      about: "I am a Software Technology specialist at De La Salle University with a unique blend of technical expertise and creative project management. Alongside my work as Website Manager for Archers Network and my research in natural language processing, I bring a highly collaborative perspective shaped by my background in university theatre production.",
       interests: [
-        "A",
-        "B",
-        "C",
-        "D"
+        "Audio-Visual Speech Recognition",
+        "Machine Learning",
+        "Website Development",
+        "Software Engineering",
+        "Agile Methodologies",
+        "Technical Project Management"
       ],
       education: "B.S. Computer Science (Software Technology), De La Salle University"
     },
     links: {
-      github: "https://github.com/jazjimenez"
+      github: "https://github.com/jazjimenez",
+      linkedin: "https://www.linkedin.com/in/jazjimenez/"
     }
   }
 ];
