@@ -53,14 +53,14 @@ const projectMembers: ProjectMember[] = [
     avatar: "🐾",
     affiliation: "De La Salle University, Manila",
     email: "justin_ethan_ching@dlsu.edu.ph",
-    shortBio: "I am a fourth-year student.",
+    shortBio: "I am a fourth-year Computer Science undergraduate student at De La Salle University.",
     bio: {
-      about: "Put your full bio here...",
+      about: "I am a fourth-year undergraduate student at De La Salle University pursuing a degree in Computer Science, majoring in Software Technology.",
       interests: [
         "Computer Vision",
         "Statistics",
-        "C",
-        "D"
+        "Data Analysis",
+        "Machine Learning"
       ],
       education: "B.S. Computer Science (Software Technology), De La Salle University"
     },
