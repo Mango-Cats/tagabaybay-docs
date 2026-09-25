@@ -58,8 +58,7 @@ const projectMembers: ProjectMember[] = [
       about: "I am a fourth-year undergraduate student at De La Salle University pursuing a degree in Computer Science, majoring in Software Technology.",
       interests: [
         "Computer Vision",
-        "Statistics",
-        "Data Analysis",
+        "Data Analysis and Statistics",
         "Machine Learning"
       ],
       education: "B.S. Computer Science (Software Technology), De La Salle University"
